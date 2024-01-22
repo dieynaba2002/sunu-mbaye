@@ -1,0 +1,29 @@
+#bg-custom-color {
+    background-color: #107D03 !important;
+    color: white;
+}
+
+.product-quantity {
+    width: 50px;
+
+    input {
+        margin-left: 20px;
+        width: 40px;
+        display: block;
+    }
+}
+.btn-valider-commande{
+    border: 1px solid #107D03;
+    color: #107D03;
+    margin: 0 auto 10px;
+    display: flex;
+    float: right;    
+}
+.sous-total{
+    float: right;
+    padding: 15px 25px 5px 10px;
+    box-shadow: 1px 1px 6px 0px #dadada;
+}
+
+
+

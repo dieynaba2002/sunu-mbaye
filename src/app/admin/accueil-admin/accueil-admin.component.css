@@ -1,3 +1,6 @@
 table.dataTable thead {
     background-color: #107D03 !important;
 }
+.table-header{
+    background-color: #107D03 !important;
+}
