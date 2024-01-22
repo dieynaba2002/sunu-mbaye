@@ -13,6 +13,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AuthComponent } from './auth/auth.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PanierComponent } from './panier/panier.component';
+import { PolitiqueDeConfidentialiteComponent } from './politique-de-confidentialite/politique-de-confidentialite.component';
+import { ConditionUtilisationComponent } from './condition-utilisation/condition-utilisation.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { PanierComponent } from './panier/panier.component';
     ProduitComponent,
     ContactComponent,
     AuthComponent,
-    PanierComponent
+    PanierComponent,
+    PolitiqueDeConfidentialiteComponent,
+    ConditionUtilisationComponent
   ],
   imports: [
     BrowserModule,

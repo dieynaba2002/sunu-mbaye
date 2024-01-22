@@ -1,0 +1,24 @@
+#section {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 15vh;
+    text-align: justify;
+    line-height: 35px;
+    font-family: 'Poppins', sans-serif;
+}
+.title{
+    color: #107D03;
+    font-weight: bold;
+}
+#section h4{
+    margin-top: 10vh;
+}
+.test{
+    margin-top: 25vh;
+}
+ul li{
+    list-style-type: disc;
+}
+.grand-titre>ol:first-child {
+    font-weight: bold;
+}
