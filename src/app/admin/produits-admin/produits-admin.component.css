@@ -1,0 +1,105 @@
+/* Debut de la stylisation de produit */
+.bi {
+    font-size: 2em;
+    color: #017D03;
+}
+
+.grid-produit {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5vh;
+}
+
+.col {
+    border: 2px solid #B6B4B4;
+    padding-top: 3vh;
+    border-radius: 10px;
+    /* height: 420px; */
+}
+
+.image-col {
+    height: 200px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.image-col img {
+    border-radius: 7px;
+}
+
+.titre-couleur {
+    color: #017D03;
+}
+
+.image-profil {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin: 5px;
+    margin-top: 10vh;
+}
+
+.image-profil img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+
+}
+
+.info-profil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info {
+    /* border: 2px solid; */
+    width: 75%;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    margin-top: 9vh;
+}
+
+.info span {
+    /* margin-top: 17vh; */
+    font-weight: bold;
+    color: black;
+}
+.btn-retirer{
+    background-color: #017D03;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    margin-top: 6vh;
+}
+
+.detail .detailLink {
+    color: #E75761;
+    text-decoration: none;
+}
+
+.card-body p {
+    text-align: justify;
+}
+
+.pagination li a {
+    color: #E75761;
+}
+
+.dropdown-toggle {
+    background-color: #E75761 !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.TitreMode {
+    color: black !important;
+}
+
+.textimg {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}

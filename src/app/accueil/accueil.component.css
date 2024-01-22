@@ -1,0 +1,568 @@
+*{
+    text-decoration: none;
+}
+.produits{
+    color: white;
+}
+.banner-container {
+    width: 100%;
+    height: 110vh;
+    background-color: #070b0d2a;
+}
+
+.section-banner {
+    background-image: url("../../assets/img/Banniere.png");
+    /* object-fit: cover; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 110vh;
+    position: relative;
+    z-index: -2;
+}
+
+.section-banner .titre {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.titre {
+    font-size: 3em !important;
+    position: relative;
+    top: -55vh;
+    margin: 0 auto;
+}
+/* debut de la section apropos */
+.grid-contain-apropos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.btn-produit{
+    background-color: #FF9C00;
+}
+.color-text{
+    color: #017D03;
+    font-weight: bold;
+}
+.retrait{
+    margin-left: 21vh;
+    font-weight: bold;
+}
+.paragraphe-apropos{
+    margin: auto;
+}
+#section{
+    width: 95%;
+    margin: 0 auto;
+}
+/* fin de la section */
+
+/* Debut de la stylisation de produit */
+.decoration{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -15px;
+}
+
+.soulignement {
+    background-color: #FF9C00;
+    width: 5%;
+    height: 2px;
+    border-radius: 10px;
+    display: inline-block;
+}
+.bi{
+    font-size: 2em;
+    color: #017D03;
+}
+.grid-produit{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* height: 420px; */
+    gap: 5vh;
+}
+.col{
+    border: 2px solid #B6B4B4;
+    padding-top: 3vh;
+    border-radius: 10px;
+    height: 420px;
+}
+.image-col{
+    height: 200px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+.image-col img{
+    border-radius: 7px;
+}
+.titre-couleur{
+    color: #017D03;
+}
+.image-profil {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin: 5px;
+    margin-top: 10vh;
+}
+
+.image-profil img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+
+}
+
+.info-profil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.info{
+    /* border: 2px solid; */
+    width: 75%;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    margin-top: 9vh;
+}
+.info span{
+    /* margin-top: 17vh; */
+    font-weight: bold; 
+    color: black;
+}
+
+/* Debut stylisation annonces */
+.grid-annonce{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* height: 450px; */
+    gap: 5vh;
+}
+.col-annonce {
+    border: 1px solid #B6B4B4;
+    border-radius: 10px;
+    height: 450px;
+}
+
+.image-profil-1 {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    margin: 5px;
+    margin-top: 13px;
+}
+
+.image-profil-1 img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+
+}
+
+.info-profil-1 {
+    display: flex;
+}
+.info-1 p{
+    margin-top: 22px;
+}
+.card-img-top{
+    border-radius: 10px;
+}
+
+/* Debut de la section verte */
+.section-verte{
+    height: 450px;
+    width: 100%;
+}
+
+/* debut section conseil agricole */
+.grid-conseil{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4vh;
+}
+.col-conseil{
+    border: 2px solid #ffffff;
+    padding: 10px;
+    z-index: -1;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 0px #bfbfbf;
+}
+.contain-icone{
+    width: 20%;
+    height: 35%;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #017D03;
+    margin: 0 auto;
+    position: relative;
+    top: -42px;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.contain-icone-1{
+    width: 20%;
+    height: 35%;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #FF9C00;
+    margin: 0 auto;
+    position: relative;
+    top: -42px;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-text {
+    font-size: 15px;
+}
+
+
+@media (max-width:767px){
+    .grid-contain-apropos {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5vh;
+    }
+    .retrait {
+        margin-left: 10vh;
+        font-weight: bold;
+    }
+    .grid-produit {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5vh;
+    }
+    .grid-annonce {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5vh;
+    }
+    .grid-conseil {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4vh;
+    }
+    .card-img-top{
+        height: 250px;
+    }
+    .section-verte {
+        height: auto;
+        width: 100%;
+    }
+    .section-banner {
+        background-image: url("../../assets/img/Banniere.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 110vh;
+        position: relative;
+        z-index: -2;
+    }
+    .image-profil {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        margin: 5px;
+    }
+    .image-profil img {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        margin-top: 2vh;
+    }
+    .info-profil {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .info {
+        width: 75%;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+        margin-top: 4vh;
+    }
+    /* debut section conseil agricole */
+    .grid-conseil {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8vh;
+    }
+    
+    .col-conseil {
+        border: 2px solid #ffffff;
+        padding: 10px;
+        z-index: -1;
+        border-radius: 10px;
+        box-shadow: 1px 1px 6px 0px #bfbfbf;
+    }
+    
+    .contain-icone {
+        width: 20%;
+        height: 35%;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #017D03;
+        margin: 0 auto;
+        position: relative;
+        top: -42px;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .contain-icone-1 {
+        width: 20%;
+        height: 35%;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #FF9C00;
+        margin: 0 auto;
+        position: relative;
+        top: -42px;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (min-width:768px) and (max-width:990px){
+    .grid-contain-apropos {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .retrait {
+        margin-left: 10vh;
+        font-weight: bold;
+    }
+    .grid-produit {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5vh;
+    }
+    .grid-annonce {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5vh;
+    }
+    .card-img-top {
+        height: 250px;
+    }
+    .grid-conseil {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4vh;
+    }
+    .section-verte {
+        height: auto;
+        width: 100%;
+    }
+    .section-banner {
+        background-image: url("../../assets/img/Banniere.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 110vh;
+        position: relative;
+        z-index: -2;
+    }
+    .image-profil {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        margin: 5px;
+    }
+
+    .image-profil img {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        margin-top: 2vh;
+    }
+
+    .info-profil {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info {
+        width: 75%;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+        margin-top: 4vh;
+    }
+    .col-conseil {
+        border: 2px solid #ffffff;
+        padding: 10px;
+        z-index: -1;
+        border-radius: 10px;
+        box-shadow: 1px 1px 6px 0px #bfbfbf;
+    }
+    
+    .contain-icone {
+        width: 20%;
+        height: 35%;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #017D03;
+        margin: 0 auto;
+        position: relative;
+        top: -42px;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+    
+    .contain-icone-1 {
+        width: 20%;
+        height: 35%;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #FF9C00;
+        margin: 0 auto;
+        position: relative;
+        top: -42px;
+        z-index: -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* Debut de la section verte */
+    .section-verte {
+       /* height: 450px; */
+       width: 100%;
+    }
+
+   /* debut section conseil agricole */
+    .grid-conseil {
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 4vh;
+    }
+}
+
+@media (min-width:900px) and (max-width:1504px) {
+    .grid-contain-apropos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .retrait {
+        margin-left: 10vh;
+        font-weight: bold;
+    }
+
+    .grid-produit {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5vh;
+    }
+
+
+    .card-img-top {
+        height: 250px;
+    }
+    
+    .image-profil {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        margin: 5px;
+    }
+
+    .image-profil img {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        margin-top: 2vh;
+    }
+
+    .info-profil {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info {
+        width: 75%;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+        margin-top: 4vh;
+    }
+
+   .col-conseil {
+       border: 2px solid #ffffff;
+       padding: 10px;
+       z-index: -1;
+       border-radius: 10px;
+       box-shadow: 1px 1px 6px 0px #bfbfbf;
+   }
+
+   .contain-icone {
+       width: 20%;
+       height: 35%;
+       padding: 10px;
+       border-radius: 50%;
+       background-color: #017D03;
+       margin: 0 auto;
+       position: relative;
+       top: -42px;
+       z-index: -1;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+
+   }
+
+   .contain-icone-1 {
+       width: 20%;
+       height: 35%;
+       padding: 10px;
+       border-radius: 50%;
+       background-color: #FF9C00;
+       margin: 0 auto;
+       position: relative;
+       top: -42px;
+       z-index: -1;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+   }
+   .card-text{
+        font-size: 14px;
+   }
+
+   /* Debut de la section verte */
+   .section-verte {
+       height: auto;
+       width: 100%;
+   }
+
+   /* debut section conseil agricole */
+   .grid-conseil {
+       display: grid;
+       grid-template-columns: 1fr 1fr 1fr;
+       gap: 4vh;
+   }
+
+}

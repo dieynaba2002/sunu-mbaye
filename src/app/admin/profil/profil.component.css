@@ -1,0 +1,39 @@
+#container-table {
+    border: 3px solid #017D03;
+    border-radius: 25px;
+}
+
+
+.ligne-table {
+    border-bottom: 2px dashed #E3E3E3;
+}
+
+.image-profil {
+    /* border: 2px solid ; */
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    margin: 0 auto;
+}
+
+.image-profil img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.btn-modifier {
+    background-color: #017D03;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-annuler {
+    border: 2px solid #017D03;
+    color: #017D03;
+    font-weight: bold;
+}
+
+#test input {
+    border: 1px solid #017D03;
+}

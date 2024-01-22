@@ -1,0 +1,31 @@
+.contain-annonce {
+    display: flex;
+    gap: 5vh;
+}
+
+.image-annonce {
+    border-radius: 15px !important;
+}
+
+.btn-publier {
+    color: #017D03;
+    border: 1px solid #017D03;
+    font-weight: bold;
+    margin-right: 8vh;
+}
+
+.btn-retirer {
+    background-color: #017D03;
+    color: white;
+    font-weight: bold;
+}
+
+.test {
+    border: 2px solid #017D03;
+    border-radius: 10px;
+}
+
+.btngroup {
+    display: flex;
+    justify-content: end;
+}

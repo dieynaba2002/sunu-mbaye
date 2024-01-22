@@ -1,0 +1,84 @@
+/* --------------------------------------------------- */
+
+/* Footer  */
+.footer {
+    margin-top: 15vh;
+    border-top: 3px solid #017D03;
+}
+
+.logoReseaux {
+    width: 45%;
+}
+
+.logoReseaux .logo {
+    border-right: 2px solid #017D03;
+}
+
+.logoReseaux .reseaux h6 {
+    color: #FF9C00;
+}
+
+.logoReseaux .reseaux .iconeReseau {
+    padding: 1.5vh;
+    border-radius: 100%;
+    border: 1px solid #017D03;
+    color: #017D03;
+    font-size: 2.5vh;
+}
+
+.ling {
+    width: 60%;
+}
+
+.ling a {
+    color: #017D03;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.copyright {
+    background-color: #FF9C00;
+    color: white;
+    padding: 1vh 0;
+}
+
+/* Média queries  */
+@media screen and (max-width:1000px) {
+    .cardObjectif i {
+        top: -5vh;
+    }
+    .logoReseaux .logo {
+        border-right: none !important;
+    }
+}
+
+@media screen and (max-width:980px) {
+    .statistique .chiffre h1 {
+        font-size: 4vh;
+    }
+
+    .statistique .icone i {
+        font-size: 5vh;
+    }
+
+    .logoReseaux .logo {
+        border-right: none !important;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .banierre .containerText h1 {
+        font-size: 6vh;
+    }
+
+    .containerApropos {
+        margin-top: -15vh;
+    }
+
+    .cardObjectif {
+        min-height: 25vh;
+    }
+    .logoReseaux .logo {
+        border-right: none !important;
+    }
+}
