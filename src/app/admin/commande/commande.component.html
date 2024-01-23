@@ -25,34 +25,81 @@
     <div class="table-data">
         <div class="order">
             <h4 class="fw-bold ">Liste des commandes</h4>
-            <table class="table table-responsive-md table1 table-sm px-5 py-5 table table-with-padding " id="table-list">
-                <thead >
-                    <tr class="h-25 px-2 py-3" style="background-color: red;">
-                        <th scope="col" >Photo</th>
-                        <th scope="col" >Client</th>
-                        <th scope="col" >Etat</th>
-                        <th scope="col" >Montant</th>
-                        <th scope="col" >Mode paiement</th>
-                        <th scope="col" >Action </th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
+            <table datatable [dtOptions]="dtOptions" class="row-border  hover w-100 table">
+            <thead class="table-header">
+                <tr class="table-header">
+                    <th class="table-header">Photo</th>
+                    <th class="table-header">Client</th>
+                    <th class="table-header">Etat</th>
+                    <th class="table-header">Montant</th>
+                    <th class="table-header">Mode paiement</th>
+                    <th class="table-header">Action</th>
+                </tr>
+            </thead>
+            <tbody>
                 <tr>
-                    <th><img style="width: 50px; height: 50px; border-radius: 50px" src="" alt=""></th>
-                    <td>Khady Mbengue</td>
-                    <td>
-                        <span class="badge rounded-pill text-danger">En cours</span>
-                    </td>
+                    <td><img src="" alt=""></td>
+                    <td>Mouhamadou </td>
+                    <td><span class="badge">En cours</span></td>
                     <td>27000</td>
                     <td>Wave</td>
-                    <td id="iconAction">
-                        <i class="bi bi-eye-fill"></i>
-                    </td>
+                    <td><i class="bi bi-eye-fill" type="button" data-bs-toggle="modal" data-bs-target="#commande"></i></td>
                 </tr>
-        
-                </tbody>
+                <tr>
+                    <td><img src="" alt=""></td>
+                    <td>Mouhamadou </td>
+                    <td><span class="badge-Termine">Terminer</span></td>
+                    <td>27000</td>
+                    <td>Wave</td>
+                    <td><i class="bi bi-eye-fill" type="button"></i></td>
+                </tr>
+                 <tr>
+                    <td><img src="" alt=""></td>
+                    <td>Mouhamadou </td>
+                    <td><span class="badge-Annuler">Annuler</span></td>
+                    <td>27000</td>
+                    <td>Wave</td>
+                    <td><i class="bi bi-eye-fill" type="button"></i></td>
+                </tr>
+            </tbody>
             </table>
         </div>
     </div>
              
 </main>
+
+<!-- Modal -->
+<div class="modal modal-lg fade" id="commande" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0 ">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <table class="table align-middle mb-0 no-gutters">
+          <thead>
+            <tr>
+              <th id="bg-custom-color" >Photo</th>
+              <th id="bg-custom-color" >Produit</th>
+              <th id="bg-custom-color" >Prix (kg)</th>
+              <th id="bg-custom-color" >Quantite (Kg)</th>
+              <th id="bg-custom-color" >Total</th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <td><img src="" alt=""></td>
+                <td>Mangue</td>
+                <td>600</td>
+                <td>100 kg</td>
+                <td>160 000</td>
+              </tr>
+            </tbody>
+        </table>
+        <div class="sous-total">
+          <p>Sous-total: 320 000</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

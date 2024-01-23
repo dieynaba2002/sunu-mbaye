@@ -9,8 +9,53 @@
 <!-- fin de section -->
 
 <!-- Debut section nos produits -->
+<!-- Menu filtre pour le tableau des projets  -->
 <section class="mt-4" id="section">
-    <h2 class="fw-bold text-center ">Nos produits</h2>
+    <div class="test mt-5">
+        <div class="menuFiltre mt-5 d-flex">
+            <div class="filtreSection">
+                <button class="btn filtreActive fw-bold px-3 active" *ngIf="isProgress">Tout</button>
+                <button class="btn fw-bold px-3 active" *ngIf="!isProgress" (click)="showProgress()">Tout</button>
+            </div>
+    
+            <div class="filtreSection">
+                <button class="btn filtreActive fw-bold px-3" *ngIf="isTerminate">Céréale</button>
+                <button class="btn fw-bold px-3" *ngIf="!isTerminate" (click)="showTerminate()">Céréale</button>
+            </div>
+    
+            <div class="filtreSection">
+                <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">Fruit</button>
+                <button class="btn fw-bold px-3" *ngIf="!isCancel" (click)="showCancel()">Fruit</button>
+            </div>
+    
+            <div class="filtreSection">
+                <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">Légume</button>
+                <button class="btn fw-bold px-3" *ngIf="!isCancel" (click)="showCancel()">Légume</button>
+            </div>
+    
+            <div class="filtreSection">
+                <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">Epice</button>
+                <button class="btn fw-bold px-3" *ngIf="!isCancel" (click)="showCancel()">Epice</button>
+            </div>
+    
+            <div class="filtreSection">
+                <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">Fruit</button>
+                <button class="btn fw-bold px-3" *ngIf="!isCancel" (click)="showCancel()">Légume vert</button>
+            </div>
+        </div>
+        <nav class="ms-5">
+            <form action="#" class="recherche">
+                <div class="form-input">
+                    <input type="search" placeholder="Rechercher...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+        </nav>
+    </div>
+</section>
+    
+<section class="mt-4" id="section">
+    <h2 class="fw-bold text-center mt-5">Nos produits</h2>
     <div class="decoration">
         <span class="soulignement"></span>
         <i class="bi bi-flower3"></i>

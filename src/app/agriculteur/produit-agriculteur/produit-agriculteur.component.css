@@ -2,7 +2,11 @@
     background-color: #017D03;
     color: white;
     font-weight: bold;
-    height: 45px;
+    height: 36px;
+    margin-top: 10px;
+}
+nav{
+    padding: 0 !important;
 }
 
 /* Debut de la stylisation de produit */
@@ -81,4 +85,34 @@
     display: block;
     margin: 0 auto;
     margin-top: 6vh;
+}
+.btngroup {
+    display: flex;
+    justify-content: end;
+}
+
+.btngroup i {
+    color: #017D03;
+    font-size: 1.5em;
+    margin-left: 2vh;
+    margin-right: 12px;
+}
+.btn-Ajout-modal{
+    background-color: #017D03;
+    color: white;
+}
+.btn-annuler-modal{
+    background-color: #FF9C00;
+    color: white;
+}
+.titre-color{
+    color: #017D03;
+}
+.color-btn-close{
+    background-color: #FF9C00;
+}
+
+.inputAjout input,textarea,select {
+    border: none;
+    border-bottom: 2px solid #FFA439;
 }

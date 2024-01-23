@@ -3,10 +3,10 @@
     <div class="table-data">
         <div class="order">
             <div class="d-flex justify-content-between ">
-                <button class="btn btn-Ajout-pro">Ajouter une annonce</button>
-                
-                <nav>
-                    <form action="#">
+                <button class="btn btn-Ajout-pro" data-bs-toggle="modal" data-bs-target="#ajoutAnnonce">Ajouter une annonce</button>
+                <button class="btn btn-annonce-pub">Annonce publié</button>
+                <nav class="ms-5">
+                    <form action="#" class="recherche">
                         <div class="form-input">
                             <input type="search" placeholder="Rechercher...">
                             <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
@@ -14,7 +14,7 @@
                     </form>
                 </nav>
             </div>
-            <div class="contain-annonce">
+            <div class="contain-annonce mt-4">
                 <div class="card mb-3 test" style="max-width: 440px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -27,8 +27,9 @@
                                 Nous sommes ravis de vous présenter notre récolte de mangues bio, fraîchement cueillies dans nos vergers. <br> Merci a  Marie Laure COLY
                             </p>
                             <div class="btngroup">
-                                <button type="button" class="btn btn-publier">Publier</button>
-                                <button type="button" class="btn btn-retirer">Retirer</button>
+                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailAnnonce" type="button"></i>
+                                <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierAnnonce" type="button"></i>
+                                <i class="bi bi-trash3" type="button"></i>
                             </div>
                         </div>
                         </div>
@@ -46,17 +47,129 @@
                                 Nous sommes ravis de vous présenter notre récolte de mangues bio, fraîchement cueillies dans nos vergers. <br> Merci a  Marie Laure COLY
                             </p>
                             <div class="btngroup">
-                                <button type="button" class="btn btn-publier">Publier</button>
-                                <button type="button" class="btn btn-retirer">Retirer</button>
+                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailAnnonce" type="button"></i>
+                                <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierAnnonce" type="button"></i>
+                                <i class="bi bi-trash3" type="button"></i>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
-
+                
             </div>
+            <!-- pagination -->
+                <div class="pagin d-flex justify-content-center mt-5">
+                    <nav aria-label="Page shadow navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- pagination -->
         </div>
     </div>
 </main>
 
 <!-- MAIN -->
+
+<!-- Modal Ajout -->
+<div class="modal fade" id="ajoutAnnonce" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titre-color" id="exampleModalLabel">Ajouter une annonce</h5>
+        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+            <label for="Titre" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce">
+        </div>
+        <div class="mb-3 inputAjout">
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control" type="file" id="image" name="image">
+        </div>
+        <div class="mb-3 inputAjout">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-Ajout-modal">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detail -->
+<div class="modal fade" id="detailAnnonce" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0 ">
+        <h5 class="modal-title titre-color" id="exampleModalLabel">Detail produit</h5>
+        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Carotte</h5>
+                    <p class="card-text">La Carotte est une plante bisannuelle de 10 à 80 cm de haut, aux rameaux étalés. Les feuilles sont molles et velues.</p>
+                    <p class="card-text"><small class="text-muted fw-bold ">Quantité:</small></p>
+                    <p class="card-text"><small class="text-muted fw-bold">Prix (kg):</small></p>
+                    <p class="card-text"><small class="text-muted fw-bold">Categorie:</small></p>
+                </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Modifier -->
+<div class="modal fade" id="modifierAnnonce" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title titre-color" id="exampleModalLabel">Modifier une annonce</h5>
+        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+            <label for="Titre" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce">
+        </div>
+        <div class="mb-3 inputAjout">
+            <label for="formFile" class="form-label">Image</label>
+            <input class="form-control" type="file" id="image" name="image">
+        </div>
+        <div class="mb-3 inputAjout">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-Ajout-modal">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,4 +11,32 @@ export class ProduitComponent implements OnInit {
     script.src = '../../../assets/js/filtre.js';
     document.body.appendChild(script);
   }
+  // Déclaration des variables
+  isProgress:boolean = true;
+  isTerminate:boolean = false;
+  isCancel:boolean = false;
+
+
+  // Déclaration des méthodes
+  // Voir les lignes urbaines
+  showProgress(){
+    this.isProgress = true;
+    this.isTerminate = false;
+    this.isCancel = false;
+  }
+
+  // Voir les lignes de Terminate
+  showTerminate(){
+    this.isProgress = false;
+    this.isTerminate = true;
+    this.isCancel = false;
+  }
+
+  // Voir les lignes Cancel
+  showCancel(){
+    this.isProgress = false;
+    this.isTerminate = false;
+    this.isCancel = true;
+  }
+
 }

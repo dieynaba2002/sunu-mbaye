@@ -3,4 +3,5 @@ table.dataTable thead {
 }
 .table-header{
     background-color: #107D03 !important;
+    color: white;
 }

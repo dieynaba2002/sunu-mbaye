@@ -8,3 +8,44 @@ tbody tr td i {
     color: #017D03;
 
 }
+.table-header {
+    background-color: #107D03 !important;
+    color: white;
+}
+
+.badge {
+    background-color: #ff9d0034;
+    color: #FF9C00;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+.badge-Termine{
+    background-color: #27ae5f2a;
+    color: #27AE60;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+.badge-Annuler{
+    background-color: #eb575732;
+    color: #EB5757;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+#commande{
+    margin-left: 100px;
+}
+#bg-custom-color {
+    background-color: #107D03 !important;
+    color: white;
+}
+.sous-total {
+    float: right;
+    padding: 15px 25px 5px 10px;
+    box-shadow: 1px 1px 6px 0px #dadada;
+}

@@ -11,7 +11,7 @@ const routes: Routes = [
       { path: 'produit-agriculteur', component: ProduitAgriculteurComponent },
       { path: 'annonce-agriculteur', component: AnnonceAgriculteurComponent },
       { path: 'profil-agriculteur', component: ProfilAgriculteurComponent },
-      { path: '',redirectTo:'dasboard-agriculteur' ,pathMatch:'full'}
+      { path: '',redirectTo:'produit-agriculteur' ,pathMatch:'full'}
   ]},
 ];
 
