@@ -1,0 +1,84 @@
+#section {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.test {
+    margin-top: 25vh;
+}
+
+.titre {
+    color: #FF9C00;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.conteneur {
+    width: 80%;
+}
+
+.image-profil {
+    /* border: 2px solid ; */
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    margin: 0 auto;
+}
+
+.image-profil img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.table1 thead tr th {
+    background-color: #017D03;
+    color: white;
+}
+
+tbody tr td i {
+    color: #017D03;
+
+}
+
+#container-table {
+    border: 3px solid #017D03;
+    border-radius: 25px;
+    /* width: 80%; */
+    margin: 0 auto;
+}
+
+
+.ligne-table {
+    border-bottom: 2px dashed #E3E3E3;
+}
+
+.image-profil {
+    /* border: 2px solid ; */
+    border-radius: 50%;
+    height: 140px;
+    width: 140px;
+    margin: 0 auto;
+}
+
+.image-profil img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.btn-modifier {
+    background-color: #017D03;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-annuler {
+    border: 2px solid #017D03;
+    color: #017D03;
+    font-weight: bold;
+}
+
+#test input {
+    border: 1px solid #017D03;
+}

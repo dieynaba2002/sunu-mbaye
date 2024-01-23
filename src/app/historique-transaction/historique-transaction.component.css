@@ -1,0 +1,30 @@
+#section {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.test {
+    margin-top: 25vh;
+}
+
+.titre {
+    color: #FF9C00;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.conteneur {
+    width: 80%;
+    box-shadow: 2px 4px 4px 2px #0f7d03af;
+    border-radius: 20px;
+}
+
+.title {
+    color: #017D03;
+    font-weight: bold;
+}
+
+#bg-custom-color {
+    background-color: #107D03 !important;
+    color: white;
+}

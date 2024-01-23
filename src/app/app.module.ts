@@ -15,6 +15,9 @@ import { DataTablesModule } from 'angular-datatables';
 import { PanierComponent } from './panier/panier.component';
 import { PolitiqueDeConfidentialiteComponent } from './politique-de-confidentialite/politique-de-confidentialite.component';
 import { ConditionUtilisationComponent } from './condition-utilisation/condition-utilisation.component';
+import { InformationProfilComponent } from './information-profil/information-profil.component';
+import { ModificationProfilComponent } from './modification-profil/modification-profil.component';
+import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { ConditionUtilisationComponent } from './condition-utilisation/condition
     AuthComponent,
     PanierComponent,
     PolitiqueDeConfidentialiteComponent,
-    ConditionUtilisationComponent
+    ConditionUtilisationComponent,
+    InformationProfilComponent,
+    ModificationProfilComponent,
+    HistoriqueTransactionComponent
   ],
   imports: [
     BrowserModule,

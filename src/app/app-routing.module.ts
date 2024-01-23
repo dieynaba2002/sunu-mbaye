@@ -9,6 +9,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PanierComponent } from './panier/panier.component';
 import { PolitiqueDeConfidentialiteComponent } from './politique-de-confidentialite/politique-de-confidentialite.component';
 import { ConditionUtilisationComponent } from './condition-utilisation/condition-utilisation.component';
+import { InformationProfilComponent } from './information-profil/information-profil.component';
+import { ModificationProfilComponent } from './modification-profil/modification-profil.component';
+import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
 
 const routes: Routes = [
   { path: '',redirectTo:'accueil' ,pathMatch:'full'},
@@ -21,6 +24,9 @@ const routes: Routes = [
   { path: 'panier', component: PanierComponent },
   { path: 'politique-confidentialite', component: PolitiqueDeConfidentialiteComponent },
   { path: 'condition-utilisation', component: ConditionUtilisationComponent },
+  { path: 'information-profil', component: InformationProfilComponent },
+  { path: 'modification-profil', component: ModificationProfilComponent },
+  { path: 'historique-transaction', component: HistoriqueTransactionComponent },
   { path: 'admin', loadChildren: () => import ('./admin/admin.module').then(m => m.AdminModule)},
   { path: 'agriculteur', loadChildren: () => import ('./agriculteur/agriculteur.module').then(m => m.AgriculteurModule)},
 ];
