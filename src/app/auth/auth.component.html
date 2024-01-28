@@ -1,6 +1,6 @@
 <app-header></app-header>
-<section class="ftco-section">
-    <div class="container">
+<section class="ftco-section mt-5 mb-5" *ngIf="formChoice">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-10">
                 <div class="wrap d-md-flex">
@@ -26,21 +26,17 @@
                         <form action="#" class="signin-form">
                             <div class="form-group mb-3">
                                 <label class="label" for="name">Email</label>
-                                <input type="text" class="form-control" placeholder="Email" required name="email"
-                                   >
+                                <input type="text" class="form-control" placeholder="Email" required name="email" [(ngModel)]="email">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="password">Mot de passe</label>
-                                <input type="password" class="form-control" placeholder="mot de passe" required
-                                    name="password">
+                                <input type="password" class="form-control" placeholder="mot de passe" required name="password" [(ngModel)]="password">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3 fw-bold "
-                                    >Connexion</button>
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3 fw-bold" (click)="login()">Connexion</button>
                             </div>
                         </form>
-                        <p class="text-end">Avez-vous un compte? <a data-toggle="tab"
-                                >S'inscrire</a></p>
+                        <p class="text-end">Avez-vous un compte? <a data-toggle="tab" type="button" (click)="ShowForm()" >S'inscrire</a></p>
                     </div>
                 </div>
             </div>
@@ -48,7 +44,7 @@
     </div>
 </section>
 
-<section class="ftco-section">
+<section class="ftco-section" *ngIf="!formChoice">
     <div class="container">
         <div class="row justify-content-center" style="z-index: -100;">
             <div class="col-md-12 col-lg-10">
@@ -63,47 +59,51 @@
                             </div>
                             <div class="w-100">
                                 <p class="social-media d-flex justify-content-end">
-                                    <a href="#"
-                                        class="social-icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-facebook"></span></a>
-                                    <a href="#"
-                                        class="social-icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-twitter"></span></a>
+                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                    <a href="#"class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
                                 </p>
                             </div>
                         </div>
                         <form action="#" class="signin-form">
                             <div class="form-group mb-3">
-                                <label class="label" for="nom">Prenom & Nom</label>
-                                <input type="text" class="form-control" placeholder="Nom Complet" required name="nom">
+                                <label class="label" for="prenom">Prenom</label>
+                                <input type="text" class="form-control" placeholder="Prenom" required name="prenom" [(ngModel)]="prenom">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="nom">Nom</label>
+                                <input type="text" class="form-control" placeholder="Nom" required name="nom" [(ngModel)]="nom">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="Telephone">Telephone</label>
-                                <input type="text" class="form-control" placeholder="Telephone" required name="telephone">
+                                <input type="text" class="form-control" placeholder="Telephone" required name="telephone" [(ngModel)]="telephone">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="email">Email</label>
-                                <input type="text" class="form-control" placeholder="Email" required name="email">
+                                <input type="text" class="form-control" placeholder="Email" required name="email" [(ngModel)]="email">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="password">Mot de passe</label>
                                 <input type="password" class="form-control" placeholder="Mot de passe" required
-                                    name="password">
+                                    name="password" [(ngModel)]="password">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="adresse">Adresse</label>
+                                <input type="text" class="form-control" placeholder="Adresse" required name="adresse" [(ngModel)]="adresse">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label form-label" for="formFile">Image</label>
-                                <input class="form-control" type="file" id="formFile" name="image">
+                                <input class="form-control" type="file" id="formFile" name="image" [(ngModel)]="image">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="Role">Role</label>
-                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                    <option selected>Vous etes ?</option>
-                                    <option value="agriculteur">Agriculteur</option>
-                                    <option value="revendeur">Revendeur</option>
+                                <select class="form-select form-select-lg mb-3" aria-label="form-select-lg example" name="role" [(ngModel)]="role">
+                                    <option selected>Vous etes... ?</option>
+                                    <option value="3">Agriculteur</option>
+                                    <option value="2">Revendeur</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3 fw-bold " >S'incrire</button>
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3 fw-bold " (click)="inscription()">S'incrire</button>
                             </div>
                         </form>
                     </div>

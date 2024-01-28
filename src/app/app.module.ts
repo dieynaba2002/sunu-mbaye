@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,6 +18,7 @@ import { ConditionUtilisationComponent } from './condition-utilisation/condition
 import { InformationProfilComponent } from './information-profil/information-profil.component';
 import { ModificationProfilComponent } from './modification-profil/modification-profil.component';
 import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,10 @@ import { HistoriqueTransactionComponent } from './historique-transaction/histori
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

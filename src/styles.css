@@ -679,3 +679,75 @@ html {
         min-width: 420px;
     }
 }
+
+
+
+
+
+/* Style général des boutons */
+.paginate_button {
+  padding: 5px 10px;
+  /* background-color: #001F3F;  */
+  /* border: 2px solid#001F3F;  */
+  margin-right: 5px;
+}
+.page-item:last-child .page-link{
+  color: #001F3F;
+  border: 2px solid #107D03 ;
+}
+.page-item:first-child .page-link{
+  color: #107D03;
+  border: 2px solid  #107D03;
+
+
+}
+.page-item:nth-last-child(1) .page-link{
+  color: #107D03;
+  border: 2px solid  #107D03;
+
+
+}
+
+.page-item:nth-last-child(2) .page-link{
+  color: #FF9C00;
+  border: 2px solid  #FF9C00;
+  border-radius: 100px;
+
+
+}
+.page-item:nth-last-child(3) .page-link{
+  color: #FF9C00;
+  border: 2px solid  #107D03;
+  border-radius: 50%;
+
+}
+
+.page-item.disabled .page-link {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #107D03;
+  color: white;
+}
+
+.page-item.active .page-link {
+  border-radius: 100px;
+  background-color: #FF9C00;
+  border: 1px solid #FF9C00;
+  color: white;
+}
+
+/* / Boutons Précédent et Suivant / */
+.paginate_button.previous{
+  font-weight: bold;
+  /* background-color: #001F3F !important;  */
+  border-radius: 100px;
+  color: white;
+}
+.paginate_button.next {
+    font-weight: bold;
+  /* background-color: #001F3F !important;  */
+    border-radius: 100px;
+    color: white;
+}

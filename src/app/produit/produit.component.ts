@@ -14,7 +14,8 @@ export class ProduitComponent implements OnInit {
   // Déclaration des variables
   isProgress:boolean = true;
   isTerminate:boolean = false;
-  isCancel:boolean = false;
+  isCancel: boolean = false;
+  isAll: boolean = false;
 
 
   // Déclaration des méthodes
@@ -36,6 +37,11 @@ export class ProduitComponent implements OnInit {
   showCancel(){
     this.isProgress = false;
     this.isTerminate = false;
+    this.isCancel = true;
+  }
+  showAll() {
+    this.isProgress = true;
+    this.isTerminate = true;
     this.isCancel = true;
   }
 
