@@ -31,7 +31,7 @@ import { ProduitsAdminComponent } from './produits-admin/produits-admin.componen
     CommonModule,
     AdminRoutingModule,
     DataTablesModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class AdminModule { }

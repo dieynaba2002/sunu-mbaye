@@ -9,9 +9,13 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 })
 export class AuthServiceService {
   isAdmin$ = new BehaviorSubject<boolean>(false);
+  private authToken = '';
+  private userId = '';
 
-  private isAuthenticatedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  private isAuthenticatedSubject: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
+  public isAuthenticated$: Observable<boolean> =
+    this.isAuthenticatedSubject.asObservable();
 
   url = 'http://127.0.0.1:8000/api/login';
 
@@ -24,8 +28,7 @@ export class AuthServiceService {
       tap((response) => {
         if (response.user) {
           this.isAuthenticatedSubject.next(true);
-          this.isAdmin$.next(response.user.role_id === 1); // Mettez à jour en fonction de votre logique de rôle
-          // Gérer la redirection ici si nécessaire
+          this.isAdmin$.next(response.user.role_id === 1); 
           this.router.navigate(['/admin']);
         }
       })
@@ -39,5 +42,15 @@ export class AuthServiceService {
 
   get isAuthenticated(): boolean {
     return this.isAuthenticatedSubject.value;
+  }
+
+  // Retourne la val du token envoyé par le back sous forme d'objet => Exemple :  { "userId": "6477aad2457309c8a3e3d031", "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDc3YWFkMjQ1NzMwOWM4YTNlM2QwMzEiLCJpYXQiOjE2ODU2MjMzOTksImV4cCI6MTY4NTcwOTc5OX0.18cpQsPFDGJWTFKeRHn92mOwLS04BDDAeewWo582rvM"}
+  getToken() {
+    return this.authToken;
+  }
+
+  // Retourne la val du token envoyé par le back sous forme d'objet
+  getUserId() {
+    return this.userId;
   }
 }

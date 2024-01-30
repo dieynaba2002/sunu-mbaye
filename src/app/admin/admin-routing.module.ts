@@ -7,6 +7,7 @@ import { AnnoncesComponent } from './annonces/annonces.component';
 import { CommandeComponent } from './commande/commande.component';
 import { ProfilComponent } from './profil/profil.component';
 import { ProduitsAdminComponent } from './produits-admin/produits-admin.component';
+import { authGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   {

@@ -8,6 +8,7 @@ import { MainAgriculteurComponent } from './main-agriculteur/main-agriculteur.co
 import { ProduitAgriculteurComponent } from './produit-agriculteur/produit-agriculteur.component';
 import { AnnonceAgriculteurComponent } from './annonce-agriculteur/annonce-agriculteur.component';
 import { ProfilAgriculteurComponent } from './profil-agriculteur/profil-agriculteur.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ProfilAgriculteurComponent } from './profil-agriculteur/profil-agricult
   ],
   imports: [
     CommonModule,
-    AgriculteurRoutingModule
+    AgriculteurRoutingModule,
+    FormsModule,
   ]
 })
 export class AgriculteurModule { }

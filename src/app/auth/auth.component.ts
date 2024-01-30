@@ -106,7 +106,7 @@ export class AuthComponent implements OnInit {
           console.log('Utilisateur ajouté:', addedUser);
           this.ShowForm();
           // Rediriger vers la page de connexion
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/login']);
         },
         (error) => {
           // Gestion des erreurs lors de l'ajout de l'utilisateur
@@ -131,6 +131,15 @@ export class AuthComponent implements OnInit {
       // Envoyer les informations d'identification au backend via une API
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
+          // console.log('====================================');
+          // console.log(response);
+          // console.log('====================================');
+          // Stocker le token dans le localStorage
+          localStorage.setItem("userOnline", JSON.stringify(response.user));
+          localStorage.setItem(
+            'access_token',
+            JSON.stringify(response.token).replace(/['"]+/g, '')
+          );
           // Gérer la réponse réussie du backend
           if (
             response.user.email === 'admin@gmail.com' &&

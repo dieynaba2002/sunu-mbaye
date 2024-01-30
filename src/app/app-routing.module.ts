@@ -12,23 +12,37 @@ import { ConditionUtilisationComponent } from './condition-utilisation/condition
 import { InformationProfilComponent } from './information-profil/information-profil.component';
 import { ModificationProfilComponent } from './modification-profil/modification-profil.component';
 import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
+import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  { path: '',redirectTo:'accueil' ,pathMatch:'full'},
+  { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: 'accueil', component: AccueilComponent },
   { path: 'apropos', component: AProposComponent },
   { path: 'produits', component: ProduitComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: AuthComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
   { path: 'panier', component: PanierComponent },
-  { path: 'politique-confidentialite', component: PolitiqueDeConfidentialiteComponent },
+  {
+    path: 'politique-confidentialite',
+    component: PolitiqueDeConfidentialiteComponent,
+  },
   { path: 'condition-utilisation', component: ConditionUtilisationComponent },
   { path: 'information-profil', component: InformationProfilComponent },
   { path: 'modification-profil', component: ModificationProfilComponent },
   { path: 'historique-transaction', component: HistoriqueTransactionComponent },
-  { path: 'admin', loadChildren: () => import ('./admin/admin.module').then(m => m.AdminModule)},
-  { path: 'agriculteur', loadChildren: () => import ('./agriculteur/agriculteur.module').then(m => m.AgriculteurModule)},
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'agriculteur',
+    loadChildren: () =>
+      import('./agriculteur/agriculteur.module').then(
+        (m) => m.AgriculteurModule
+      ),
+  },
 ];
 
 @NgModule({
