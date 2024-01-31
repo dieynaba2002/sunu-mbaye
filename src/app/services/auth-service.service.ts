@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
+import { User } from '../models/user.model';
+import { url } from './apiUrl';
 
 
 @Injectable({
@@ -28,7 +30,7 @@ export class AuthServiceService {
       tap((response) => {
         if (response.user) {
           this.isAuthenticatedSubject.next(true);
-          this.isAdmin$.next(response.user.role_id === 1); 
+          this.isAdmin$.next(response.user.role_id === 1);
           this.router.navigate(['/admin']);
         }
       })
@@ -52,5 +54,15 @@ export class AuthServiceService {
   // Retourne la val du token envoyé par le back sous forme d'objet
   getUserId() {
     return this.userId;
+  }
+
+  getAllsUsers(): Observable<any> {
+    return this.http.get<User[]>(`${url}/listeUser`).pipe(
+      tap((data) => console.log('Données des catégories:', data)),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des catégories:', error);
+        return of(null); // Gérer l'erreur comme vous le souhaitez
+      })
+    );
   }
 }
