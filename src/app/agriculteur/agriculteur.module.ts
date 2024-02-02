@@ -9,6 +9,7 @@ import { ProduitAgriculteurComponent } from './produit-agriculteur/produit-agric
 import { AnnonceAgriculteurComponent } from './annonce-agriculteur/annonce-agriculteur.component';
 import { ProfilAgriculteurComponent } from './profil-agriculteur/profil-agriculteur.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,12 +19,13 @@ import { FormsModule } from '@angular/forms';
     MainAgriculteurComponent,
     ProduitAgriculteurComponent,
     AnnonceAgriculteurComponent,
-    ProfilAgriculteurComponent
+    ProfilAgriculteurComponent,
   ],
   imports: [
     CommonModule,
     AgriculteurRoutingModule,
     FormsModule,
-  ]
+    HttpClientModule,
+  ],
 })
-export class AgriculteurModule { }
+export class AgriculteurModule {}

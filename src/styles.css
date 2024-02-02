@@ -685,10 +685,8 @@ html {
 
 
 /* Style général des boutons */
-.paginate_button {
+/* .paginate_button {
   padding: 5px 10px;
-  /* background-color: #001F3F;  */
-  /* border: 2px solid#001F3F;  */
   margin-right: 5px;
 }
 .page-item:last-child .page-link{
@@ -738,16 +736,13 @@ html {
   color: white;
 }
 
-/* / Boutons Précédent et Suivant / */
 .paginate_button.previous{
   font-weight: bold;
-  /* background-color: #001F3F !important;  */
   border-radius: 100px;
   color: white;
 }
 .paginate_button.next {
     font-weight: bold;
-  /* background-color: #001F3F !important;  */
     border-radius: 100px;
     color: white;
-}
+} */

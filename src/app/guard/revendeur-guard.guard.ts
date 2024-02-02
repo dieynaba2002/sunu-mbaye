@@ -1,15 +1,12 @@
 import { CanActivateFn, Router } from '@angular/router';
 
-export const authGuard: CanActivateFn = (route, state) => {
-
+export const revendeurGuardGuard: CanActivateFn = (route, state) => {
   const router = new Router();
   const userConnect = JSON.parse(localStorage.getItem('userOnline') || '');
-  if (userConnect.role_id == 1) {
+  if (userConnect.role_id == 2) {
     return true;
-  }
-  else {
+  } else {
     router.navigate(['login']);
     return false;
   }
 };
-  

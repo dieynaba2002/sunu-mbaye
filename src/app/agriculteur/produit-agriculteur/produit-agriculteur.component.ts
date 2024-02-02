@@ -16,33 +16,35 @@ export class ProduitAgriculteurComponent implements OnInit {
     private categorieService: CategorieService
   ) {}
   ngOnInit(): void {
-    this.loadCategories(); 
+    this.loadCategories();
+    this.loadProduit();
   }
 
   // Les attributs
   nom_produit: string = '';
   images: any = '';
-  quantite: string = '';
-  prix: string = '';
+  quantite: any = '';
+  prix: any = '';
   user_id: any;
-  categorie_id: string = '';
+  categorie_id: any = '';
   description: string = '';
 
   produits: any[] = [];
   categories: Categorie[] = [];
+  seletedProduit: any = {};
 
   loadCategories() {
     this.categorieService.getAlls().subscribe((data) => {
-      console.log('Données des catégories:', data);
+      // console.log('Données des catégories:', data);
       this.categories = data.categorie;
-      console.log('Données des catégories:', data);
+      // console.log('Données des catégories:', data);
     });
   }
 
-  // Récupération des categories
+  // Récupération des produits
   loadProduit() {
     this.produitService.getAllsProduit().subscribe((data) => {
-      console.log('Données des produit:', data);
+      console.log('Données des produits:', data);
       this.produits = data.produit;
       console.log('Données des produits:', data);
     });
@@ -56,19 +58,9 @@ export class ProduitAgriculteurComponent implements OnInit {
         'Renseigner un produit'
       );
     } else {
-      // const newProduit: Produit = {
-      //   nom_produit: this.nom_produit,
-      //   images: this.images,
-      //   quantite: this.quantite,
-      //   prix: this.prix,
-      //   user_id: this.user_id,
-      //   categorie_id: this.categorie_id,
-      //   description: this.description
-      // };
-
       this.user_id = JSON.parse(localStorage.getItem('userOnline') || '');
       let formData = new FormData();
-      formData.append('image', this.images);
+      formData.append('images', this.images);
       formData.append('nom_produit', this.nom_produit);
       formData.append('quantite', this.quantite);
       formData.append('categorie_id', this.categorie_id);
@@ -76,7 +68,10 @@ export class ProduitAgriculteurComponent implements OnInit {
       formData.append('description', this.description);
       formData.append('prix', this.prix);
       console.log(formData);
-      this.produitService.addProduit(formData).subscribe(() => {
+      this.produitService.addProduit(formData).subscribe((response) => {
+        console.log('====================================');
+        console.log(response);
+        console.log('====================================');
         this.produitService.alertMessage(
           'success',
           'Bravo!',
@@ -88,7 +83,7 @@ export class ProduitAgriculteurComponent implements OnInit {
     }
   }
 
-  SupprimerCategorie(id: number) {
+  SupprimerProduit(id: number) {
     Swal.fire({
       title: 'Êtes-vous sûr?',
       text: 'Vous ne pourrez pas revenir en arrière après cette action!',
@@ -103,7 +98,7 @@ export class ProduitAgriculteurComponent implements OnInit {
           this.produitService.alertMessage(
             'success',
             'Supprimé!',
-            'Categorie supprimé avec succès'
+            'Produit supprimé avec succès'
           );
           this.loadProduit();
         });
@@ -111,12 +106,56 @@ export class ProduitAgriculteurComponent implements OnInit {
     });
   }
 
+  // fonction pour modifier
+  modifierProduit() {
+    const data = {
+      nom_produit: this.nom_produit,
+      description: this.description,
+      images: this.images,
+      prix: this.prix,
+      quantite: this.quantite,
+      categorie_id: this.categorie_id,
+    };
+
+    console.log('rtyu', this.seletedProduit);
+    // console.log(data)
+    this.produitService
+      .updateProduit(this.seletedProduit, data)
+      .subscribe((response) => {
+        console.log(response);
+      });
+
+    this.loadProduit();
+    console.warn(data);
+  }
+
+  chargerInfosProduit(produit: any) {
+    this.seletedProduit = produit.id;
+    console.log('novysvd', produit);
+    this.nom_produit = produit.nom_produit;
+    this.description = produit.description;
+    this.images = produit.images;
+    this.prix = produit.prix;
+    this.quantite = produit.quantite;
+    this.categorie_id = produit.categorie_id;
+
+  }
+
   viderChamps() {
     this.nom_produit = '';
+    this.images = '';
+    this.description = '';
+    this.prix = '';
+    this.quantite = '';
+    this.categorie_id = '';
   }
 
   getFile(event: any) {
     console.warn(event.target.files[0]);
     this.images = event.target.files[0] as File;
+  }
+
+  getProduit(produit: any) {
+    this.seletedProduit = produit;
   }
 }

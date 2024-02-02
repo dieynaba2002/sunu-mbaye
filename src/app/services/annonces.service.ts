@@ -24,6 +24,18 @@ export class AnnoncesService {
       : of(null);
   }
 
+  getAllsAnnonceByAdmin(): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+
+    return accessToken
+      ? this.http.get<any>(`${url}/listAnnonce`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+  }
+
   getByAnnonceId(id: string) {
     return this.http
       .get<Annonce>(`${url}/listeAnnonceAgriculteur/` + id)

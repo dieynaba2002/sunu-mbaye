@@ -1,67 +1,71 @@
 <!-- MAIN -->
 <main id="dark" class="">
-    <ul class="box-info">
-        <li>
-            <i class='bx bxs-group'></i>
-            <span class="text">
-                <h3>1020</h3>
-                <p>Utilisateurs</p>
-            </span>
-        </li>
-        <li>
-            <i class='bx bi-megaphone-fill'></i>
-            <span class="text">
-                <h3>2834</h3>
-                <p>Annonces</p>
-            </span>
-        </li>
-        <li>
-            <i class='bx bi bi-ui-checks-grid'></i>
-            <span class="text">
-                <h3>254</h3>
-                <p>Categorie</p>
-            </span>
-        </li>
-    </ul>
-    <div class="table-data">
-        <div class="order">
-            <h5 class="fw-bold ">Liste des utilisateurs</h5>
-            <table datatable [dtOptions]="dtOptions" class="row-border  hover w-100 table">
-            <thead class="table-header">
-                <tr class="table-header">
-                    <th class="table-header">Photo</th>
-                    <th class="table-header">Prenom</th>
-                    <th class="table-header">Nom</th>
-                    <th class="table-header">Email</th>
-                    <th class="table-header">Role</th>
-                    <th class="table-header">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><img src="" alt=""></td>
-                    <td>Mouhamadou </td>
-                    <td>Bah</td>
-                    <td>fall@gmail.com</td>
-                    <td>agriculteur</td>
-                    <td><i class="bi bi-ban" type="button"></i></td>
-                </tr>
-                <tr>
-                    <td><img src="" alt=""></td>
-                    <td>Mouhamadou </td>
-                    <td>Bah</td>
-                    <td>fall@gmail.com</td>
-                    <td>agriculteur</td>
-                    <td><i class="bi bi-ban" type="button"></i></td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
+  <ul class="box-info">
+    <li>
+      <i class="bx bxs-group"></i>
+      <span class="text" *ngIf="users">
+        <h3>{{ users.length }}</h3>
+        <p>Utilisateurs</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bi-megaphone-fill"></i>
+      <span class="text" *ngIf="annonces">
+        <h3>{{ annonces.length }}</h3>
+        <p>Annonces</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bi bi-ui-checks-grid"></i>
+      <span class="text" *ngIf="categories">
+        <h3>{{ categories.length }}</h3>
+        <p>Categorie</p>
+      </span>
+    </li>
+  </ul>
+  <div class="table-data">
+    <div class="order">
+      <h5 class="fw-bold">Liste des utilisateurs</h5>
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        class="row-border hover w-100 table"
+        *ngIf="users.length > 0"
+      >
+        <thead class="table-header">
+          <tr class="table-header">
+            <th class="table-header">Photo</th>
+            <th class="table-header">Prenom</th>
+            <th class="table-header">Nom</th>
+            <th class="table-header">Email</th>
+            <th class="table-header">Role</th>
+            <th class="table-header">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td><img src="" alt="" /></td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td><i class="bi bi-ban" type="button"></i></td>
+          </tr>
+        </tbody>
+      </table>
 
+      <!-- other table-->
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        class="row-border hover w-100 table"
+      >
+        <thead class="table-header">
+          <tr class="table-header"></tr>
+        </thead>
+      </table>
     </div>
-
-
-   
+  </div>
 </main>
 
 <!-- MAIN -->

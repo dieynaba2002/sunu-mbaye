@@ -14,58 +14,25 @@
                 </nav>
             </div>
             <section class="mt-5" id="section">
-                <div class="grid-produit mt-4">
-                    <div class="col">
+                <div class="grid-produit mt-4" >
+                    <div class="col" *ngFor="let produit of produits">
                         <div class="image-col">
-                            <img src="https://img.freepik.com/photos-gratuite/salade-vegetarienne-fraiche-saine-ingredients-colores-vibrants-generes-par-intelligence-artificielle_25030-60497.jpg?w=996&t=st=1704802531~exp=1704803131~hmac=e71d0e5b2fc92c3487b8c3b9a5aa4d0f71edf3566b991c0abbc4c6d72f88744d"
+                            <img src="http://127.0.0.1:8000/images/{{produit.images}}"
                                 alt="" height="100%" width="100%">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-center mt-3 titre-couleur">Carotte</h5>
+                            <h5 class="card-title text-center mt-3 titre-couleur">{{produit.nom_produit}}</h5>
                             <p class="text-center mt-2">
-                                Elle est cultivée comme légume pour sa racine pivotante épaisse et de sa couleur orange
+                                {{produit.description}}
                             </p>
                         </div>
                         <div class="btngroup">
-                            <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailProduit" type="button"></i>
-                            <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierProduit" type="button"></i>
-                            <i class="bi bi-trash3" type="button"></i>
+                            <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailProduit" type="button" (click)="getProduit(produit)"></i>
+                            <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierProduit" type="button" (click)="chargerInfosProduit(produit)"></i>
+                            <i class="bi bi-trash3" type="button" (click)="SupprimerProduit(produit.id ?? -1)"></i>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="image-col">
-                            <img src="https://img.freepik.com/photos-gratuite/mandarines-clementines-fraiches-juteuses_114579-79028.jpg?size=626&ext=jpg&uid=R87930847&ga=GA1.2.810580184.1680065265&semt=sph"
-                                alt="" height="100%" width="100%">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-center mt-3 titre-couleur">Mandarine</h5>
-                            <p class="text-center mt-2">
-                                Elle est cultivée comme légume pour sa racine pivotante épaisse et de sa couleur orange
-                            </p>
-                        </div>
-                        <div class="btngroup">
-                            <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailProduit" type="button"></i>
-                            <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierProduit" type="button"></i>
-                            <i class="bi bi-trash3" type="button"></i>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="image-col">
-                            <img src="https://img.freepik.com/photos-gratuite/gros-plan-photo-poivrons-biologiques-frais-isoles-surface-blanche_114579-64433.jpg?w=826&t=st=1705585197~exp=1705585797~hmac=997cddb29185080a8ba8e64cced7de0f6e6f75601826f23d38824a100a7ff421"
-                                alt="" height="100%" width="100%">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title mt-3 text-center titre-couleur">Poivron</h5>
-                            <p class="text-center mt-2">
-                                Elle est cultivée comme légume pour sa racine pivotante épaisse et de sa couleur orange
-                            </p>
-                        </div>
-                        <div class="btngroup">
-                            <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailProduit" type="button"></i>
-                            <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierProduit" type="button"></i>
-                            <i class="bi bi-trash3" type="button"></i>
-                        </div>  
-                    </div>
+                    
                 </div>
                 <!-- pagination -->
                 <div class="pagin d-flex justify-content-center mt-5">
@@ -127,7 +94,7 @@
             </div>
             <div class="mb-3 inputAjout">
                 <label for="formFile" class="form-label">Image</label>
-                <input class="form-control" type="file" id="image" name="images" (change)="getFile($event)" >
+                <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images" (change)="getFile($event)">
             </div>
             <div class="mb-3 inputAjout">
                 <label for="Description" class="form-label">Description</label>
@@ -154,15 +121,15 @@
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <img src="http://127.0.0.1:8000/images/{{seletedProduit.images}}" class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Carotte</h5>
-                    <p class="card-text">La Carotte est une plante bisannuelle de 10 à 80 cm de haut, aux rameaux étalés. Les feuilles sont molles et velues.</p>
-                    <p class="card-text"><small class="text-muted fw-bold ">Quantité:</small></p>
-                    <p class="card-text"><small class="text-muted fw-bold">Prix (kg):</small></p>
-                    <p class="card-text"><small class="text-muted fw-bold">Categorie:</small></p>
+                    <h5 class="card-title">{{seletedProduit.nom_produit}}</h5>
+                    <p class="card-text">{{seletedProduit.description}}</p>
+                    <p class="card-text"><small class="text-muted fw-bold ">Quantité:{{seletedProduit.quantite}}</small></p>
+                    <p class="card-text"><small class="text-muted fw-bold">Prix (kg):{{seletedProduit.prix}}</small></p>
+                    <p class="card-text"><small class="text-muted fw-bold">Categorie:{{seletedProduit.nom_categorie}}</small></p>
                 </div>
                 </div>
             </div>
@@ -173,43 +140,45 @@
 </div>
 
 <!-- Modal Modifier -->
-<div class="modal fade" id="modifierProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modifierProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+       <div class="modal-body">
             <div class="mb-3 inputAjout">
                 <label for="nomProduit" class="form-label">Nom du produit</label>
-                <input type="text" class="form-control" id="nomProduit" name="nomProduit" placeholder="Titre produit">
+                <input type="text" class="form-control" id="nomProduit" name="nomProduit" placeholder="Titre produit" [(ngModel)]="nom_produit">
             </div>
             <div class="mb-3 inputAjout">
                 <label for="categorie" class="form-label">Categorie</label>
-                <select class="form-select" aria-label="Default select example" name="categorie">
+                <select class="form-select" aria-label="Default select example" name="categorie" [(ngModel)]="categorie_id">
                     <option selected>Selectionner une categorie</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.nom_categories }}</option>
                 </select>
             </div>
             <div class="mb-3 inputAjout">
                 <label for="quatite" class="form-label">Quantite</label>
-                <input type="number" class="form-control" id="quantite" name="quantite" placeholder="Quantite">
+                <input type="number" class="form-control" id="quantite" name="quantite" placeholder="Quantite" [(ngModel)]="quantite">
+            </div>
+            <div class="mb-3 inputAjout">
+                <label for="prix" class="form-label">Prix</label>
+                <input class="form-control" type="number" id="prix" name="prix" [(ngModel)]="prix">
             </div>
             <div class="mb-3 inputAjout">
                 <label for="formFile" class="form-label">Image</label>
-                <input class="form-control" type="file" id="image" name="image">
+                <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images" (change)="getFile($event)">
             </div>
             <div class="mb-3 inputAjout">
                 <label for="Description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+                <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
             </div>
-      </div> 
+        </div>  
       <div class="modal-footer">
         <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-Ajout-modal">Modifier</button>
+        <button type="button" class="btn btn-Ajout-modal" (click)="modifierProduit()">Modifier</button>
       </div>
     </div>
   </div>

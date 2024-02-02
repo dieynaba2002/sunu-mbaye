@@ -26,45 +26,20 @@
         <div class="order">
             <section class="mt-4" id="section">
                 <div class="grid-produit mt-4">
-                    <div class="col">
+                    <div class="col" *ngFor="let produit of produits">
                         <div class="image-col">
-                            <img src="https://img.freepik.com/photos-gratuite/salade-vegetarienne-fraiche-saine-ingredients-colores-vibrants-generes-par-intelligence-artificielle_25030-60497.jpg?w=996&t=st=1704802531~exp=1704803131~hmac=e71d0e5b2fc92c3487b8c3b9a5aa4d0f71edf3566b991c0abbc4c6d72f88744d"
+                            <img src="http://127.0.0.1:8000/images/{{produit.images}}"
                                 alt="" height="100%" width="100%">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title text-center mt-3 titre-couleur">Carotte</h5>
+                            <h5 class="card-title text-center mt-3 titre-couleur">{{produit.nom_produit}}</h5>
                             <p class="text-center mt-2">
-                                Elle est cultivée comme légume pour sa racine pivotante épaisse et de sa couleur orange
+                                {{produit.description}}
                             </p>
                         </div>
                         <button class="btn btn-retirer mb-2">Retirer</button>
                     </div>
-                    <div class="col">
-                        <div class="image-col">
-                            <img src="https://img.freepik.com/photos-gratuite/mandarines-clementines-fraiches-juteuses_114579-79028.jpg?size=626&ext=jpg&uid=R87930847&ga=GA1.2.810580184.1680065265&semt=sph"
-                                alt="" height="100%" width="100%">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-center mt-3 titre-couleur">Mandarine</h5>
-                            <p class="text-center mt-2">
-                                Elle est cultivée comme légume pour sa racine pivotante épaisse et de sa couleur orange
-                            </p>
-                        </div>
-                        <button class="btn btn-retirer mb-2">Retirer</button>
-                    </div>
-                    <div class="col">
-                        <div class="image-col">
-                            <img src="https://img.freepik.com/photos-gratuite/gros-plan-photo-poivrons-biologiques-frais-isoles-surface-blanche_114579-64433.jpg?w=826&t=st=1705585197~exp=1705585797~hmac=997cddb29185080a8ba8e64cced7de0f6e6f75601826f23d38824a100a7ff421"
-                                alt="" height="100%" width="100%">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title mt-3 text-center titre-couleur">Poivron</h5>
-                            <p class="text-center mt-2">
-                                Elle est cultivée comme légume pour sa racine pivotante épaisse et de sa couleur orange
-                            </p>
-                        </div>
-                        <button class="btn btn-retirer mb-2">Retirer</button>
-                    </div>
+                    
                 </div>
                 <!-- pagination -->
                 <div class="pagin d-flex justify-content-center mt-5">

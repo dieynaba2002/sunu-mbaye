@@ -40,6 +40,8 @@ export class AuthServiceService {
   logout() {
     // Logique de déconnexion
     this.isAuthenticatedSubject.next(false);
+    localStorage.removeItem('userOnline');
+    this.router.navigate(['/login']);
   }
 
   get isAuthenticated(): boolean {
@@ -64,5 +66,32 @@ export class AuthServiceService {
         return of(null); // Gérer l'erreur comme vous le souhaitez
       })
     );
+  }
+
+  getAllsUsersByAdmin(): Observable<any> {
+    return this.http.get<User[]>(`${url}/listeUser`).pipe(
+      tap((data) => console.log('Données des catégories:', data)),
+      catchError((error) => {
+        console.error('Erreur lors de la récupération des catégories:', error);
+        return of(null); // Gérer l'erreur comme vous le souhaitez
+      })
+    );
+  }
+ 
+
+// Service qui verifie quel utilisateur est connecter
+  IsOnline(): { user: User | null; role: string | null } {
+    const userOnlineString = localStorage.getItem('userOnline');
+    if (userOnlineString) {
+      const userOnline = JSON.parse(userOnlineString);
+      const role = userOnline && userOnline.role_id ? userOnline.role_id.toString() : null;
+      return { user: userOnline, role: role };
+    }
+    return { user: null, role: null };
+  }
+
+  isUserLoggedIn(): boolean {
+    const { user, role } = this.IsOnline();
+    return user !== null && role === '2'; 
   }
 }

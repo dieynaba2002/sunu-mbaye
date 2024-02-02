@@ -13,6 +13,7 @@ import { InformationProfilComponent } from './information-profil/information-pro
 import { ModificationProfilComponent } from './modification-profil/modification-profil.component';
 import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
 import { authGuard } from './guard/auth.guard';
+import { agriculteurGuardGuard } from './guard/agriculteur-guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'produits', component: ProduitComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: AuthComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'panier', component: PanierComponent },
   {
     path: 'politique-confidentialite',
@@ -35,6 +36,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [authGuard],
   },
   {
     path: 'agriculteur',
@@ -42,6 +44,7 @@ const routes: Routes = [
       import('./agriculteur/agriculteur.module').then(
         (m) => m.AgriculteurModule
       ),
+    canActivate: [agriculteurGuardGuard],
   },
 ];
 

@@ -14,48 +14,27 @@
                     </form>
                 </nav>
             </div>
-            <div class="contain-annonce mt-4">
-                <div class="card mb-3 test" style="max-width: 440px;">
+            <div class="contain-annonce mt-4" >
+                <div class="card mb-3 test" style="max-width: 440px;" *ngFor="let annonce of annonces">
                     <div class="row g-0">
-                        <div class="col-md-4">
-                        <img src="https://img.freepik.com/photos-gratuite/close-up-of-fort-legumes-murs_329181-4612.jpg?w=826&t=st=1705671718~exp=1705672318~hmac=bd3708c00838bc427ba3388b8370d2c23413953adf2752826336c9c70b530dcf" class="img-fluid rounded h-100 image-annonce p-2" alt="...">
+                        <div class="col-md-4" >
+                        <img src="http://127.0.0.1:8000/images/{{annonce.images}}" class="img-fluid rounded h-100 image-annonce p-2" alt="...">
                         </div>
                         <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Reduction sur ces produits</h5>
+                            <h5 class="card-title">{{annonce.titre}}</h5>
                             <p class="card-text">
-                                Nous sommes ravis de vous présenter notre récolte de mangues bio, fraîchement cueillies dans nos vergers. <br> Merci a  Marie Laure COLY
+                               {{annonce.description}}
                             </p>
                             <div class="btngroup">
                                 <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailAnnonce" type="button"></i>
-                                <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierAnnonce" type="button"></i>
-                                <i class="bi bi-trash3" type="button"></i>
+                                <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierAnnonce" type="button" (click)="chargerInfosAnnonce(annonce)"></i>
+                                <i class="bi bi-trash3" type="button" (click)="SupprimerAnnonce(annonce.id ?? -1)"></i>
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
-                <div class="card mb-3 test" style="max-width: 440px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                        <img src="https://img.freepik.com/photos-gratuite/close-up-of-fort-legumes-murs_329181-4612.jpg?w=826&t=st=1705671718~exp=1705672318~hmac=bd3708c00838bc427ba3388b8370d2c23413953adf2752826336c9c70b530dcf" class="img-fluid rounded h-100 image-annonce p-2" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Reduction sur ces produits</h5>
-                            <p class="card-text">
-                                Nous sommes ravis de vous présenter notre récolte de mangues bio, fraîchement cueillies dans nos vergers. <br> Merci a  Marie Laure COLY
-                            </p>
-                            <div class="btngroup">
-                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailAnnonce" type="button"></i>
-                                <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierAnnonce" type="button"></i>
-                                <i class="bi bi-trash3" type="button"></i>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                
             </div>
             <!-- pagination -->
                 <div class="pagin d-flex justify-content-center mt-5">
@@ -95,20 +74,20 @@
       <div class="modal-body">
         <div class="mb-3 inputAjout">
             <label for="Titre" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce">
+            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce" [(ngModel)]="titre">
         </div>
         <div class="mb-3 inputAjout">
             <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" id="image" name="image">
+            <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images" (change)="getFile($event)">
         </div>
         <div class="mb-3 inputAjout">
             <label for="Description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+            <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-Ajout-modal">Ajouter</button>
+        <button type="button" class="btn btn-Ajout-modal" (click)="AjoutAnnonce()">Ajouter</button>
       </div>
     </div>
   </div>
@@ -155,20 +134,20 @@
       <div class="modal-body">
         <div class="mb-3 inputAjout">
             <label for="Titre" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce">
+            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce" [(ngModel)]="titre">
         </div>
         <div class="mb-3 inputAjout">
             <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" id="image" name="image">
+            <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images">
         </div>
         <div class="mb-3 inputAjout">
             <label for="Description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+            <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-Ajout-modal">Modifier</button>
+        <button type="button" class="btn btn-Ajout-modal" (click)="modifierAnnonce()">Modifier</button>
       </div>
     </div>
   </div>

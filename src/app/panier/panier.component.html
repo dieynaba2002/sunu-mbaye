@@ -10,45 +10,66 @@
         <table class="table align-middle mb-0 no-gutters">
           <thead>
             <tr>
-              <th id="bg-custom-color" >Photo</th>
-              <th id="bg-custom-color" >Produit</th>
-              <th id="bg-custom-color" >Prix (kg)</th>
-              <th id="bg-custom-color" >Quantite (Kg)</th>
-              <th id="bg-custom-color" >Total</th>
-              <th id="bg-custom-color" >Actions</th>
+              <th id="bg-custom-color">Photo</th>
+              <th id="bg-custom-color">Produit</th>
+              <th id="bg-custom-color">Prix (kg)</th>
+              <th id="bg-custom-color">Quantite (Kg)</th>
+              <th id="bg-custom-color">Total</th>
+              <th id="bg-custom-color">Actions</th>
             </tr>
           </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
-                  </div>
-                </td>
-                <td>
-                  <p class="fw-normal mb-1">Mangue</p>
-                </td>
-                <td>
-                  <span class="badge badge-success rounded-pill d-inline text-black ">600</span>
-                </td>
-                <td class="pr-0">
-                  <div class="product-quantity">
-                    <input type="number" value="1" min="1">
-                  </div>
-                </td>
-                <td>
-                  <p class="fw-normal mb-1">160 000</p>
-                </td>
-                <td>
-                  <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    <a href="#" class="text-danger ms-3"><i class="fas fa-trash fa-lg"></i></a>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+          <tbody>
+            <tr *ngFor="let item of panier">
+              <td>
+                <div class="d-flex align-items-center">
+                  <img
+                    src="http://127.0.0.1:8000/images/{{ item.images }}"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                </div>
+              </td>
+              <td>
+                <p class="fw-normal mb-1">{{ item.nom_produit }}</p>
+              </td>
+              <td>
+                <span
+                  class="badge badge-success rounded-pill d-inline text-black"
+                  >{{ item.prix }}</span
+                >
+              </td>
+              <td class="pr-0">
+                <div class="product-quantity">
+                  <input
+                    type="number"
+                    value="1"
+                    min="1"
+                    [value]="item.quantity"
+                    [(ngModel)]="item.quantity"
+                    (change)="updateCartItem(item)"
+                  />
+                </div>
+              </td>
+              <td>
+                <p class="fw-normal mb-1">{{ item.prix * item.quantity }}</p>
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-link btn-sm btn-rounded"
+                  (click)="removeFromCart(item.id)"
+                >
+                  <a class="text-danger ms-3"
+                    ><i class="fas fa-trash fa-lg"></i
+                  ></a>
+                </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
         <div class="sous-total">
-          <p>Sous-total: 320 000</p>
+          <p>Sous-total: {{ sommeArticles }}</p>
         </div>
       </div>
     </div>

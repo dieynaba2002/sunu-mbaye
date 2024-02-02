@@ -21,9 +21,9 @@ export class CategoriesComponent implements OnInit {
   // Récupération des categories
   loadCategories() {
     this.categorieService.getAlls().subscribe((data) => {
-      console.log('Données des catégories:', data);
+      // console.log('Données des catégories:', data);
       this.categories = data.categorie;
-      console.log('Données des catégories:', data);
+      // console.log('Données des catégories:', data);
     });
   }
 

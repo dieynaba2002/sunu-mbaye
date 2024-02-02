@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthServiceService } from '../services/auth-service.service';
 import { User } from '../models/user.model';
 import { UserServicesService } from '../services/user-services.service';
+import { PanierService } from '../services/panier.service';
 
 @Component({
   selector: 'app-auth',
@@ -36,7 +37,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthServiceService,
-    private userService: UserServicesService
+    private userService: UserServicesService,
+    private panierService: PanierService
   ) {}
 
   ngOnInit(): void {
@@ -50,9 +52,12 @@ export class AuthComponent implements OnInit {
   inscription() {
     if (this.nom == '') {
       this.alertMessage('error', 'Attention', 'Merci de renseigner votre nom!');
-    } else if(this.prenom == '') { 
-      this.alertMessage('error', 'Attention', 'Merci de renseigner votre prenom!');
-
+    } else if (this.prenom == '') {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Merci de renseigner votre prenom!'
+      );
     } else if (this.email == '') {
       this.alertMessage(
         'error',
@@ -92,7 +97,7 @@ export class AuthComponent implements OnInit {
         role_id: this.role,
         telephone: this.telephone,
         image: this.image,
-        adresse: this.adresse
+        adresse: this.adresse,
       };
       // Appel du service pour ajouter le nouvel utilisateur
       this.userService.addUser(newUser).subscribe(
@@ -122,6 +127,68 @@ export class AuthComponent implements OnInit {
   }
 
   // Methode pour faire la connexion
+  // login() {
+  //   if (this.email == '') {
+  //     this.alertMessage('error', 'Attention', "Renseigner l'email");
+  //   } else if (this.password == '') {
+  //     this.alertMessage('error', 'Attention', 'Renseigner le mot de passe');
+  //   } else {
+  //     // Envoyer les informations d'identification au backend via une API
+  //     this.authService.login(this.email, this.password).subscribe(
+  //       (response) => {
+  //         // console.log('====================================');
+  //         // console.log(response);
+  //         // console.log('====================================');
+  //         // Stocker le token dans le localStorage
+  //         localStorage.setItem('userOnline', JSON.stringify(response.user));
+  //         localStorage.setItem(
+  //           'access_token',
+  //           JSON.stringify(response.token).replace(/['"]+/g, '')
+  //         );
+  //         // Stocker l'utilisateur dans une variable
+  //         const loggedInUser = response.user;
+  //         // Gérer la réponse réussie du backend
+  //         if (
+  //           response.user.email === 'admin@gmail.com' &&
+  //           response.user.password === 'admin@123' &&
+  //           response.user.role_id == 1
+  //         ) {
+  //           this.router.navigate(['/admin']);
+  //           this.alertMessage(
+  //             'success',
+  //             'Bienvenue',
+  //             'Connexion réussie avec succès'
+  //           );
+  //         } else if (response.user.role_id == 3) {
+  //           this.router.navigate(['/agriculteur']);
+  //           this.alertMessage(
+  //             'success',
+  //             'Bienvenue',
+  //             'Connexion réussie avec succès'
+  //           );
+  //         } else if (response.user.role_id == 2) {
+  //           this.router.navigate(['/accueil']);
+  //           this.alertMessage(
+  //             'success',
+  //             'Bienvenue',
+  //             'Connexion réussie avec succès'
+  //           );
+  //         }
+  //         this.panierService.setUserId(user.id);
+  //       },
+  //       (error) => {
+  //         // Gérer l'échec de l'authentification
+  //         console.log("Erreur d'authentification:", error);
+  //         this.alertMessage(
+  //           'error',
+  //           'Erreur',
+  //           'Email ou mot de passe incorrect'
+  //         );
+  //       }
+  //     );
+  //   }
+  // }
+
   login() {
     if (this.email == '') {
       this.alertMessage('error', 'Attention', "Renseigner l'email");
@@ -131,20 +198,21 @@ export class AuthComponent implements OnInit {
       // Envoyer les informations d'identification au backend via une API
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
-          // console.log('====================================');
-          // console.log(response);
-          // console.log('====================================');
           // Stocker le token dans le localStorage
-          localStorage.setItem("userOnline", JSON.stringify(response.user));
+          localStorage.setItem('userOnline', JSON.stringify(response.user));
           localStorage.setItem(
             'access_token',
             JSON.stringify(response.token).replace(/['"]+/g, '')
           );
+
+          // Stocker l'utilisateur dans une variable
+          const loggedInUser = response.user;
+
           // Gérer la réponse réussie du backend
           if (
-            response.user.email === 'admin@gmail.com' &&
-            response.user.password === 'admin@123' &&
-            response.user.role_id == 1
+            loggedInUser.email === 'admin@gmail.com' &&
+            loggedInUser.password === 'admin@123' &&
+            loggedInUser.role_id == 1
           ) {
             this.router.navigate(['/admin']);
             this.alertMessage(
@@ -152,14 +220,14 @@ export class AuthComponent implements OnInit {
               'Bienvenue',
               'Connexion réussie avec succès'
             );
-          } else if (response.user.role_id == 3) {
+          } else if (loggedInUser.role_id == 3) {
             this.router.navigate(['/agriculteur']);
             this.alertMessage(
               'success',
               'Bienvenue',
               'Connexion réussie avec succès'
             );
-          } else if (response.user.role_id == 2) {
+          } else if (loggedInUser.role_id == 2) {
             this.router.navigate(['/accueil']);
             this.alertMessage(
               'success',
@@ -167,6 +235,9 @@ export class AuthComponent implements OnInit {
               'Connexion réussie avec succès'
             );
           }
+
+          // Appeler la méthode setUserId du service panier pour associer le panier à l'utilisateur
+          this.panierService.setUserId(loggedInUser.id);
         },
         (error) => {
           // Gérer l'échec de l'authentification

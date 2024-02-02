@@ -13,6 +13,7 @@ import { AnnoncesComponent } from './annonces/annonces.component';
 import { ProfilComponent } from './profil/profil.component';
 import { CommandeComponent } from './commande/commande.component';
 import { ProduitsAdminComponent } from './produits-admin/produits-admin.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ProduitsAdminComponent } from './produits-admin/produits-admin.componen
     AdminRoutingModule,
     DataTablesModule,
     FormsModule,
+    HttpClientModule
   ]
 })
 export class AdminModule { }

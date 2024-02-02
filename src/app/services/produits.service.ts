@@ -35,6 +35,18 @@ export class ProduitsService {
       : of(null);
   }
 
+  getAllsProduitByAdmin(): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+
+    return accessToken
+      ? this.http.get<any>(`${url}/listeProduit`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+  }
+
   getByProduitId(id: string) {
     return this.http
       .get<Produit>(`${url}/listeProduitAgriculteur/` + id)

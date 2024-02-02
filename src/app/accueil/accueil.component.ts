@@ -10,7 +10,7 @@ export class AccueilComponent implements OnInit{
    
 
   ngOnInit(): void {
-    
+    localStorage.setItem('userOnline', JSON.stringify([]));
   }
 
  
