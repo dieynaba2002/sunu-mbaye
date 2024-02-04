@@ -41,7 +41,7 @@
       </li>
     </ul>
     <div class="buttons">
-      <a href="#" routerLink="/panier">
+      <a href="#" routerLink="/panier" >
         <svg
           width="40"
           height="40"
@@ -67,6 +67,7 @@
             />
           </g>
         </svg>
+        <span class="badge" *ngIf="panierSize > 0">{{ panierSize }}</span>
       </a>
       <a href="#" routerLink="/login" class="paste-button">
         <svg
@@ -94,7 +95,9 @@
         </svg>
         <ul class="dropdown-content" *ngIf="isUserLoggedIn()">
           <a id="top" href="#" routerLink="/information-profil">Profil</a>
-          <a id="middle" href="#" routerLink="/accueil" (click)="logout()">Se deconnecter</a>
+          <a id="middle" href="#" routerLink="/accueil" (click)="logout()"
+            >Se deconnecter</a
+          >
         </ul>
       </a>
     </div>

@@ -50,4 +50,15 @@ export class AnnoncesComponent implements OnInit {
       // console.log('Données des catégories:', data);
     });
   }
+
+  // publierAnnonce(annonceId: number) {
+  //   this.annonceService.PublierAnnonceByAdmin(annonceId);
+
+  //   // Vous pouvez également afficher un message de succès si nécessaire
+  //   this.annonceService.alertMessage(
+  //     'success',
+  //     'Succès',
+  //     'Annonce publiée avec succès.'
+  //   );
+  // }
 }

@@ -70,7 +70,7 @@
     border: 2px solid #B6B4B4;
     padding-top: 3vh;
     border-radius: 10px;
-    height: 420px;
+    height: 405px;
 }
 
 .image-col {
@@ -82,6 +82,7 @@
 
 .image-col img {
     border-radius: 7px;
+    
 }
 
 .titre-couleur {

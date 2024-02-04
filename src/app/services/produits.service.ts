@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Produit } from '../models/produits.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject, catchError, of, tap, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {
+  Observable,
+  Subject,
+  catchError,
+  forkJoin,
+  map,
+  of,
+  tap,
+  throwError,
+} from 'rxjs';
 import { url } from './apiUrl';
 import Swal from 'sweetalert2';
 
@@ -95,6 +104,62 @@ export class ProduitsService {
           headers: new HttpHeaders({ Authorization: `Bearer ${accessToken}` }),
         })
       : of(null);
+  }
+
+  getUserDetails(user_id: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+
+    return accessToken
+      ? this.http
+          .get<any>(`${url}/listeUser`, {
+            headers: new HttpHeaders({
+              Authorization: `Bearer ${accessToken}`,
+            }),
+          })
+          .pipe(
+            map((response) => {
+              const users = response.user || [];
+              const user = users.find((u: any) => u.id === user_id);
+              return user || null;
+            })
+          )
+      : of(null);
+  }
+
+  getProduitsByCategory(categorie: string): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      return of(null);
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    // Ajoutez le paramètre de catégorie à la requête
+    const params = new HttpParams().set('categorie', categorie);
+
+    return this.http
+      .get<any>(`${url}/listeCategorie`, { headers, params })
+      .pipe(
+        map((response) => {
+          if (response && response.categorie) {
+            // Modifiez la propriété 'produit' pour correspondre à la structure attendue
+            return { produit: response.categorie };
+          } else {
+            // Handle the case where the response doesn't contain the expected data
+            console.error('Réponse de service invalide:', response);
+            return null;
+          }
+        }),
+        catchError((error) => {
+          console.error(
+            'Erreur lors de la récupération des produits par catégorie:',
+            error
+          );
+          return of(null);
+        })
+      );
   }
 
   // Fonction pour afficher un sweetalert

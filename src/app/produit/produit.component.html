@@ -12,81 +12,14 @@
   <div class="test mt-5">
     <div class="menuFiltre mt-5 d-flex">
       <div class="filtreSection">
-        <button class="btn filtreActive fw-bold px-3 active" *ngIf="isAll">
-          Tout
-        </button>
-        <button
-          class="btn fw-bold px-3 active"
-          *ngIf="!isAll"
-          (click)="showAll()"
-        >
-          Tout
-        </button>
-      </div>
+        <button class="btn fw-bold px-3 active" (click)="filterByCategory(null)">Tout</button>
+        <button class="btn fw-bold px-3" *ngFor="let categorie of categories" (click)="filterByCategory(categorie.id)">{{ categorie.nom_categories }}</button>
 
-      <div class="filtreSection">
-        <button class="btn filtreActive fw-bold px-3" *ngIf="isTerminate">
-          Céréale
-        </button>
-        <button
-          class="btn fw-bold px-3"
-          *ngIf="!isTerminate"
-          (click)="showTerminate()"
-        >
-          Céréale
-        </button>
-      </div>
-
-      <div class="filtreSection">
-        <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">
-          Fruit
-        </button>
-        <button
-          class="btn fw-bold px-3"
-          *ngIf="!isCancel"
-          (click)="showCancel()"
-        >
-          Fruit
-        </button>
-      </div>
-
-      <div class="filtreSection">
-        <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">
-          Légume
-        </button>
-        <button
-          class="btn fw-bold px-3"
-          *ngIf="!isCancel"
-          (click)="showCancel()"
-        >
-          Légume
-        </button>
-      </div>
-
-      <div class="filtreSection">
-        <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">
-          Epice
-        </button>
-        <button
-          class="btn fw-bold px-3"
-          *ngIf="!isCancel"
-          (click)="showCancel()"
-        >
-          Epice
-        </button>
-      </div>
-
-      <div class="filtreSection">
-        <button class="btn filtreActive fw-bold px-3" *ngIf="isCancel">
-          Légume vert
-        </button>
-        <button
-          class="btn fw-bold px-3"
-          *ngIf="!isCancel"
-          (click)="showCancel()"
-        >
-          Légume vert
-        </button>
+        <!-- <button class="btn fw-bold px-3" > Céréale </button>
+        <button class="btn fw-bold px-3">Fruit</button>
+        <button class="btn fw-bold px-3">Légume</button>
+        <button class="btn fw-bold px-3">Epice</button>
+        <button class="btn fw-bold px-3">Légume vert</button> -->
       </div>
     </div>
     <nav class="ms-5">
@@ -134,7 +67,7 @@
           />
         </div>
         <div class="info d-flex">
-          <span>Fall Bah</span>
+          <span>{{ produit.user_nom }}</span>
           <a>
             <a type="button" (click)="addToCart(produit)">
               <svg

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
@@ -69,13 +69,21 @@ export class AuthServiceService {
   }
 
   getAllsUsersByAdmin(): Observable<any> {
-    return this.http.get<User[]>(`${url}/listeUser`).pipe(
-      tap((data) => console.log('Données des catégories:', data)),
-      catchError((error) => {
-        console.error('Erreur lors de la récupération des catégories:', error);
-        return of(null); // Gérer l'erreur comme vous le souhaitez
-      })
-    );
+    const accessToken = localStorage.getItem('access_token');
+    return accessToken
+      ? this.http.get<any>(`${url}/listeUser`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+    // return this.http.get<User[]>(`${url}/listeUser`).pipe(
+    //   tap((data) => console.log('Données des catégories:', data)),
+    //   catchError((error) => {
+    //     console.error('Erreur lors de la récupération des catégories:', error);
+    //     return of(null); // Gérer l'erreur comme vous le souhaitez
+    //   })
+    // );
   }
  
 

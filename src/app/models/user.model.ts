@@ -10,7 +10,7 @@ export interface User{
     date_naissance?: Date;	
     adresse?: string;
     nom_entreprise?: string;	
-    role_id	:number;	
+    role_id: number;	
 }
 
 

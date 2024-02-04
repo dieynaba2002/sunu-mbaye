@@ -275,3 +275,16 @@ color: white !important;
 .paste-button:hover .dropdown-content {
   display: block;
 }
+
+
+.badge {
+    position: relative;
+    top: -15px;
+    right: 10px;
+    background-color: #FF9C00;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2em 0.5em;
+    font-size: 0.8em;
+   
+}
