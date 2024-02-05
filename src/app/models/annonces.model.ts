@@ -4,5 +4,5 @@ export interface Annonce {
   images: string;
   user_id: number;
   description?: string;
-  // publiee?: boolean;
+  is_published?: boolean;
 }

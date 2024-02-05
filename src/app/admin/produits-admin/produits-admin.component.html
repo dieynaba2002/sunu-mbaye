@@ -37,7 +37,7 @@
                                 {{produit.description}}
                             </p>
                         </div>
-                        <button class="btn btn-retirer mb-2">Retirer</button>
+                        <button class="btn btn-retirer mb-2" type="button" (click)="SupprimerProduitByAdmin(produit.id ?? -1)">Retirer</button>
                     </div>
                     
                 </div>

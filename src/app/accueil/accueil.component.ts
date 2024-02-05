@@ -8,17 +8,23 @@ import { Annonce } from '../models/annonces.model';
   styleUrls: ['./accueil.component.css'],
 })
 export class AccueilComponent implements OnInit {
-  annoncesPubliees: Annonce[] = [];
+  annonces: any[] = [];
+  users: any[] = [];
+  categories: any[] = [];
+  annoncesPubliees: any[] = [];
 
   constructor(private annonceService: AnnoncesService) {}
   ngOnInit(): void {
     localStorage.setItem('userOnline', JSON.stringify([]));
+    this.loadAnnoncePubliee();
     // this.loadAnnoncesPubliees();
   }
 
-  // loadAnnoncesPubliees() {
-  //   this.annoncesPubliees = this.annonceService.annonces.filter(
-  //     (annonce) => annonce.publiee
-  //   );
-  // }
+  loadAnnoncePubliee() {
+    this.annonceService.getAllspublishAnnonceByAdmin().subscribe((data) => {
+      console.log('Données des annonces publish:', data);
+      this.annoncesPubliees = data.annoncesPubliees;
+      console.log('Données des annonces:', data);
+    });
+  }
 }

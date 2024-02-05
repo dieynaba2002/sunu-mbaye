@@ -1,138 +1,264 @@
 <!-- MAIN -->
 <main id="dark" class="">
-    <div class="table-data">
-        <div class="order">
-            <div class="d-flex justify-content-between ">
-                <button class="btn btn-Ajout-pro" type="button" data-bs-toggle="modal" data-bs-target="#ajoutProduit">Ajouter un produit</button>
-                <nav>
-                    <form action="#">
-                        <div class="form-input">
-                            <input type="search" placeholder="Rechercher...">
-                            <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-                        </div>
-                    </form>
-                </nav>
+  <div class="table-data">
+    <div class="order">
+      <div class="d-flex justify-content-between">
+        <button
+          class="btn btn-Ajout-pro"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#ajoutProduit"
+        >
+          Ajouter un produit
+        </button>
+        <nav>
+          <form action="#">
+            <div class="form-input">
+              <input
+                type="search"
+                name="search"
+                placeholder="Rechercher..."
+                (input)="onSearch()"
+                [(ngModel)]="filterValue"
+              />
+              <button type="submit" class="search-btn">
+                <i class="bx bx-search"></i>
+              </button>
             </div>
-            <section class="mt-5" id="section">
-                <div class="grid-produit mt-4" >
-                    <div class="col" *ngFor="let produit of produits">
-                        <div class="image-col">
-                            <img src="http://127.0.0.1:8000/images/{{produit.images}}"
-                                alt="" height="100%" width="100%">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-center mt-3 titre-couleur">{{produit.nom_produit}}</h5>
-                            <p class="text-center mt-2">
-                                {{produit.description}}
-                            </p>
-                        </div>
-                        <div class="btngroup">
-                            <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailProduit" type="button" (click)="getProduit(produit)"></i>
-                            <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierProduit" type="button" (click)="chargerInfosProduit(produit)"></i>
-                            <i class="bi bi-trash3" type="button" (click)="SupprimerProduit(produit.id ?? -1)"></i>
-                        </div>
-                    </div>
-                    
-                </div>
-                <!-- pagination -->
-                <div class="pagin d-flex justify-content-center mt-5">
-                    <nav aria-label="Page shadow navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- pagination -->
-            </section>
+          </form>
+        </nav>
+      </div>
+      <section class="mt-5" id="section">
+        <div class="grid-produit mt-4">
+          <div class="col" *ngFor="let produit of (filterValue ? tabNewsFilter : produits)">
+            <div class="image-col">
+              <img
+                src="http://127.0.0.1:8000/images/{{ produit.images }}"
+                alt=""
+                height="100%"
+                width="100%"
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center mt-3 titre-couleur">
+                {{ produit.nom_produit }}
+              </h5>
+              <p class="text-center mt-2">
+                {{ produit.description }}
+              </p>
+            </div>
+            <div class="btngroup">
+              <i
+                class="bi bi-eye-fill"
+                data-bs-toggle="modal"
+                data-bs-target="#detailProduit"
+                type="button"
+                (click)="getProduit(produit)"
+              ></i>
+              <i
+                class="bi bi-pencil-square"
+                data-bs-toggle="modal"
+                data-bs-target="#modifierProduit"
+                type="button"
+                (click)="chargerInfosProduit(produit)"
+              ></i>
+              <i
+                class="bi bi-trash3"
+                type="button"
+                (click)="SupprimerProduit(produit.id ?? -1)"
+              ></i>
+            </div>
+          </div>
         </div>
+        <!-- pagination -->
+        <div class="pagin d-flex justify-content-center mt-5">
+          <nav aria-label="Page shadow navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- pagination -->
+      </section>
     </div>
+  </div>
 </main>
 
 <!-- MAIN -->
 
-
-
 <!-- Modal Ajout -->
-<div class="modal fade" id="ajoutProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="ajoutProduit"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title titre-color" id="exampleModalLabel">Ajouter un produit</h5>
-            <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header">
+        <h5 class="modal-title titre-color" id="exampleModalLabel">
+          Ajouter un produit
+        </h5>
+        <button
+          type="button"
+          class="btn-close color-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="nomProduit" class="form-label">Nom du produit</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nomProduit"
+            name="nomProduit"
+            placeholder="Titre produit"
+            [(ngModel)]="nom_produit"
+          />
         </div>
-        <div class="modal-body">
-            <div class="mb-3 inputAjout">
-                <label for="nomProduit" class="form-label">Nom du produit</label>
-                <input type="text" class="form-control" id="nomProduit" name="nomProduit" placeholder="Titre produit" [(ngModel)]="nom_produit">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="categorie" class="form-label">Categorie</label>
-                <select class="form-select" aria-label="Default select example" name="categorie" [(ngModel)]="categorie_id">
-                    <option selected>Selectionner une categorie</option>
-                    <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.nom_categories }}</option>
-                </select>
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="quatite" class="form-label">Quantite</label>
-                <input type="number" class="form-control" id="quantite" name="quantite" placeholder="Quantite" [(ngModel)]="quantite">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="prix" class="form-label">Prix</label>
-                <input class="form-control" type="number" id="prix" name="prix" [(ngModel)]="prix">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="formFile" class="form-label">Image</label>
-                <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images" (change)="getFile($event)">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="Description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
-            </div>
-        </div> 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-            <button type="button" class="btn btn-Ajout-modal" (click)="AjoutProduit()">Ajouter</button>
+        <div class="mb-3 inputAjout">
+          <label for="categorie" class="form-label">Categorie</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            name="categorie"
+            [(ngModel)]="categorie_id"
+          >
+            <option selected>Selectionner une categorie</option>
+            <option *ngFor="let categorie of categories" [value]="categorie.id">
+              {{ categorie.nom_categories }}
+            </option>
+          </select>
         </div>
+        <div class="mb-3 inputAjout">
+          <label for="quatite" class="form-label">Quantite</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantite"
+            name="quantite"
+            placeholder="Quantite"
+            [(ngModel)]="quantite"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="prix" class="form-label">Prix</label>
+          <input
+            class="form-control"
+            type="number"
+            id="prix"
+            name="prix"
+            [(ngModel)]="prix"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="formFile" class="form-label">Image</label>
+          <input
+            class="form-control"
+            type="file"
+            id="image"
+            name="images"
+            [(ngModel)]="images"
+            (change)="getFile($event)"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="Description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            name="description"
+            [(ngModel)]="description"
+          ></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-annuler-modal"
+          data-bs-dismiss="modal"
+        >
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-Ajout-modal"
+          (click)="AjoutProduit()"
+        >
+          Ajouter
+        </button>
+      </div>
     </div>
   </div>
 </div>
- 
+
 <!-- Modal Detail -->
-<div class="modal fade" id="detailProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="detailProduit"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Detail Produit</h5>
-        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close color-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img src="http://127.0.0.1:8000/images/{{seletedProduit.images}}" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">{{seletedProduit.nom_produit}}</h5>
-                    <p class="card-text">{{seletedProduit.description}}</p>
-                    <p class="card-text"><small class="text-muted fw-bold ">Quantité:{{seletedProduit.quantite}}</small></p>
-                    <p class="card-text"><small class="text-muted fw-bold">Prix (kg):{{seletedProduit.prix}}</small></p>
-                    <p class="card-text"><small class="text-muted fw-bold">Categorie:{{seletedProduit.nom_categorie}}</small></p>
-                </div>
-                </div>
+        <div class="card mb-3" style="max-width: 540px">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="http://127.0.0.1:8000/images/{{ seletedProduit.images }}"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
             </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ seletedProduit.nom_produit }}</h5>
+                <p class="card-text">{{ seletedProduit.description }}</p>
+                <p class="card-text">
+                  <small class="text-muted fw-bold"
+                    >Quantité:{{ seletedProduit.quantite }}</small
+                  >
+                </p>
+                <p class="card-text">
+                  <small class="text-muted fw-bold"
+                    >Prix (kg):{{ seletedProduit.prix }}</small
+                  >
+                </p>
+                <p class="card-text">
+                  <small class="text-muted fw-bold"
+                    >Categorie:{{ seletedProduit.nom_categorie }}</small
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -140,45 +266,108 @@
 </div>
 
 <!-- Modal Modifier -->
-<div class="modal fade" id="modifierProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div
+  class="modal fade"
+  id="modifierProduit"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close color-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-       <div class="modal-body">
-            <div class="mb-3 inputAjout">
-                <label for="nomProduit" class="form-label">Nom du produit</label>
-                <input type="text" class="form-control" id="nomProduit" name="nomProduit" placeholder="Titre produit" [(ngModel)]="nom_produit">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="categorie" class="form-label">Categorie</label>
-                <select class="form-select" aria-label="Default select example" name="categorie" [(ngModel)]="categorie_id">
-                    <option selected>Selectionner une categorie</option>
-                    <option *ngFor="let categorie of categories" [value]="categorie.id">{{ categorie.nom_categories }}</option>
-                </select>
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="quatite" class="form-label">Quantite</label>
-                <input type="number" class="form-control" id="quantite" name="quantite" placeholder="Quantite" [(ngModel)]="quantite">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="prix" class="form-label">Prix</label>
-                <input class="form-control" type="number" id="prix" name="prix" [(ngModel)]="prix">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="formFile" class="form-label">Image</label>
-                <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images" (change)="getFile($event)">
-            </div>
-            <div class="mb-3 inputAjout">
-                <label for="Description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
-            </div>
-        </div>  
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="nomProduit" class="form-label">Nom du produit</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nomProduit"
+            name="nomProduit"
+            placeholder="Titre produit"
+            [(ngModel)]="nom_produit"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="categorie" class="form-label">Categorie</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            name="categorie"
+            [(ngModel)]="categorie_id"
+          >
+            <option selected>Selectionner une categorie</option>
+            <option *ngFor="let categorie of categories" [value]="categorie.id">
+              {{ categorie.nom_categories }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="quatite" class="form-label">Quantite</label>
+          <input
+            type="number"
+            class="form-control"
+            id="quantite"
+            name="quantite"
+            placeholder="Quantite"
+            [(ngModel)]="quantite"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="prix" class="form-label">Prix</label>
+          <input
+            class="form-control"
+            type="number"
+            id="prix"
+            name="prix"
+            [(ngModel)]="prix"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="formFile" class="form-label">Image</label>
+          <input
+            class="form-control"
+            type="file"
+            id="image"
+            name="images"
+            [(ngModel)]="images"
+            (change)="getFile($event)"
+          />
+        </div>
+        <div class="mb-3 inputAjout">
+          <label for="Description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            name="description"
+            [(ngModel)]="description"
+          ></textarea>
+        </div>
+      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-Ajout-modal" (click)="modifierProduit()">Modifier</button>
+        <button
+          type="button"
+          class="btn btn-annuler-modal"
+          data-bs-dismiss="modal"
+        >
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-Ajout-modal"
+          (click)="modifierProduit()"
+        >
+          Modifier
+        </button>
       </div>
     </div>
   </div>

@@ -33,6 +33,18 @@ export class ProduitAgriculteurComponent implements OnInit {
   categories: Categorie[] = [];
   seletedProduit: any = {};
 
+  tabNewsFilter: any[] = [];
+  filterValue: string = '';
+
+  onSearch() {
+    // Recherche se fait selon le nom ou le prenom
+    this.filterValue = this.filterValue.toLowerCase();
+    this.tabNewsFilter = this.produits.filter((elt: any) =>
+      elt?.nom_produit.toLowerCase().includes(this.filterValue)
+    );
+    console.log('je suis le filter', this.tabNewsFilter);
+  }
+
   loadCategories() {
     this.categorieService.getAlls().subscribe((data) => {
       // console.log('Données des catégories:', data);
@@ -138,7 +150,6 @@ export class ProduitAgriculteurComponent implements OnInit {
     this.prix = produit.prix;
     this.quantite = produit.quantite;
     this.categorie_id = produit.categorie_id;
-
   }
 
   viderChamps() {

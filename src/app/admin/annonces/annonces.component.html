@@ -1,5 +1,5 @@
 <main id="dark" class="">
-     <ul class="box-info">
+  <ul class="box-info">
     <li>
       <i class="bx bxs-group"></i>
       <span class="text" *ngIf="users">
@@ -21,28 +21,49 @@
         <p>Categorie</p>
       </span>
     </li>
-  </ul>  
-     <div class="table-data">
-        <div class="order contain-annonce" >
-            <div class="card mb-3 test" style="max-width: 440px;" *ngFor="let annonce of annonces">
-                <div class="row g-0">
-                    <div class="col-md-4" >
-                    <img src="http://127.0.0.1:8000/images/{{annonce.images}}" class="img-fluid rounded h-100 image-annonce p-2" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{annonce.titre}}</h5>
-                        <p class="card-text">
-                            {{annonce.description}}
-                        </p>
-                        <div class="btngroup">
-                            <button type="button" class="btn btn-publier" >Publier</button>
-                            <button type="button" class="btn btn-retirer">Retirer</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+  </ul>
+  <div class="table-data">
+    <div class="order contain-annonce">
+      <!-- <h5>Liste des annonces</h5> -->
+      <div
+        class="card mb-3 test"
+        style="max-width: 440px"
+        *ngFor="let annonce of annonces"
+      >
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img
+              src="http://127.0.0.1:8000/images/{{ annonce.images }}"
+              class="img-fluid rounded h-100 image-annonce p-2"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ annonce.titre }}</h5>
+              <p class="card-text">
+                {{ annonce.description }}
+              </p>
+              <div class="btngroup">
+                <button
+                  type="button"
+                  class="btn btn-publier"
+                  (click)="publierAnnonce(annonce.id)"
+                >
+                  Publier
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-retirer"
+                  (click)="retirerAnnonce(annonce.id)"
+                >
+                  Retirer
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>        
+      </div>
+    </div>
+  </div>
 </main>

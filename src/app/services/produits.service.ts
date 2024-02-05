@@ -162,6 +162,22 @@ export class ProduitsService {
       );
   }
 
+  deleteProduitByAdmin(id: number): Observable<{ message: string }> {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      // Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
+      // ou affichez un message d'erreur.
+      return throwError('Utilisateur non connecté');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+    return this.http.delete<{ message: string }>(`${url}/supProduitAdmine/` + id, {
+      headers,
+    });
+  }
+
   // Fonction pour afficher un sweetalert
   alertMessage(icon: any, title: any, text: any) {
     Swal.fire({

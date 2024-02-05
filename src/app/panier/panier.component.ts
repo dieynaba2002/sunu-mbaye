@@ -3,6 +3,7 @@ import { PanierService } from '../services/panier.service';
 import { Router } from '@angular/router';
 import { CategorieService } from '../services/categorie.service';
 import { Observable } from 'rxjs';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-panier',
@@ -19,7 +20,8 @@ export class PanierComponent {
   constructor(
     private panierService: PanierService,
     private router: Router,
-    private categoriesService: CategorieService
+    private categoriesService: CategorieService,
+    private authService: AuthServiceService
   ) {}
   ngOnInit(): void {
     this.panierService.cart$.subscribe((cart) => {
@@ -46,8 +48,6 @@ export class PanierComponent {
     this.panierService.removeFromCart(item);
   }
 
-  
-
   totalArticles() {
     this.nombreArticles = 0;
     this.sommeArticles = 0;
@@ -59,5 +59,32 @@ export class PanierComponent {
       this.sommeArticles += element.quantity * element.prix;
     });
     console.log('Somme des articles :', this.sommeArticles);
+  }
+
+  payer() {
+    if (this.authService.isAuthenticated) {
+      let panier = this.panierService.getFromPanier();
+      let panierProduit: any[] = [];
+
+      panier.forEach((element: any) => {
+        panierProduit.push({
+          produit_id: element.produit.id,
+          nombre_produit: element.quantitePanier,
+          montant: element.produit.prix * element.quantitePanier,
+        });
+      });
+      let panierToSend = {
+        panier: panierProduit,
+      };
+      console.log(panierToSend);
+
+      // this.panierService.post('api/passerCommande', panierToSend, (reponse: any) => {
+      //   console.warn(reponse);
+      //   window.open(reponse.payment_url, '_self');
+      // });
+    } else {
+      console.log('Utilisateur non connecté. Redirection vers la page de connexion...');
+      this.router.navigate(['/login']);
+    }
   }
 }

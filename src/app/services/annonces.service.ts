@@ -82,25 +82,49 @@ export class AnnoncesService {
       : of(null);
   }
 
-  // PublierAnnonceByAdmin(id: number): Observable<any> {
-  //   const accessToken = localStorage.getItem('access_token');
-  //   return accessToken
-  //     ? this.http.post<any>(`${url}/ajoutAnnonceAdmin`, null, {
-  //         headers: new HttpHeaders({ Authorization: `Bearer ${accessToken}` }),
-  //       })
-  //     : of(null);
-  // }
+  PublierAnnonceByAdmin(id: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    return accessToken
+      ? this.http.post<any>(`${url}/publierAnnonce`, null, {
+          headers: new HttpHeaders({ Authorization: `Bearer ${accessToken}` }),
+        })
+      : of(null);
+  }
 
-  // PublierAnnonceByAdmin(annonceId: number): void {
-  //   const annonceIndex = this.annonces.findIndex(
-  //     (annonce) => annonce.id === annonceId
-  //   );
+  publierAnnonceByAdmin(id: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    return accessToken
+      ? this.http.get<any>(`${url}/publierAnnonce/${id}`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+  }
 
-  //   if (annonceIndex !== -1) {
-  //     // Marquer l'annonce comme publiée
-  //     this.annonces[annonceIndex].publiee = true;
-  //   }
-  // }
+  getAllspublishAnnonceByAdmin(): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+
+    return accessToken
+      ? this.http.get<any>(`${url}/listeAnnoncesPubliees`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+  }
+
+  deleteAnnonceByAdmin(id: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+
+    return accessToken
+      ? this.http.get<any>(`${url}/retirerAnnonce/${id}`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+  }
 
   // Fonction pour afficher un sweetalert
   alertMessage(icon: any, title: any, text: any) {
