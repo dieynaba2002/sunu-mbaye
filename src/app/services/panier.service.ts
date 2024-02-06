@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
 import Swal from 'sweetalert2';
 import { url } from './apiUrl';
 
@@ -92,6 +92,17 @@ export class PanierService {
 
   getFromPanier() {
     return JSON.parse(localStorage.getItem('cart') ?? '[]');
+  }
+
+  addPayment(data: any) {
+    const accessToken = localStorage.getItem('access_token');
+    return accessToken
+      ? this.http.post<any>(`${url}/Commender ` , data, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
   }
 
   // Fonction pour afficher un sweetalert

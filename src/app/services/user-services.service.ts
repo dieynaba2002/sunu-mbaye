@@ -22,7 +22,7 @@ export class UserServicesService {
     return this.http.get<User>(url);
   }
 
-  addUser(User: User): Observable<User> {
+  addUser(User: any): Observable<User> {
     return this.http.post<User>(this.apiUrl, User);
   }
 

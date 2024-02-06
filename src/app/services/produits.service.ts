@@ -118,7 +118,7 @@ export class ProduitsService {
           })
           .pipe(
             map((response) => {
-              const users = response.user || [];
+              const users = response.users || [];
               const user = users.find((u: any) => u.id === user_id);
               return user || null;
             })

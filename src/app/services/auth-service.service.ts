@@ -85,14 +85,14 @@ export class AuthServiceService {
     //   })
     // );
   }
- 
 
-// Service qui verifie quel utilisateur est connecter
+  // Service qui verifie quel utilisateur est connecter
   IsOnline(): { user: User | null; role: string | null } {
     const userOnlineString = localStorage.getItem('userOnline');
     if (userOnlineString) {
       const userOnline = JSON.parse(userOnlineString);
-      const role = userOnline && userOnline.role_id ? userOnline.role_id.toString() : null;
+      const role =
+        userOnline && userOnline.role_id ? userOnline.role_id.toString() : null;
       return { user: userOnline, role: role };
     }
     return { user: null, role: null };
@@ -100,6 +100,17 @@ export class AuthServiceService {
 
   isUserLoggedIn(): boolean {
     const { user, role } = this.IsOnline();
-    return user !== null && role === '2'; 
+    return user !== null && role === '2';
   }
+
+  getAllRoles(): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    return accessToken
+      ? this.http.get<any>(`${url}/listRole`, {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        })
+      : of(null);
+    }
 }
