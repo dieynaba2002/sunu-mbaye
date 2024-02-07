@@ -20,8 +20,8 @@ export class AuthComponent implements OnInit {
   email: string = '';
   password: string = '';
   telephone: string = '';
-  image: string = '';
-  role: number = 0;
+  image: any = '';
+  role: any = 0;
   adresse: string = '';
   sexe: string = '';
 
@@ -89,18 +89,28 @@ export class AuthComponent implements OnInit {
         'Merci de renseigner votre numéro de téléphone!'
       );
     } else {
-      let newUser: User = {
-        nom: this.nom,
-        prenom: this.prenom,
-        email: this.email,
-        password: this.password,
-        role_id: this.role,
-        telephone: this.telephone,
-        image: this.image,
-        adresse: this.adresse,
-      };
+      // let newUser: User = {
+      //   nom: this.nom,
+      //   prenom: this.prenom,
+      //   email: this.email,
+      //   password: this.password,
+      //   role_id: this.role,
+      //   telephone: this.telephone,
+      //   image: this.image,
+      //   adresse: this.adresse,
+      // };
+      let formData = new FormData();
+      formData.append('nom', this.nom);
+      formData.append('prenom', this.prenom);
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+      formData.append('role_id', this.role);
+      formData.append('telephone', this.telephone);
+      formData.append('adresse', this.adresse);
+      formData.append('image', this.image);
+      console.log(formData);
       // Appel du service pour ajouter le nouvel utilisateur
-      this.userService.addUser(newUser).subscribe(
+      this.userService.addUser(formData).subscribe(
         (addedUser) => {
           // L'utilisateur a été ajouté avec succès
           this.alertMessage(
@@ -124,6 +134,11 @@ export class AuthComponent implements OnInit {
         }
       );
     }
+  }
+
+  getFile(event: any) {
+    console.warn(event.target.files[0]);
+    this.image = event.target.files[0] as File;
   }
 
   // Methode pour faire la connexion

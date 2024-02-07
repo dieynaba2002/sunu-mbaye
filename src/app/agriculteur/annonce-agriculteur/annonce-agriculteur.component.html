@@ -8,14 +8,14 @@
                 <nav class="ms-5">
                     <form action="#" class="recherche">
                         <div class="form-input">
-                            <input type="search" placeholder="Rechercher...">
+                            <input type="search" placeholder="Rechercher..." [(ngModel)]="filterValue" name="search" (input)="onSearch()">
                             <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
                         </div>
                     </form>
                 </nav>
             </div>
             <div class="contain-annonce mt-4" >
-                <div class="card mb-3 test" style="max-width: 440px;" *ngFor="let annonce of annonces">
+                <div class="card mb-3 test" style="max-width: 440px;" *ngFor="let annonce of (filterValue ? tabNewsFilter : getAnnoncesPage())">
                     <div class="row g-0">
                         <div class="col-md-4" >
                         <img src="http://127.0.0.1:8000/images/{{annonce.images}}" class="img-fluid rounded h-100 image-annonce p-2" alt="...">
@@ -36,27 +36,30 @@
                     </div>
                 </div>
             </div>
-            <!-- pagination -->
-                <div class="pagin d-flex justify-content-center mt-5">
-                    <nav aria-label="Page shadow navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- pagination -->
+             <div class="d-flex justify-content-center my-5">
+              <button
+                class="btn btnColor me-2 pagination-button"
+                [disabled]="pageActuelle === 1"
+                (click)="pageActuelle = pageActuelle - 1"
+              >
+                <i class="bi bi-caret-left-fill" style="font-size: 14px"></i>
+              </button>
+              <button
+                class="btn btnColor ms-2 pagination-button"
+                *ngFor="let page of pages"
+                (click)="pageActuelle = page"
+                [class.active]="page === pageActuelle"
+              >
+                {{ page }}
+              </button>
+              <button
+                class="btn btnColor ms-2 pagination-button"
+                [disabled]="pageActuelle === totalPages"
+                (click)="pageActuelle = pageActuelle + 1"
+              >
+                <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
+              </button>
+            </div>
         </div>
     </div>
 </main>

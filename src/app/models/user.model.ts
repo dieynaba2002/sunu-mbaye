@@ -11,6 +11,7 @@ export interface User{
     adresse?: string;
     nom_entreprise?: string;	
     role_id: number;	
+    est_bloquer?: boolean;	
 }
 
 

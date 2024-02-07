@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, catchError, of, tap, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { url } from './apiUrl';
 import Swal from 'sweetalert2';
@@ -43,6 +43,54 @@ export class UserServicesService {
   getUserInfo(): any {
     const userString = localStorage.getItem('userOnline');
     return userString ? JSON.parse(userString) : null;
+  }
+
+  // bloquerUtilisateur(id: number): Observable<{ message: string }> {
+  //   const accessToken = localStorage.getItem('access_token');
+  //   if (!accessToken) {
+  //     return throwError('Utilisateur non connecté');
+  //   }
+
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${accessToken}`,
+  //   });
+  //   return this.http.delete<{ message: string }>(`${url}/BloquerUser/` + id, {
+  //     headers,
+  //   });
+  // }
+
+  bloquerUtilisateur(
+    id: number,
+    newState: boolean
+  ): Observable<{ message: string }> {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      return throwError('Utilisateur non connecté');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    // Construire l'URL en fonction du nouvel état de blocage
+    const urlWithState = `${url}/BloquerUser/${id}?bloque=${newState}`;
+
+    return this.http.delete<{ message: string }>(urlWithState, { headers });
+  }
+
+  debloquerUtilisateur(id: number): Observable<{ message: string }> {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      return throwError('Utilisateur non connecté');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    const urlWithState = `${url}/debloquerUser/${id}`;
+
+    return this.http.delete<{ message: string }>(urlWithState, { headers });
   }
 
   // Fonction pour afficher un sweetalert

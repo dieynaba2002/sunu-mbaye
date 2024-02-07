@@ -37,6 +37,14 @@ export class ProduitComponent implements OnInit {
   allProduits: Produit[] = [];
   selectedCategory: string | null = null;
 
+  // pagination
+  pageActuelle: number = 1;
+  produitParPage: number = 12;
+
+  // recherche
+  tabNewsFilter: any[] = [];
+  filterValue: string = '';
+
   // Récupération des categories
   loadProduit() {
     this.produitService.getAllsProduitByAdmin().subscribe((data) => {
@@ -89,5 +97,53 @@ export class ProduitComponent implements OnInit {
         return produit.categorie_id.toString() == categorie.toString();
       });
     }
+  }
+
+  // recherche
+
+  onSearch() {
+    // Recherche se fait selon le nom ou le prenom
+    this.filterValue = this.filterValue.toLowerCase();
+    this.tabNewsFilter = this.produits.filter((elt: any) =>
+      elt?.nom_produit.toLowerCase().includes(this.filterValue)
+    );
+    console.log('je suis le filter', this.tabNewsFilter);
+  }
+
+  // Méthode pour déterminer les articles à afficher sur la page actuelle
+  getProduitPage(): any[] {
+    if (!this.produits) {
+      return [];
+    }
+    const indexDebut = (this.pageActuelle - 1) * this.produitParPage;
+    const indexFin = indexDebut + this.produitParPage;
+    return this.produits.slice(indexDebut, indexFin);
+  }
+  // Méthode pour générer la liste des pages
+  get pages(): number[] {
+    if (
+      !this.produits ||
+      this.produits.length === 0 ||
+      this.produitParPage <= 0
+    ) {
+      return [];
+    }
+
+    const totalPages = Math.ceil(this.produits.length / this.produitParPage);
+    return Array(totalPages)
+      .fill(0)
+      .map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    if (
+      !this.produits ||
+      this.produits.length === 0 ||
+      this.produitParPage <= 0
+    ) {
+      return 0;
+    }
+    return Math.ceil(this.produits.length / this.produitParPage);
   }
 }

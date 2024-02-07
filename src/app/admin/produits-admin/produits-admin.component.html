@@ -1,71 +1,83 @@
 <main id="dark" class="">
-     <ul class="box-info">
-        <li>
-            <i class='bx bxs-group'></i>
-            <span class="text">
-                <h3>1020</h3>
-                <p>Utilisateurs</p>
-            </span>
-        </li>
-        <li>
-            <i class='bx bi-megaphone-fill'></i>
-            <span class="text">
-                <h3>2834</h3>
-                <p>Annonces</p>
-            </span>
-        </li>
-        <li>
-            <i class='bx bi bi-ui-checks-grid'></i>
-            <span class="text">
-                <h3>254</h3>
-                <p>Categorie</p>
-            </span>
-        </li>
-    </ul>
-    <div class="table-data">
-        <div class="order">
-            <section class="mt-4" id="section">
-                <div class="grid-produit mt-4">
-                    <div class="col" *ngFor="let produit of produits">
-                        <div class="image-col">
-                            <img src="http://127.0.0.1:8000/images/{{produit.images}}"
-                                alt="" height="100%" width="100%">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title text-center mt-3 titre-couleur">{{produit.nom_produit}}</h5>
-                            <p class="text-center mt-2">
-                                {{produit.description}}
-                            </p>
-                        </div>
-                        <button class="btn btn-retirer mb-2" type="button" (click)="SupprimerProduitByAdmin(produit.id ?? -1)">Retirer</button>
-                    </div>
-                    
-                </div>
-                <!-- pagination -->
-                <div class="pagin d-flex justify-content-center mt-5">
-                    <nav aria-label="Page shadow navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- pagination -->
-            </section>
+  <ul class="box-info">
+    <li>
+      <i class="bx bxs-group"></i>
+      <span class="text" *ngIf="users">
+        <h3>{{ users.length }}</h3>
+        <p>Utilisateurs</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bi-megaphone-fill"></i>
+      <span class="text" *ngIf="annonces">
+        <h3>{{ annonces.length }}</h3>
+        <p>Annonces</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bi bi-ui-checks-grid"></i>
+      <span class="text" *ngIf="categories">
+        <h3>{{ categories.length }}</h3>
+        <p>Categories</p>
+      </span>
+    </li>
+  </ul>
+  <div class="table-data">
+    <div class="order">
+      <h4 class="fw-bold">Liste des produits</h4>
+      <section class="mt-4" id="section">
+        <div class="grid-produit mt-4">
+          <div class="col" *ngFor="let produit of getProduitPage()">
+            <div class="image-col">
+              <img
+                src="http://127.0.0.1:8000/images/{{ produit.images }}"
+                alt=""
+                height="100%"
+                width="100%"
+              />
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center mt-3 titre-couleur">
+                {{ produit.nom_produit }}
+              </h5>
+              <p class="text-center mt-2">
+                {{ produit.description }}
+              </p>
+            </div>
+            <button
+              class="btn btn-retirer mb-2"
+              type="button"
+              (click)="SupprimerProduitByAdmin(produit.id ?? -1)"
+            >
+              Retirer
+            </button>
+          </div>
         </div>
-        
+        <div class="d-flex justify-content-center my-5">
+          <button
+            class="btn btnColor me-2 pagination-button"
+            [disabled]="pageActuelle === 1"
+            (click)="pageActuelle = pageActuelle - 1"
+          >
+            <i class="bi bi-caret-left-fill" style="font-size: 14px"></i>
+          </button>
+          <button
+            class="btn btnColor ms-2 pagination-button"
+            *ngFor="let page of pages"
+            (click)="pageActuelle = page"
+            [class.active]="page === pageActuelle"
+          >
+            {{ page }}
+          </button>
+          <button
+            class="btn btnColor ms-2 pagination-button"
+            [disabled]="pageActuelle === totalPages"
+            (click)="pageActuelle = pageActuelle + 1"
+          >
+            <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
+          </button>
+        </div>
+      </section>
     </div>
-
-        
+  </div>
 </main>

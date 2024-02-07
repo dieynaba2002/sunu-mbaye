@@ -47,18 +47,20 @@
     <span class="soulignement"></span>
   </div>
   <div class="grid-produit mt-4">
-    <div class="col">
+    <div class="col" *ngFor="let produit of getThreeProducts()">
       <div class="image-col">
         <img
-          src="https://img.freepik.com/photos-gratuite/salade-vegetarienne-fraiche-saine-ingredients-colores-vibrants-generes-par-intelligence-artificielle_25030-60497.jpg?w=996&t=st=1704802531~exp=1704803131~hmac=e71d0e5b2fc92c3487b8c3b9a5aa4d0f71edf3566b991c0abbc4c6d72f88744d"
+          src="http://127.0.0.1:8000/images/{{ produit.images }}"
           alt=""
           height="100%"
           width="100%"
         />
       </div>
       <div class="card-body">
-        <h5 class="card-title text-center mt-3 titre-couleur">Carotte</h5>
-        <h5 class="mt-2 card-title text-center">800fr / Kg</h5>
+        <h5 class="card-title text-center mt-3 titre-couleur">
+          {{ produit.nom_produit }}
+        </h5>
+        <h5 class="mt-2 card-title text-center">{{ produit.prix }}fr / Kg</h5>
       </div>
       <div class="info-profil">
         <div class="image-profil">
@@ -68,9 +70,9 @@
           />
         </div>
         <div class="info d-flex">
-          <span>Fall Bah</span>
-          <a href="#">
-            <a href="#">
+          <span>{{ produit.user_nom }}</span>
+          <a>
+            <a type="button" (click)="addToCart(produit)">
               <svg
                 width="35"
                 height="35"
@@ -101,7 +103,7 @@
         </div>
       </div>
     </div>
-    <div class="col">
+    <!-- <div class="col">
       <div class="image-col">
         <img
           src="https://img.freepik.com/photos-gratuite/salade-vegetarienne-fraiche-saine-ingredients-colores-vibrants-generes-par-intelligence-artificielle_25030-60497.jpg?w=996&t=st=1704802531~exp=1704803131~hmac=e71d0e5b2fc92c3487b8c3b9a5aa4d0f71edf3566b991c0abbc4c6d72f88744d"
@@ -204,7 +206,7 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
 <!-- Debut section annonce -->

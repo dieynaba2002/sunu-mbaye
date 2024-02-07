@@ -12,8 +12,19 @@
   <div class="test mt-5">
     <div class="menuFiltre mt-5 d-flex">
       <div class="filtreSection">
-        <button class="btn fw-bold px-3 active" (click)="filterByCategory(null)">Tout</button>
-        <button class="btn fw-bold px-3" *ngFor="let categorie of categories" (click)="filterByCategory(categorie.id)">{{ categorie.nom_categories }}</button>
+        <button
+          class="btn fw-bold px-3 active"
+          (click)="filterByCategory(null)"
+        >
+          Tout
+        </button>
+        <button
+          class="btn fw-bold px-3"
+          *ngFor="let categorie of categories"
+          (click)="filterByCategory(categorie.id)"
+        >
+          {{ categorie.nom_categories }}
+        </button>
 
         <!-- <button class="btn fw-bold px-3" > Céréale </button>
         <button class="btn fw-bold px-3">Fruit</button>
@@ -25,7 +36,7 @@
     <nav class="ms-5">
       <form action="#" class="recherche">
         <div class="form-input">
-          <input type="search" placeholder="Rechercher..." />
+          <input type="search" placeholder="Rechercher..." name="search" [(ngModel)]="filterValue" (input)="onSearch()"/>
           <button type="submit" class="search-btn">
             <i class="bx bx-search"></i>
           </button>
@@ -44,7 +55,7 @@
   </div>
   <div class="grid-produit mt-4">
     <!-- Tableau des projets en cours -->
-    <div class="col" *ngFor="let produit of produits">
+    <div class="col"  *ngFor="let produit of (filterValue ? tabNewsFilter : getProduitPage())">
       <div class="image-col">
         <img
           src="http://127.0.0.1:8000/images/{{ produit.images }}"
@@ -54,7 +65,7 @@
         />
       </div>
       <div class="card-body">
-        <h5 class="card-title text-center mt-3 titre-couleur">
+        <h5 class="card-title text-center mt-3 titre-couleur fw-bold">
           {{ produit.nom_produit }}
         </h5>
         <h5 class="mt-2 card-title text-center">{{ produit.prix }}fr / Kg</h5>
@@ -103,6 +114,31 @@
   </div>
 </section>
 <!-- fin de section -->
+
+<div class="d-flex justify-content-center my-5">
+  <button
+    class="btn btnColor me-2 pagination-button"
+    [disabled]="pageActuelle === 1"
+    (click)="pageActuelle = pageActuelle - 1"
+  >
+    <i class="bi bi-caret-left-fill" style="font-size: 14px"></i>
+  </button>
+  <button
+    class="btn btnColor ms-2 pagination-button"
+    *ngFor="let page of pages"
+    (click)="pageActuelle = page"
+    [class.active]="page === pageActuelle"
+  >
+    {{ page }}
+  </button>
+  <button
+    class="btn btnColor ms-2 pagination-button"
+    [disabled]="pageActuelle === totalPages"
+    (click)="pageActuelle = pageActuelle + 1"
+  >
+    <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
+  </button>
+</div>
 
 <!-- fin -->
 <app-footer></app-footer>

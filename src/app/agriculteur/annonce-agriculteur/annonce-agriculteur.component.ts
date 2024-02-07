@@ -21,6 +21,14 @@ export class AnnonceAgriculteurComponent {
   annonces: any[] = [];
   seletedAnnonce: any = {};
 
+  // pagination
+  pageActuelle: number = 1;
+  annonceParPage: number = 2;
+
+  // recherche
+  tabNewsFilter: any[] = [];
+  filterValue: string = '';
+
   // Récupération des categories
   loadAnnonce() {
     this.annonceService.getAllsAnnonces().subscribe((data) => {
@@ -118,5 +126,52 @@ export class AnnonceAgriculteurComponent {
     this.titre = annonce.titre;
     this.description = annonce.description;
     this.images = annonce.images;
+  }
+
+  onSearch() {
+    // Recherche se fait selon le nom ou le prenom
+    this.filterValue = this.filterValue.toLowerCase();
+    this.tabNewsFilter = this.annonces.filter((elt: any) =>
+      elt?.titre.toLowerCase().includes(this.filterValue)
+    );
+    console.log('je suis le filter', this.tabNewsFilter);
+  }
+
+  // pagination
+  // Méthode pour déterminer les articles à afficher sur la page actuelle
+  getAnnoncesPage(): any[] {
+    if (!this.annonces) {
+      return [];
+    }
+    const indexDebut = (this.pageActuelle - 1) * this.annonceParPage;
+    const indexFin = indexDebut + this.annonceParPage;
+    return this.annonces.slice(indexDebut, indexFin);
+  }
+  // Méthode pour générer la liste des pages
+  get pages(): number[] {
+    if (
+      !this.annonces ||
+      this.annonces.length === 0 ||
+      this.annonceParPage <= 0
+    ) {
+      return [];
+    }
+
+    const totalPages = Math.ceil(this.annonces.length / this.annonceParPage);
+    return Array(totalPages)
+      .fill(0)
+      .map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    if (
+      !this.annonces ||
+      this.annonces.length === 0 ||
+      this.annonceParPage <= 0
+    ) {
+      return 0;
+    }
+    return Math.ceil(this.annonces.length / this.annonceParPage);
   }
 }

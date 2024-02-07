@@ -681,6 +681,43 @@ html {
 }
 
 
+/* pagination */
+/* Conteneur de la pagination */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Styles pour les boutons */
+.pagination-button {
+    /* background-color: #0097b2; */
+    color: #017D03;
+    border: 1px solid #017D03;
+    padding: 8px 12px;
+    margin: 0 2px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-button.disabled {
+    background-color: #FF9C00;
+    border-color: #FF9A9A;
+    cursor: not-allowed;
+}
+
+/* Style pour le bouton actuel */
+.pagination-button.active {
+    background-color: #FF9C00;
+    border-color: #FF9C00;
+    color: white !important;
+}
+
+/* Animation de survol pour les boutons */
+.pagination-button:hover:not(.disabled) {
+    background-color: #FF9C00;
+    border-color: #FF9C00;
+}
 
 
 

@@ -44,18 +44,21 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td><img src="" alt="" /></td>
+            <td>
+              <img *ngIf="user.image" src="http://127.0.0.1:8000/images/{{ user.image }}" alt=""/> 
+              <!-- <img *ngIf="!user.image || user.image === '1'" src="../../../assets/img/pub.png" alt="" /> -->
+            </td>
             <td>{{ user.prenom }}</td>
             <td>{{ user.nom }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.role }}</td>
-            <td><i class="bi bi-ban" type="button"></i></td>
+            <td>{{ getRoleName(user.role_id) }}</td>
+            <td><i  class="bi ms-4" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #017D03;font-size: 24px; font-weight: bold;"></i></td>
           </tr>
         </tbody>
       </table>
 
       <!-- other table-->
-      <table
+      <!-- <table
         datatable
         [dtOptions]="dtOptions"
         class="row-border hover w-100 table"
@@ -63,7 +66,7 @@
         <thead class="table-header">
           <tr class="table-header"></tr>
         </thead>
-      </table>
+      </table> -->
     </div>
   </div>
 </main>

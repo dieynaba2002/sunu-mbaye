@@ -33,8 +33,13 @@ export class ProduitAgriculteurComponent implements OnInit {
   categories: Categorie[] = [];
   seletedProduit: any = {};
 
+  // reacherche
   tabNewsFilter: any[] = [];
   filterValue: string = '';
+
+  // pagination
+  pageActuelle: number = 1;
+  produitParPage: number = 3;
 
   onSearch() {
     // Recherche se fait selon le nom ou le prenom
@@ -168,5 +173,50 @@ export class ProduitAgriculteurComponent implements OnInit {
 
   getProduit(produit: any) {
     this.seletedProduit = produit;
+  }
+
+  getCategorieName(categorie_id: number): string {
+    console.log('ID de catégorie:', categorie_id);
+    const categorie = this.categories.find((c) => c.id === categorie_id);
+    console.log('Catégorie correspondante:', categorie);
+    return categorie ? categorie.nom_categories : 'N/A';
+  }
+
+  // pagination
+  // Méthode pour déterminer les articles à afficher sur la page actuelle
+  getProduitPage(): any[] {
+    if (!this.produits) {
+      return [];
+    }
+    const indexDebut = (this.pageActuelle - 1) * this.produitParPage;
+    const indexFin = indexDebut + this.produitParPage;
+    return this.produits.slice(indexDebut, indexFin);
+  }
+  // Méthode pour générer la liste des pages
+  get pages(): number[] {
+    if (
+      !this.produits ||
+      this.produits.length === 0 ||
+      this.produitParPage <= 0
+    ) {
+      return [];
+    }
+
+    const totalPages = Math.ceil(this.produits.length / this.produitParPage);
+    return Array(totalPages)
+      .fill(0)
+      .map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    if (
+      !this.produits ||
+      this.produits.length === 0 ||
+      this.produitParPage <= 0
+    ) {
+      return 0;
+    }
+    return Math.ceil(this.produits.length / this.produitParPage);
   }
 }

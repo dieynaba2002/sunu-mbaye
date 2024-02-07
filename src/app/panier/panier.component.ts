@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CategorieService } from '../services/categorie.service';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from '../services/auth-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-panier',
@@ -21,7 +22,8 @@ export class PanierComponent {
     private panierService: PanierService,
     private router: Router,
     private categoriesService: CategorieService,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private http: HttpClient
   ) {}
   ngOnInit(): void {
     this.panierService.cart$.subscribe((cart) => {
@@ -68,9 +70,9 @@ export class PanierComponent {
 
       panier.forEach((element: any) => {
         panierProduit.push({
-          produit_id: element.produit.id,
-          nombre_produit: element.quantitePanier,
-          montant: element.produit.prix * element.quantitePanier,
+          produit_id: element.id,
+          nombre_produit: element.quantity,
+          montant: element.prix * element.quantity,
         });
       });
       let panierToSend = {
@@ -78,12 +80,14 @@ export class PanierComponent {
       };
       console.log(panierToSend);
 
-      // this.panierService.post('api/passerCommande', panierToSend, (reponse: any) => {
-      //   console.warn(reponse);
-      //   window.open(reponse.payment_url, '_self');
-      // });
+      this.panierService.addPayment(panierToSend).subscribe((reponse: any) => {
+        console.warn(reponse);
+        window.open(reponse.payment_url, '_self');
+      });
     } else {
-      console.log('Utilisateur non connecté. Redirection vers la page de connexion...');
+      console.log(
+        'Utilisateur non connecté. Redirection vers la page de connexion...'
+      );
       this.router.navigate(['/login']);
     }
   }

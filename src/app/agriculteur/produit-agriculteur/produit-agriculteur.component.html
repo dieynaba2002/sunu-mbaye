@@ -30,7 +30,12 @@
       </div>
       <section class="mt-5" id="section">
         <div class="grid-produit mt-4">
-          <div class="col" *ngFor="let produit of (filterValue ? tabNewsFilter : produits)">
+          <div
+            class="col"
+            *ngFor="
+              let produit of filterValue ? tabNewsFilter : getProduitPage()
+            "
+          >
             <div class="image-col">
               <img
                 src="http://127.0.0.1:8000/images/{{ produit.images }}"
@@ -70,27 +75,30 @@
             </div>
           </div>
         </div>
-        <!-- pagination -->
-        <div class="pagin d-flex justify-content-center mt-5">
-          <nav aria-label="Page shadow navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <div class="d-flex justify-content-center my-5">
+          <button
+            class="btn btnColor me-2 pagination-button"
+            [disabled]="pageActuelle === 1"
+            (click)="pageActuelle = pageActuelle - 1"
+          >
+            <i class="bi bi-caret-left-fill" style="font-size: 14px"></i>
+          </button>
+          <button
+            class="btn btnColor ms-2 pagination-button"
+            *ngFor="let page of pages"
+            (click)="pageActuelle = page"
+            [class.active]="page === pageActuelle"
+          >
+            {{ page }}
+          </button>
+          <button
+            class="btn btnColor ms-2 pagination-button"
+            [disabled]="pageActuelle === totalPages"
+            (click)="pageActuelle = pageActuelle + 1"
+          >
+            <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
+          </button>
         </div>
-        <!-- pagination -->
       </section>
     </div>
   </div>
@@ -218,7 +226,7 @@
 >
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header border-0">
         <h5 class="modal-title" id="exampleModalLabel">Detail Produit</h5>
         <button
           type="button"
@@ -234,6 +242,7 @@
               <img
                 src="http://127.0.0.1:8000/images/{{ seletedProduit.images }}"
                 class="img-fluid rounded-start"
+                id="img-detail"
                 alt="..."
               />
             </div>
@@ -253,7 +262,8 @@
                 </p>
                 <p class="card-text">
                   <small class="text-muted fw-bold"
-                    >Categorie:{{ seletedProduit.nom_categorie }}</small
+                    >Categorie:
+                    {{ getCategorieName(seletedProduit.categorie_id) }}</small
                   >
                 </p>
               </div>

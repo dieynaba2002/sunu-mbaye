@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categorie } from 'src/app/models/categorie.model';
+import { AnnoncesService } from 'src/app/services/annonces.service';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { CategorieService } from 'src/app/services/categorie.service';
 import Swal from 'sweetalert2';
 
@@ -9,14 +11,22 @@ import Swal from 'sweetalert2';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  constructor(private categorieService: CategorieService) {}
+  constructor(
+    private categorieService: CategorieService,
+    private authService: AuthServiceService,
+    private annonceService: AnnoncesService
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
+    this.loadUser();
+    this.loadAnnonce();
   }
   nom_categorie: string = '';
   // categories: Categorie[] = [];
   categories: any[] = [];
+  users: any[] = [];
+  annonces: any[] = [];
 
   // Récupération des categories
   loadCategories() {
@@ -24,6 +34,24 @@ export class CategoriesComponent implements OnInit {
       // console.log('Données des catégories:', data);
       this.categories = data.categorie;
       // console.log('Données des catégories:', data);
+    });
+  }
+
+  // Récupération des categories
+  loadUser() {
+    this.authService.getAllsUsersByAdmin().subscribe((data) => {
+      console.log('Données des annonces:', data);
+      this.users = data.users;
+      console.log('Données des annonces:', data);
+    });
+  }
+
+  // Récupération des categories
+  loadAnnonce() {
+    this.annonceService.getAllsAnnonceByAdmin().subscribe((data) => {
+      console.log('Données des annonces:', data);
+      this.annonces = data.anonces;
+      console.log('Données des annonces:', data);
     });
   }
 
@@ -49,7 +77,6 @@ export class CategoriesComponent implements OnInit {
       });
     }
   }
-
 
   SupprimerCategorie(id: number) {
     Swal.fire({
@@ -78,4 +105,3 @@ export class CategoriesComponent implements OnInit {
     this.nom_categorie = '';
   }
 }
-

@@ -13,6 +13,7 @@ import {
 } from 'rxjs';
 import { url } from './apiUrl';
 import Swal from 'sweetalert2';
+import { PanierService } from './panier.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ import Swal from 'sweetalert2';
 export class ProduitsService {
   produit = new Subject<Produit[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private panierService:PanierService) {}
 
   // getAllsProduit(): Observable<any> {
   //   return this.http.get<Produit[]>(`${url}/listeProduitAgriculteur`).pipe(
@@ -173,10 +174,14 @@ export class ProduitsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${accessToken}`,
     });
-    return this.http.delete<{ message: string }>(`${url}/supProduitAdmine/` + id, {
-      headers,
-    });
+    return this.http.delete<{ message: string }>(
+      `${url}/supProduitAdmine/` + id,
+      {
+        headers,
+      }
+    );
   }
+
 
   // Fonction pour afficher un sweetalert
   alertMessage(icon: any, title: any, text: any) {

@@ -85,7 +85,7 @@
     gap: 5vh;
 }
 .col{
-    border: 2px solid #B6B4B4;
+    border: 1.7px solid #cfcfcf;
     padding-top: 3vh;
     border-radius: 10px;
     height: 420px;
@@ -172,10 +172,10 @@
     margin-top: 22px;
 }
 .card-img-top{
-    /* border-radius: 10px; */
 }
 #teste{
     height: 200px;
+    border-radius: 18px 18px 0px 0px;
 }
 
 /* Debut de la section verte */

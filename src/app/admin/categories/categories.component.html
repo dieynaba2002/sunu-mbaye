@@ -2,22 +2,22 @@
      <ul class="box-info">
         <li>
             <i class='bx bxs-group'></i>
-            <span class="text">
-                <h3>1020</h3>
+            <span class="text" *ngIf="users">
+                <h3>{{ users.length }}</h3>
                 <p>Utilisateurs</p>
             </span>
         </li>
         <li>
             <i class='bx bi-megaphone-fill'></i>
-            <span class="text">
-                <h3>2834</h3>
+            <span class="text" *ngIf="annonces">
+                <h3>{{ annonces.length }}</h3>
                 <p>Annonces</p>
             </span>
         </li>
         <li>
             <i class='bx bi bi-ui-checks-grid'></i>
-            <span class="text">
-                <h3>254</h3>
+            <span class="text" *ngIf="categories">
+                <h3>{{ categories.length }}</h3>
                 <p>Categorie</p>
             </span>
         </li>

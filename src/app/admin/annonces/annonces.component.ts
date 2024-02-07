@@ -14,6 +14,10 @@ export class AnnoncesComponent implements OnInit {
   categories: any[] = [];
   annoncesPubliees: any[] = [];
 
+  // pagination
+  pageActuelle: number = 1;
+  annonceParPage: number = 2;
+
   constructor(
     private annonceService: AnnoncesService,
     private authService: AuthServiceService,
@@ -47,7 +51,7 @@ export class AnnoncesComponent implements OnInit {
   loadUser() {
     this.authService.getAllsUsersByAdmin().subscribe((data) => {
       console.log('Données des annonces:', data);
-      this.users = data.user;
+      this.users = data.users;
       console.log('Données des annonces:', data);
     });
   }
@@ -74,25 +78,62 @@ export class AnnoncesComponent implements OnInit {
   }
 
   retirerAnnonce(annonceId: number) {
-  this.annonceService.deleteAnnonceByAdmin(annonceId).subscribe(
-    (response) => {
-      this.annonceService.alertMessage(
-        'success',
-        'Succès!',
-        'Annonce retirée avec succès.'
-      );
-      // Actualisez la liste des annonces après le retrait
-      this.loadAnnoncePubliee();
-    },
-    (error) => {
-      console.error('Erreur lors du retrait de l\'annonce', error);
-      this.annonceService.alertMessage(
-        'error',
-        'Erreur!',
-        'Une erreur est survenue lors du retrait de l\'annonce.'
-      );
-    }
-  );
-}
+    this.annonceService.deleteAnnonceByAdmin(annonceId).subscribe(
+      (response) => {
+        this.annonceService.alertMessage(
+          'success',
+          'Succès!',
+          'Annonce retirée avec succès.'
+        );
+        // Actualisez la liste des annonces après le retrait
+        this.loadAnnoncePubliee();
+      },
+      (error) => {
+        console.error("Erreur lors du retrait de l'annonce", error);
+        this.annonceService.alertMessage(
+          'error',
+          'Erreur!',
+          "Une erreur est survenue lors du retrait de l'annonce."
+        );
+      }
+    );
+  }
 
+  // pagination
+  // Méthode pour déterminer les articles à afficher sur la page actuelle
+  getAnnoncesPage(): any[] {
+    if (!this.annonces) {
+      return [];
+    }
+    const indexDebut = (this.pageActuelle - 1) * this.annonceParPage;
+    const indexFin = indexDebut + this.annonceParPage;
+    return this.annonces.slice(indexDebut, indexFin);
+  }
+  // Méthode pour générer la liste des pages
+  get pages(): number[] {
+    if (
+      !this.annonces ||
+      this.annonces.length === 0 ||
+      this.annonceParPage <= 0
+    ) {
+      return [];
+    }
+
+    const totalPages = Math.ceil(this.annonces.length / this.annonceParPage);
+    return Array(totalPages)
+      .fill(0)
+      .map((_, index) => index + 1);
+  }
+
+  // Méthode pour obtenir le nombre total de pages
+  get totalPages(): number {
+    if (
+      !this.annonces ||
+      this.annonces.length === 0 ||
+      this.annonceParPage <= 0
+    ) {
+      return 0;
+    }
+    return Math.ceil(this.annonces.length / this.annonceParPage);
+  }
 }
