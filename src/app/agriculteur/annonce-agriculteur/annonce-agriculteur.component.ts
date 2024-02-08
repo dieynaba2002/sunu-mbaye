@@ -38,6 +38,8 @@ export class AnnonceAgriculteurComponent {
     });
   }
 
+  // detail annonce
+  
   AjoutAnnonce() {
     if (this.titre == '') {
       this.annonceService.alertMessage(
@@ -96,7 +98,7 @@ export class AnnonceAgriculteurComponent {
     this.images = event.target.files[0] as File;
   }
 
-  getProduit(annonce: any) {
+  getAnnonce(annonce: any) {
     this.seletedAnnonce = annonce;
   }
 

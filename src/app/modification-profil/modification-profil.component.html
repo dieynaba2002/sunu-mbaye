@@ -1,17 +1,10 @@
 <app-header></app-header>
 <div class="test"></div>
 <section id="section">
-  <div
-    class="container conteneur"
-    id="container-table"
-    (change)="chargerInfosUser(seletedUser)"
-  >
+  <div class="container conteneur" id="container-table">
     <h4 class="text-center titre py-4">Modification du profil</h4>
     <div class="image-profil">
-      <img
-        src="https://img.freepik.com/photos-gratuite/gros-plan-adorables-femelles-peau-sombre-regard-confiant-cheveux-boucles-reflechit-quelque-chose-femme-afro-americaine-s-est-reposee-contre-interieur-du-cafe_273609-2383.jpg?size=626&ext=jpg&ga=GA1.1.810580184.1680065265&semt=ais"
-        alt=""
-      />
+      <img src="http://127.0.0.1:8000/images/{{ image }}" alt="" />
     </div>
     <form class="row g-3 py-5 px-5" id="test">
       <div class="col-md-6">
@@ -82,7 +75,9 @@
       </div>
       <div class="col-12 d-flex justify-content-end">
         <button type="submit" class="btn btn-annuler mx-3">Annuler</button>
-        <button type="submit" class="btn btn-modifier" (click)="modifierUser()">Modifier</button>
+        <button type="submit" class="btn btn-modifier" (click)="modifierUser()">
+          Modifier
+        </button>
       </div>
     </form>
   </div>

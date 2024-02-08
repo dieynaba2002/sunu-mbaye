@@ -76,6 +76,11 @@ nav{
     color: white;
 }
 
+#img-annonce-detail{
+    width: 100%;
+    height: 100%;
+}
+
 /* pagination */
 /* Conteneur de la pagination */
 .pagination-container {

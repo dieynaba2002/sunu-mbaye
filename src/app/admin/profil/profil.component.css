@@ -37,3 +37,91 @@
 #test input {
     border: 1px solid #017D03;
 }
+
+.table1 thead tr th {
+    background-color: #017D03;
+    color: white;
+
+}
+
+tbody tr td i {
+    color: #017D03;
+
+}
+
+.table-header {
+    background-color: #107D03 !important;
+    color: white;
+}
+
+.badge {
+    background-color: #ff9d0034;
+    color: #FF9C00;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.badge-Termine {
+    background-color: #27ae5f2a;
+    color: #27AE60;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.badge-Annuler {
+    background-color: #eb575732;
+    color: #EB5757;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+#commande {
+    margin-left: 100px;
+}
+
+#bg-custom-color {
+    background-color: #107D03 !important;
+    color: white;
+}
+
+.sous-total {
+    float: right;
+    padding: 15px 25px 5px 10px;
+    box-shadow: 1px 1px 6px 0px #dadada;
+}
+
+.btn-message{
+    border: 1px solid #017D03;
+    color: #017D03;
+    border-radius: 6px;
+}
+
+.color-btn-close {
+    background-color: #FF9C00;
+}
+
+.inputAjout input,
+textarea,
+select {
+    border: none;
+    border-bottom: 2px solid #FFA439;
+}
+
+.btn-Envoie {
+    background-color: #FF9C00;
+    color: white;
+}
+
+.truncated-message {
+    max-width: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}

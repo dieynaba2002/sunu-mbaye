@@ -24,14 +24,10 @@
   </ul>
   <h4 class="ms-5 fw-bold mt-4">Liste des annonces</h4>
   <div class="table-data">
-    <div class="order contain-annonce">
-      <div
-        class="card mb-3 test"
-        style="max-width: 440px"
-        *ngFor="let annonce of annonces"
-      >
-        <div class="row g-0">
-          <div class="col-md-4">
+    <div class="order contain-annonce" >
+      <div class="card mb-3 test" style="max-width: 440px" *ngFor="let annonce of getAnnoncesPage()">
+        <div class="row g-0" >
+          <div class="col-md-4" >
             <img
               src="http://127.0.0.1:8000/images/{{ annonce.images }}"
               class="img-fluid rounded h-100 image-annonce p-2"

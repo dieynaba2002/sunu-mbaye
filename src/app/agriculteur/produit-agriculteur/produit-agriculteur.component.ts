@@ -136,12 +136,10 @@ export class ProduitAgriculteurComponent implements OnInit {
 
     console.log('rtyu', this.seletedProduit);
     // console.log(data)
-    this.produitService
-      .updateProduit(this.seletedProduit, data)
+    this.produitService.updateProduit(this.seletedProduit, data)
       .subscribe((response) => {
         console.log(response);
       });
-
     this.loadProduit();
     console.warn(data);
   }

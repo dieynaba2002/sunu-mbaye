@@ -63,6 +63,34 @@ export class PanierComponent {
     console.log('Somme des articles :', this.sommeArticles);
   }
 
+  // payer() {
+  //   if (this.authService.isAuthenticated) {
+  //     let panier = this.panierService.getFromPanier();
+  //     let panierProduit: any[] = [];
+
+  //     panier.forEach((element: any) => {
+  //       panierProduit.push({
+  //         produit_id: element.produit.id,
+  //         nombre_produit: element.quantite,
+  //         montant: element.produit.prix * element.quantite,
+  //       });
+  //     });
+  //     let panierToSend = {
+  //       panier: panierProduit,
+  //     };
+  //     console.log(panierToSend);
+
+  //     this.panierService.post('api/payment', panierToSend, (reponse: any) => {
+  //       console.warn(reponse);
+  //       window.open(reponse.payment_url, '_self');
+  //     });
+  //   } else {
+  //     console.log(
+  //       'Utilisateur non connecté. Redirection vers la page de connexion...'
+  //     );
+  //     this.router.navigate(['/login']);
+  //   }
+  // }
   payer() {
     if (this.authService.isAuthenticated) {
       let panier = this.panierService.getFromPanier();

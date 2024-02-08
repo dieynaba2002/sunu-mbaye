@@ -59,10 +59,7 @@ export class UserServicesService {
   //   });
   // }
 
-  bloquerUtilisateur(
-    id: number,
-    newState: boolean
-  ): Observable<{ message: string }> {
+  bloquerUtilisateur(id: number,newState: boolean): Observable<{ message: string }> {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       return throwError('Utilisateur non connecté');

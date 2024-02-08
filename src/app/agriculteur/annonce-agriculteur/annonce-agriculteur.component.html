@@ -1,125 +1,225 @@
 <!-- MAIN -->
 <main id="dark" class="">
-    <div class="table-data">
-        <div class="order">
-            <div class="d-flex justify-content-between ">
-                <button class="btn btn-Ajout-pro" data-bs-toggle="modal" data-bs-target="#ajoutAnnonce">Ajouter une annonce</button>
-                <button class="btn btn-annonce-pub">Annonce publié</button>
-                <nav class="ms-5">
-                    <form action="#" class="recherche">
-                        <div class="form-input">
-                            <input type="search" placeholder="Rechercher..." [(ngModel)]="filterValue" name="search" (input)="onSearch()">
-                            <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
-                        </div>
-                    </form>
-                </nav>
+  <div class="table-data">
+    <div class="order">
+      <div class="d-flex justify-content-between">
+        <button
+          class="btn btn-Ajout-pro"
+          data-bs-toggle="modal"
+          data-bs-target="#ajoutAnnonce"
+        >
+          Ajouter une annonce
+        </button>
+        <button class="btn btn-annonce-pub">Annonce publié</button>
+        <nav class="ms-5">
+          <form action="#" class="recherche">
+            <div class="form-input">
+              <input
+                type="search"
+                placeholder="Rechercher..."
+                [(ngModel)]="filterValue"
+                name="search"
+                (input)="onSearch()"
+              />
+              <button type="submit" class="search-btn">
+                <i class="bx bx-search"></i>
+              </button>
             </div>
-            <div class="contain-annonce mt-4" >
-                <div class="card mb-3 test" style="max-width: 440px;" *ngFor="let annonce of (filterValue ? tabNewsFilter : getAnnoncesPage())">
-                    <div class="row g-0">
-                        <div class="col-md-4" >
-                        <img src="http://127.0.0.1:8000/images/{{annonce.images}}" class="img-fluid rounded h-100 image-annonce p-2" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{annonce.titre}}</h5>
-                            <p class="card-text">
-                               {{annonce.description}}
-                            </p>
-                            <div class="btngroup">
-                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#detailAnnonce" type="button"></i>
-                                <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#modifierAnnonce" type="button" (click)="chargerInfosAnnonce(annonce)"></i>
-                                <i class="bi bi-trash3" type="button" (click)="SupprimerAnnonce(annonce.id ?? -1)"></i>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+          </form>
+        </nav>
+      </div>
+      <div class="contain-annonce mt-4">
+        <div
+          class="card mb-3 test"
+          style="max-width: 440px"
+          *ngFor="
+            let annonce of filterValue ? tabNewsFilter : getAnnoncesPage()
+          "
+        >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="http://127.0.0.1:8000/images/{{ annonce.images }}"
+                class="img-fluid rounded h-100 image-annonce p-2"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ annonce.titre }}</h5>
+                <p class="card-text">
+                  {{ annonce.description }}
+                </p>
+                <div class="btngroup">
+                  <i
+                    class="bi bi-eye-fill"
+                    data-bs-toggle="modal"
+                    data-bs-target="#detailAnnonce"
+                    type="button"
+                    (click)="getAnnonce(annonce)"
+                  ></i>
+                  <i
+                    class="bi bi-pencil-square"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modifierAnnonce"
+                    type="button"
+                    (click)="chargerInfosAnnonce(annonce)"
+                  ></i>
+                  <i
+                    class="bi bi-trash3"
+                    type="button"
+                    (click)="SupprimerAnnonce(annonce.id ?? -1)"
+                  ></i>
                 </div>
+              </div>
             </div>
-             <div class="d-flex justify-content-center my-5">
-              <button
-                class="btn btnColor me-2 pagination-button"
-                [disabled]="pageActuelle === 1"
-                (click)="pageActuelle = pageActuelle - 1"
-              >
-                <i class="bi bi-caret-left-fill" style="font-size: 14px"></i>
-              </button>
-              <button
-                class="btn btnColor ms-2 pagination-button"
-                *ngFor="let page of pages"
-                (click)="pageActuelle = page"
-                [class.active]="page === pageActuelle"
-              >
-                {{ page }}
-              </button>
-              <button
-                class="btn btnColor ms-2 pagination-button"
-                [disabled]="pageActuelle === totalPages"
-                (click)="pageActuelle = pageActuelle + 1"
-              >
-                <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
-              </button>
-            </div>
+          </div>
         </div>
+      </div>
+      <div class="d-flex justify-content-center my-5">
+        <button
+          class="btn btnColor me-2 pagination-button"
+          [disabled]="pageActuelle === 1"
+          (click)="pageActuelle = pageActuelle - 1"
+        >
+          <i class="bi bi-caret-left-fill" style="font-size: 14px"></i>
+        </button>
+        <button
+          class="btn btnColor ms-2 pagination-button"
+          *ngFor="let page of pages"
+          (click)="pageActuelle = page"
+          [class.active]="page === pageActuelle"
+        >
+          {{ page }}
+        </button>
+        <button
+          class="btn btnColor ms-2 pagination-button"
+          [disabled]="pageActuelle === totalPages"
+          (click)="pageActuelle = pageActuelle + 1"
+        >
+          <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
+        </button>
+      </div>
     </div>
+  </div>
 </main>
 
 <!-- MAIN -->
 
 <!-- Modal Ajout -->
-<div class="modal fade" id="ajoutAnnonce" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="ajoutAnnonce"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title titre-color" id="exampleModalLabel">Ajouter une annonce</h5>
-        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title titre-color" id="exampleModalLabel">
+          Ajouter une annonce
+        </h5>
+        <button
+          type="button"
+          class="btn-close color-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="mb-3 inputAjout">
-            <label for="Titre" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce" [(ngModel)]="titre">
+          <label for="Titre" class="form-label">Titre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="titre"
+            name="titre"
+            placeholder="Titre annonce"
+            [(ngModel)]="titre"
+          />
         </div>
         <div class="mb-3 inputAjout">
-            <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images" (change)="getFile($event)">
+          <label for="formFile" class="form-label">Image</label>
+          <input
+            class="form-control"
+            type="file"
+            id="image"
+            name="images"
+            [(ngModel)]="images"
+            (change)="getFile($event)"
+          />
         </div>
         <div class="mb-3 inputAjout">
-            <label for="Description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
+          <label for="Description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            name="description"
+            [(ngModel)]="description"
+          ></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-Ajout-modal" (click)="AjoutAnnonce()">Ajouter</button>
+        <button
+          type="button"
+          class="btn btn-annuler-modal"
+          data-bs-dismiss="modal"
+        >
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-Ajout-modal"
+          (click)="AjoutAnnonce()"
+        >
+          Ajouter
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Modal Detail -->
-<div class="modal fade" id="detailAnnonce" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="detailAnnonce"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header border-0 ">
-        <h5 class="modal-title titre-color" id="exampleModalLabel">Detail produit</h5>
-        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header border-0">
+        <h5 class="modal-title titre-color" id="exampleModalLabel">
+          Detail Annonce
+        </h5>
+        <button
+          type="button"
+          class="btn-close color-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Carotte</h5>
-                    <p class="card-text">La Carotte est une plante bisannuelle de 10 à 80 cm de haut, aux rameaux étalés. Les feuilles sont molles et velues.</p>
-                    <p class="card-text"><small class="text-muted fw-bold ">Quantité:</small></p>
-                    <p class="card-text"><small class="text-muted fw-bold">Prix (kg):</small></p>
-                    <p class="card-text"><small class="text-muted fw-bold">Categorie:</small></p>
-                </div>
-                </div>
+        <div class="card mb-3" style="max-width: 540px">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="http://127.0.0.1:8000/images/{{ seletedAnnonce.images }}"
+                class="img-fluid rounded-start"
+                alt="..."
+                id="img-annonce-detail"
+              />
             </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ seletedAnnonce.titre }}</h5>
+                <p class="card-text">{{ seletedAnnonce.description }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -127,30 +227,74 @@
 </div>
 
 <!-- Modal Modifier -->
-<div class="modal fade" id="modifierAnnonce" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="modifierAnnonce"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title titre-color" id="exampleModalLabel">Modifier une annonce</h5>
-        <button type="button" class="btn-close color-btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title titre-color" id="exampleModalLabel">
+          Modifier une annonce
+        </h5>
+        <button
+          type="button"
+          class="btn-close color-btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="mb-3 inputAjout">
-            <label for="Titre" class="form-label">Titre</label>
-            <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre annonce" [(ngModel)]="titre">
+          <label for="Titre" class="form-label">Titre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="titre"
+            name="titre"
+            placeholder="Titre annonce"
+            [(ngModel)]="titre"
+          />
         </div>
         <div class="mb-3 inputAjout">
-            <label for="formFile" class="form-label">Image</label>
-            <input class="form-control" type="file" id="image" name="images" [(ngModel)]="images">
+          <label for="formFile" class="form-label">Image</label>
+          <input
+            class="form-control"
+            type="file"
+            id="image"
+            name="images"
+            [(ngModel)]="images"
+          />
         </div>
         <div class="mb-3 inputAjout">
-            <label for="Description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" name="description" [(ngModel)]="description"></textarea>
+          <label for="Description" class="form-label">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            name="description"
+            [(ngModel)]="description"
+          ></textarea>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-annuler-modal" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-Ajout-modal" (click)="modifierAnnonce()">Modifier</button>
+        <button
+          type="button"
+          class="btn btn-annuler-modal"
+          data-bs-dismiss="modal"
+        >
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-Ajout-modal"
+          (click)="modifierAnnonce()"
+        >
+          Modifier
+        </button>
       </div>
     </div>
   </div>

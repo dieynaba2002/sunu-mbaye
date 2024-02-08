@@ -1,39 +1,66 @@
- <main id="dark" class="">
-     <div class="table-data">
-            <div class="order">
-                <div class="container" id="container-table">
-                    <h3 style="color: #017D03;" class="text-center py-3 ">Modifier profil</h3>
-                    <div class="image-profil">
-                        <img src="https://img.freepik.com/photos-gratuite/gros-plan-adorables-femelles-peau-sombre-regard-confiant-cheveux-boucles-reflechit-quelque-chose-femme-afro-americaine-s-est-reposee-contre-interieur-du-cafe_273609-2383.jpg?size=626&ext=jpg&ga=GA1.1.810580184.1680065265&semt=ais" alt="">
-                    </div>
-                    <form class="row g-3 py-5 px-5" id="test">
-                        <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Prenom & Nom</label>
-                            <input type="text" class="form-control" id="nomComplet" name="nomComplet" placeholder="Prenom & Nom">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputTelephone" class="form-label">Telephone</label>
-                            <input type="text" class="form-control" id="inputTelephone" name="telephone" placeholder="Telephone">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Mot de passe">
-                        </div>
-                        <div class="col-12">
-                            <label for="inputNewPassword" class="form-label">Nouveau mot de passe</label>
-                            <input type="password" class="form-control" id="inputNewPassword" placeholder="nouveau mot de passe">
-                        </div>
-                        
-                        <div class="col-12 d-flex justify-content-end ">
-                            <button type="submit" class="btn btn-annuler mx-3">Annuler</button>
-                            <button type="submit" class="btn btn-modifier">Modifier</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-     </div>
- </main>
+<main id="dark" class="">
+  <div class="table-data">
+    <div class="order">
+      <div class="container" id="container-table">
+        <h3 style="color: #017d03" class="text-center py-3">Modifier profil</h3>
+        <div class="image-profil">
+          <img
+            src="https://img.freepik.com/photos-gratuite/gros-plan-adorables-femelles-peau-sombre-regard-confiant-cheveux-boucles-reflechit-quelque-chose-femme-afro-americaine-s-est-reposee-contre-interieur-du-cafe_273609-2383.jpg?size=626&ext=jpg&ga=GA1.1.810580184.1680065265&semt=ais"
+            alt=""
+          />
+        </div>
+        <form class="row g-3 py-5 px-5" id="test">
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Prenom</label>
+            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom" [(ngModel)]="prenom"/>
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" [(ngModel)]="nom"/>
+          </div>
+          <div class="col-md-6">
+            <label for="inputTelephone" class="form-label">Telephone</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputTelephone"
+              name="telephone"
+              placeholder="Telephone"
+              [(ngModel)]="telephone"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="inputEmail"
+              name="email"
+              placeholder="Email"
+              [(ngModel)]="email"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Adresse</label>
+            <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Adresse" [(ngModel)]="adresse"/>
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="inputPassword"
+              name="password"
+              placeholder="Mot de passe"
+              [(ngModel)]="password"
+            />
+          </div>
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-annuler mx-3">Annuler</button>
+            <button type="submit" class="btn btn-modifier" (click)="modifierUser()">Modifier</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,10 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MessagesService } from '../services/messages.service';
+import { Message } from '../models/message.model';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.css'],
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+  constructor(private messageService: MessagesService) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  // nos variables
+  nom: string = '';
+  email: string = '';
+  telephone: string = '';
+  message: string = '';
 
+  AjoutMessage() {
+    if (
+      this.nom == '' ||
+      this.email == '' ||
+      this.telephone == '' ||
+      this.message == ''
+    ) {
+      this.messageService.alertMessage(
+        'error',
+        'Attention',
+        'Renseigner tous les champs'
+      );
+    } else {
+      let newUser: Message = {
+        nom: this.nom,
+        email: this.email,
+        telephone: this.telephone,
+        message: this.message,
+      };
+      console.log(newUser);
+      this.messageService.addMessage(newUser).subscribe((response) => {
+        console.log('====================================');
+        console.log(response);
+        console.log('====================================');
+        this.messageService.alertMessage(
+          'success',
+          'Bravo!',
+          'Message envoyer avec succés'
+        );
+        this.viderChamps();
+        // this.loadProduit();
+      });
+    }
+  }
+
+  viderChamps() {
+    this.nom = "";
+    this.email = "";
+    this.telephone = "";
+    this.message = "";
+  }
 }

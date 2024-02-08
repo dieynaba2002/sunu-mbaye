@@ -1,39 +1,141 @@
- <main id="dark" class="">
-     <div class="table-data">
-            <div class="order">
-                <div class="container" id="container-table">
-                    <h3 style="color: #017D03;" class="text-center py-3 ">Modifier profil</h3>
-                    <div class="image-profil">
-                        <img src="https://img.freepik.com/photos-gratuite/gros-plan-adorables-femelles-peau-sombre-regard-confiant-cheveux-boucles-reflechit-quelque-chose-femme-afro-americaine-s-est-reposee-contre-interieur-du-cafe_273609-2383.jpg?size=626&ext=jpg&ga=GA1.1.810580184.1680065265&semt=ais" alt="">
-                    </div>
-                    <form class="row g-3 py-5 px-5" id="test">
-                        <div class="col-md-6">
-                            <label for="inputEmail4" class="form-label">Prenom & Nom</label>
-                            <input type="text" class="form-control" id="nomComplet" name="nomComplet" placeholder="Prenom & Nom">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputTelephone" class="form-label">Telephone</label>
-                            <input type="text" class="form-control" id="inputTelephone" name="telephone" placeholder="Telephone">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Mot de passe">
-                        </div>
-                        <div class="col-12">
-                            <label for="inputNewPassword" class="form-label">Nouveau mot de passe</label>
-                            <input type="password" class="form-control" id="inputNewPassword" placeholder="nouveau mot de passe">
-                        </div>
-                        
-                        <div class="col-12 d-flex justify-content-end ">
-                            <button type="submit" class="btn btn-annuler mx-3">Annuler</button>
-                            <button type="submit" class="btn btn-modifier">Modifier</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-     </div>
- </main>
+<main id="dark" class="">
+  <ul class="box-info">
+    <li>
+      <i class="bx bxs-group"></i>
+      <span class="text" *ngIf="users">
+        <h3>{{ users.length }}</h3>
+        <p>Utilisateurs</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bi-megaphone-fill"></i>
+      <span class="text" *ngIf="annonces">
+        <h3>{{ annonces.length }}</h3>
+        <p>Annonces</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bi bi-ui-checks-grid"></i>
+      <span class="text" *ngIf="categories">
+        <h3>{{ categories.length }}</h3>
+        <p>Categorie</p>
+      </span>
+    </li>
+  </ul>
+  <div class="table-data">
+    <div class="order">
+      <h4 class="fw-bold">Liste des messages</h4>
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        class="row-border hover w-100 table"
+        *ngIf="messages.length > 0"
+      >
+        <thead class="table-header">
+          <tr class="table-header">
+            <th class="table-header">Nom Complet</th>
+            <th class="table-header">Email</th>
+            <th class="table-header">Telephone</th>
+            <th class="table-header">Message</th>
+            <th class="table-header">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let message of messages">
+            <td>{{ message.nom }}</td>
+            <td>{{ message.email }}</td>
+            <td>{{ message.telephone }}</td>
+            <td class="truncated-message">{{ message.message }}</td>
+            <td>
+              <button
+                class="btn btn-message"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                (click)="chargerInfos(message)"
+              >
+                Répondre
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- other table-->
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        class="row-border hover w-100 table"
+      >
+        <thead class="table-header">
+          <tr class="table-header"></tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Envoyer un message</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 inputAjout">
+          <label for="exampleInputEmail1" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control inputAjout"
+            id="exampleInputEmail1"
+            name="mail"
+            [(ngModel)]="email"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            style="height: 100px"
+            name="message"
+            [(ngModel)]="message"
+          ></textarea>
+          <label for="floatingTextarea2">Message</label>
+        </div>
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            style="height: 100px"
+            name="contenue"
+            [(ngModel)]="contenue"
+          ></textarea>
+          <label for="floatingTextarea2">Réponse</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-Envoie" data-bs-dismiss="modal" (click)="sendReponse()">
+          Envoyer
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

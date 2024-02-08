@@ -13,6 +13,7 @@ export class InformationProfilComponent implements OnInit {
   adresse: string = '';
   email: string = '';
   contact: string = '';
+  image: string = '';
 
   constructor(private authService: AuthServiceService) {}
 
@@ -21,11 +22,12 @@ export class InformationProfilComponent implements OnInit {
 
     if (userString) {
       const user = JSON.parse(userString);
-      this.nom = user.nom;  
+      this.nom = user.nom; 
       this.prenom = user.prenom;
       this.adresse = user.adresse;
       this.email = user.email;
       this.contact = user.telephone;
+      this.image = user.image;
     }
   }
 }
