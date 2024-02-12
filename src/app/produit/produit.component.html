@@ -36,7 +36,13 @@
     <nav class="ms-5">
       <form action="#" class="recherche">
         <div class="form-input">
-          <input type="search" placeholder="Rechercher..." name="search" [(ngModel)]="filterValue" (input)="onSearch()"/>
+          <input
+            type="search"
+            placeholder="Rechercher..."
+            name="search"
+            [(ngModel)]="filterValue"
+            (input)="onSearch()"
+          />
           <button type="submit" class="search-btn">
             <i class="bx bx-search"></i>
           </button>
@@ -55,14 +61,23 @@
   </div>
   <div class="grid-produit mt-4">
     <!-- Tableau des projets en cours -->
-    <div class="col"  *ngFor="let produit of (filterValue ? tabNewsFilter : getProduitPage())">
+    <div
+      class="col"
+      *ngFor="let produit of filterValue ? tabNewsFilter : getProduitPage()"
+    >
       <div class="image-col">
-        <img
-          src="http://127.0.0.1:8000/images/{{ produit.images }}"
-          alt=""
-          height="100%"
-          width="100%"
-        />
+        <a
+          href=""
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="getProduit(produit)"
+          ><img
+            src="http://127.0.0.1:8000/images/{{ produit.images }}"
+            alt=""
+            height="100%"
+            width="100%"
+          />
+        </a>
       </div>
       <div class="card-body">
         <h5 class="card-title text-center mt-3 titre-couleur fw-bold">
@@ -138,6 +153,75 @@
   >
     <i class="bi bi-caret-right-fill" style="font-size: 14px"></i>
   </button>
+</div>
+
+<!-- detailproduit -->
+
+<div
+  class="modal fade modal-lg"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="card mb-3 border-0" style="max-width: 100%">
+          <div class="row g-0">
+            <div class="col-md-4" id="image-detail">
+              <img
+                src="http://127.0.0.1:8000/images/{{ seletedProduit.images }}"
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h3 class="card-title fw-bold">
+                  {{ seletedProduit.nom_produit }}
+                </h3>
+                <p class="card-text">
+                  {{ seletedProduit.description }}
+                </p>
+                <p class="card-text">
+                  <small class="text-muted fw-bold"
+                    >Quantité:{{ seletedProduit.quantite }}</small
+                  >
+                </p>
+                <p class="card-text">
+                  <small class="text-muted fw-bold"
+                    >Prix (kg):{{ seletedProduit.prix }}</small
+                  >
+                </p>
+                <div class="contain-elt-panier">
+                  <div class="product-quantity">
+                    <input type="number" value="1" min="1" />
+                  </div>
+                  <button class="btn btn-ajoutpanier" (click)="addToCart(seletedProduit)">Ajouter au panier</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
 </div>
 
 <!-- fin -->

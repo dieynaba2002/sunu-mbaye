@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    /* margin: 0; */
+    /* padding: 0; */
     list-style: none;
     text-decoration: none;
 }
@@ -628,4 +628,39 @@
 .pagination-button:hover:not(.disabled) {
     background-color: #FF9C00;
     border-color: #FF9C00;
+}
+
+.product-quantity {
+    width: 50px;
+
+    input {
+        margin-left: 20px;
+        width: 40px;
+        display: block;
+        margin-top: 5px;
+    }
+}
+
+.btn-ajoutpanier{
+    background-color: #017D03;
+    color: white;
+    font-weight: bold;
+    width: 180px;
+    margin-left: -25px;
+
+}
+
+.contain-elt-panier{
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+}
+
+#image-detail img{
+    height: 350px;
+    /* border: 2px solid; */
+    width: 520px;
+}
+
+.card-text{
+    font-size: 20px;
 }

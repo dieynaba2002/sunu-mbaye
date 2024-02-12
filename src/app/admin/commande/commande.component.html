@@ -29,6 +29,7 @@
         datatable
         [dtOptions]="dtOptions"
         class="row-border hover w-100 table"
+        *ngIf="commandes.length > 0"
       >
         <thead class="table-header">
           <tr class="table-header">
@@ -42,17 +43,29 @@
         </thead>
         <tbody>
           <tr *ngFor="let commande of commandes">
-            <td><img src="" alt="" /></td>
-            <td>{{ commande.livraison }}</td>
-            <td><span class="badge">En cours</span></td>
-            <td>{{commande.montant * commande.nombre_produit}}</td>
-            <td>Wave</td>
+            <td>
+              <img
+                src="http://127.0.0.1:8000/images/{{
+                  commande.photo_utilisateur
+                }}"
+                alt=""
+              />
+            </td>
+            <td>
+              {{ commande.prenom_utilisateur + " " + commande.nom_utilisateur }}
+            </td>
+            <td>
+              <span class="badge">{{ commande.etat_livraison }}</span>
+            </td>
+            <td>{{ commande.montant_total }}</td>
+            <td>Orange Money</td>
             <td>
               <i
                 class="bi bi-eye-fill"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#commande"
+                (click)="loadDetailCommande(commande.id)"
               ></i>
             </td>
           </tr>
@@ -92,17 +105,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><img src="" alt="" /></td>
-              <td>Mangue</td>
-              <td>600</td>
-              <td>100 kg</td>
-              <td>160 000</td>
+            <tr *ngFor="let detail of detailCommandes">
+              <td><img src="http://127.0.0.1:8000/images/{{ detail.produit_photo }}" alt=""  style="width: 45px; height: 45px" class="rounded-circle "/></td>
+              <td>{{ detail.produit_nom }}</td>
+              <td>{{ detail.prix_unitaire }}</td>
+              <td>{{ detail.quantite }}</td>
+              <td>{{ detail.prix_total }}</td>
             </tr>
           </tbody>
         </table>
         <div class="sous-total">
-          <p>Sous-total: 320 000</p>
+          <p>Sous-total: {{ calculateSubtotal(detailCommandes) }}</p>
         </div>
       </div>
     </div>

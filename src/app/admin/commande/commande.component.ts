@@ -16,6 +16,7 @@ export class CommandeComponent implements OnInit {
   users: any[] = [];
   categories: any[] = [];
   commandes: any[] = [];
+  detailCommandes: any[] = [];
 
   constructor(
     private annonceService: AnnoncesService,
@@ -44,18 +45,14 @@ export class CommandeComponent implements OnInit {
   // Récupération des categories
   loadAnnonce() {
     this.annonceService.getAllsAnnonceByAdmin().subscribe((data) => {
-      // console.log('Données des annonces:', data);
       this.annonces = data.anonces;
-      // console.log('Données des annonces:', data);
     });
   }
 
   // Récupération des categories
   loadUser() {
     this.authService.getAllsUsersByAdmin().subscribe((data) => {
-      // console.log('Données des annonces:', data);
       this.users = data.users;
-      // console.log('Données des annonces:', data);
     });
   }
 
@@ -68,8 +65,28 @@ export class CommandeComponent implements OnInit {
 
   loadCommande() {
     this.commandeService.getAllComandes().subscribe((data) => {
-      this.commandes = data.detailCommende;
-      console.log('bonjour des commandes:', data);
+      this.commandes = data.commandes;
+      // console.log('bonjour des commandes:', data);
     });
+  }
+
+  loadDetailCommande(commandeId: number) {
+    this.commandeService.getDetailsCommande(commandeId).subscribe((data) => {
+      this.detailCommandes = data.details_commande;
+      console.log(
+        'Détails de la commande',
+        commandeId,
+        ':',
+        data.details_commande
+      );
+    });
+  }
+
+  calculateSubtotal(detailCommandes: any[]): number {
+    let subtotal = 0;
+    detailCommandes.forEach((detail) => {
+      subtotal += detail.prix_total;
+    });
+    return subtotal;
   }
 }

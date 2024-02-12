@@ -204,11 +204,7 @@
         >
           Annuler
         </button>
-        <button
-          type="button"
-          class="btn btn-Ajout-modal"
-          (click)="AjoutProduit()"
-        >
+        <button type="button" class="btn btn-Ajout-modal" data-bs-dismiss="modal" (click)="AjoutProduit()">
           Ajouter
         </button>
       </div>
@@ -286,7 +282,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Produit</h5>
         <button
           type="button"
           class="btn-close color-btn-close"
@@ -374,6 +370,7 @@
         <button
           type="button"
           class="btn btn-Ajout-modal"
+          data-bs-dismiss="modal"
           (click)="modifierProduit()"
         >
           Modifier
@@ -382,3 +379,4 @@
     </div>
   </div>
 </div>
+

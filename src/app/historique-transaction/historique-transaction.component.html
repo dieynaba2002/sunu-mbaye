@@ -1,29 +1,40 @@
 <app-header></app-header>
 <section class="mt-5" id="section">
-    <div class="test"></div>
-    <h4 class="text-center mt-5 mb-4 title">Liste des transactions</h4>
-  <div class="container h-100 ">
+  <div class="test"></div>
+  <h4 class="text-center mt-5 mb-4 title">Liste des Commande passer</h4>
+  <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-10">
         <table class="table align-middle mb-0 no-gutters">
           <thead>
             <tr>
-              <th id="bg-custom-color" >Date</th>
-              <th id="bg-custom-color" >Transaction ID</th>
-              <th id="bg-custom-color" >Type transaction</th>
-              <th id="bg-custom-color" >Montant</th>
-              <th id="bg-custom-color" >Mode paiement</th>
+              <th id="bg-custom-color">Photo</th>
+              <th id="bg-custom-color">Nom Produit</th>
+              <th id="bg-custom-color">Prix</th>
+              <th id="bg-custom-color">Quantite</th>
+              <th id="bg-custom-color">Prix Total</th>
             </tr>
           </thead>
-            <tbody>
-              <tr>
-                <td>14/01/2024</td>
-                <td>TRHTVN7Q0A4M</td>
-                <td>ACHAT</td>
-                <td>27000</td>
-                <td>Wave</td>
-              </tr>
-            </tbody>
+          <tbody>
+            <tr *ngFor="let detail of detailCommandes">
+              <td>
+                <div class="d-flex align-items-center">
+                  <img
+                    src="http://127.0.0.1:8000/images/{{
+                      detail.produit_photo
+                    }}"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                </div>
+              </td>
+              <td>{{ detail.produit_nom }}</td>
+              <td>{{ detail.prix_unitaire }}</td>
+              <td>{{ detail.quantite }}</td>
+              <td>{{ detail.prix_total }}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

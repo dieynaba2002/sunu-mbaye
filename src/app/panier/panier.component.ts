@@ -5,6 +5,7 @@ import { CategorieService } from '../services/categorie.service';
 import { Observable } from 'rxjs';
 import { AuthServiceService } from '../services/auth-service.service';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-panier',
@@ -63,35 +64,18 @@ export class PanierComponent {
     console.log('Somme des articles :', this.sommeArticles);
   }
 
-  // payer() {
-  //   if (this.authService.isAuthenticated) {
-  //     let panier = this.panierService.getFromPanier();
-  //     let panierProduit: any[] = [];
-
-  //     panier.forEach((element: any) => {
-  //       panierProduit.push({
-  //         produit_id: element.produit.id,
-  //         nombre_produit: element.quantite,
-  //         montant: element.produit.prix * element.quantite,
-  //       });
-  //     });
-  //     let panierToSend = {
-  //       panier: panierProduit,
-  //     };
-  //     console.log(panierToSend);
-
-  //     this.panierService.post('api/payment', panierToSend, (reponse: any) => {
-  //       console.warn(reponse);
-  //       window.open(reponse.payment_url, '_self');
-  //     });
-  //   } else {
-  //     console.log(
-  //       'Utilisateur non connecté. Redirection vers la page de connexion...'
-  //     );
-  //     this.router.navigate(['/login']);
-  //   }
-  // }
+  
   payer() {
+    let panier = this.panierService.getFromPanier();
+    // Vérifier si le panier est vide
+    if (panier.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Panier vide',
+        text: 'Votre panier est vide. Veuillez le remplir avant de passer une commande.',
+      });
+      return; // Arrêter l'exécution de la fonction
+    }
     if (this.authService.isAuthenticated) {
       let panier = this.panierService.getFromPanier();
       let panierProduit: any[] = [];

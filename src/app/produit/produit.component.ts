@@ -36,6 +36,9 @@ export class ProduitComponent implements OnInit {
   categories: any[] = [];
   allProduits: Produit[] = [];
   selectedCategory: string | null = null;
+  seletedProduit: any = {};
+  public panier: any = [];
+  public quantite = 1;
 
   // pagination
   pageActuelle: number = 1;
@@ -146,4 +149,15 @@ export class ProduitComponent implements OnInit {
     }
     return Math.ceil(this.produits.length / this.produitParPage);
   }
+
+  getProduit(produit: any) {
+    this.seletedProduit = produit;
+  }
+
+  updateCartItem(item: any): void {
+    // Mettez à jour le panier avec la nouvelle quantité
+    this.panierService.updateCartItem(item);
+  }
+
+  
 }

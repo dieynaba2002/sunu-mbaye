@@ -53,7 +53,7 @@ export class ProfilAgriculteurComponent implements OnInit {
       role_id: this.userConnect.role_id,
     };
 
-    // console.log('rtyu', this.seletedUser);
+    console.log('rtyu', this.seletedUser);
     // console.log(data)
     // this.userService.updateUser(this.seletedUser, data).subscribe((response) => {
     //     console.log('je suis la reponse',response);
@@ -72,7 +72,7 @@ export class ProfilAgriculteurComponent implements OnInit {
 
   chargerInfosUser(user: any) {
     this.seletedUser = user.id;
-    // console.log('novysvd', user);
+    console.log('je suis id user', this.seletedUser);
     this.nom = user.nom;
     this.prenom = user.prenom;
     this.email = user.email;
