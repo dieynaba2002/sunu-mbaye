@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Annonce } from 'src/app/models/annonces.model';
 import { AnnoncesService } from 'src/app/services/annonces.service';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { CategorieService } from 'src/app/services/categorie.service';
@@ -65,14 +66,61 @@ export class AnnoncesComponent implements OnInit {
     });
   }
   // publier annonce pour l'admin
+  // publierAnnonce(id: number): void {
+  //   this.annonceService.publierAnnonceByAdmin(id).subscribe((response) => {
+  //     if (response && response.status) {
+  //       this.annonceService.alertMessage(
+  //         'success',
+  //         'Succès',
+  //         'Annonce publiée avec succès'
+  //       );
+  //       // Gérer la réponse de réussite (si nécessaire)
+  //       console.log('Annonce publiée avec succès');
+  //     } else {
+  //       // Gérer la réponse d'échec (si nécessaire)
+  //       console.error("Erreur lors de la publication de l'annonce");
+  //     }
+  //   });
+  // }
+
   publierAnnonce(id: number): void {
-    this.annonceService.publierAnnonceByAdmin(id).subscribe((response) => {
-      if (response && response.status) {
-        // Gérer la réponse de réussite (si nécessaire)
-        console.log('Annonce publiée avec succès');
+    // Récupérer la liste des annonces publiées
+    this.annonceService.getAllspublishAnnonceByAdmin().subscribe((data) => {
+      if (data && data.annoncesPubliees) {
+        const annoncesPubliees: Annonce[] = data.annoncesPubliees;
+        // Vérifier si l'annonce à publier est déjà dans la liste des annonces publiées
+        const annonceExiste = annoncesPubliees.some(
+          (annonce) => annonce.id === id
+        );
+
+        if (annonceExiste) {
+          // Si l'annonce existe déjà dans la liste des annonces publiées, afficher un message indiquant qu'elle a déjà été publiée
+          this.annonceService.alertMessage(
+            'info',
+            'Information',
+            'Cette annonce a déjà été publiée'
+          );
+        } else {
+          // Sinon, procéder à la publication de l'annonce
+          this.annonceService
+            .publierAnnonceByAdmin(id)
+            .subscribe((response) => {
+              if (response && response.status) {
+                // Si la publication est réussie, afficher un message de succès
+                this.annonceService.alertMessage(
+                  'success',
+                  'Succès',
+                  'Annonce publiée avec succès'
+                );
+                console.log('Annonce publiée avec succès');
+              } else {
+                // Si la publication échoue pour une autre raison, afficher un message d'erreur
+                console.error("Erreur lors de la publication de l'annonce");
+              }
+            });
+        }
       } else {
-        // Gérer la réponse d'échec (si nécessaire)
-        console.error("Erreur lors de la publication de l'annonce");
+        console.error('Erreur lors de la récupération des annonces publiées');
       }
     });
   }

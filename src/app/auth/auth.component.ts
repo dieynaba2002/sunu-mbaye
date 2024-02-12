@@ -80,7 +80,7 @@ export class AuthComponent implements OnInit {
       this.alertMessage(
         'error',
         'Attention',
-        'le mot de ppasse doit etre supérieur ou égal à 8!'
+        'le mot de passe doit etre supérieur ou égal à 8!'
       );
     } else if (this.telephone == '') {
       this.alertMessage(
@@ -205,10 +205,13 @@ export class AuthComponent implements OnInit {
   // }
 
   login() {
+    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (this.email == '') {
       this.alertMessage('error', 'Attention', "Renseigner l'email");
     } else if (this.password == '') {
       this.alertMessage('error', 'Attention', 'Renseigner le mot de passe');
+    } else if (!this.email.match(emailPattern)) {
+      this.alertMessage('error', 'Attention', 'Email invalide');
     } else {
       // Envoyer les informations d'identification au backend via une API
       this.authService.login(this.email, this.password).subscribe(

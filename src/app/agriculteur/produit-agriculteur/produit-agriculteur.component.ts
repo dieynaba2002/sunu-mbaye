@@ -68,11 +68,23 @@ export class ProduitAgriculteurComponent implements OnInit {
   }
 
   AjoutProduit() {
-    if (this.nom_produit == '') {
+    if (this.nom_produit == '' || this.quantite == '' || this.prix == '' || this.description == '' || this.images == '' ) {
       this.produitService.alertMessage(
         'error',
         'Attention',
-        'Renseigner un produit'
+        'Veuillez remplir tous les champs'
+      );
+    } else if (this.quantite < 0 ) {
+      this.produitService.alertMessage(
+        'error',
+        'Erreur',
+        'La quantité ne doit pas être négatif'
+      );
+    } else if (this.prix < 0) {
+      this.produitService.alertMessage(
+        'error',
+        'Erreur',
+        'Le prix ne doit pas être négatif'
       );
     } else {
       this.user_id = JSON.parse(localStorage.getItem('userOnline') || '');

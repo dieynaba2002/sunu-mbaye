@@ -19,6 +19,7 @@ export class ContactComponent implements OnInit {
   message: string = '';
 
   AjoutMessage() {
+    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (
       this.nom == '' ||
       this.email == '' ||
@@ -30,6 +31,8 @@ export class ContactComponent implements OnInit {
         'Attention',
         'Renseigner tous les champs'
       );
+    } else if (!this.email.match(emailPattern)) {
+      this.messageService.alertMessage('error', 'Attention', 'Email invalide');
     } else {
       let newUser: Message = {
         nom: this.nom,
