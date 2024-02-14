@@ -49,3 +49,7 @@ tbody tr td i {
     padding: 15px 25px 5px 10px;
     box-shadow: 1px 1px 6px 0px #dadada;
 }
+.action i{
+    padding: 10px;
+    font-size: 22px;
+}

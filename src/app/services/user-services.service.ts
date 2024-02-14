@@ -31,14 +31,18 @@ export class UserServicesService {
     return this.http.delete<void>(url);
   }
   updateUser(id: number, user: any): Observable<any> {
-    const accessToken = localStorage.getItem('userOnline');
-
+    const accessToken = localStorage.getItem('access_token');
+    console.log(accessToken);
     return accessToken
       ? this.http.put<any>(`${url}/updateUser/${id}`, user, {
-          headers: new HttpHeaders({ Authorization: `Bearer ${accessToken}` }),
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${accessToken}`,
+          }),
         })
       : of(null);
+
   }
+
 
   getUserInfo(): any {
     const userString = localStorage.getItem('userOnline');
@@ -59,7 +63,10 @@ export class UserServicesService {
   //   });
   // }
 
-  bloquerUtilisateur(id: number,newState: boolean): Observable<{ message: string }> {
+  bloquerUtilisateur(
+    id: number,
+    newState: boolean
+  ): Observable<{ message: string }> {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       return throwError('Utilisateur non connecté');

@@ -58,6 +58,18 @@ export class AuthComponent implements OnInit {
         'Attention',
         'Merci de renseigner votre prenom!'
       );
+    } else if (this.nom.length < 2) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Le nom doit contenir au moins 2 caractères!'
+      );
+    } else if (this.prenom.length < 3) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Le prénom doit contenir au moins 3 caractères!'
+      );
     } else if (this.email == '') {
       this.alertMessage(
         'error',
@@ -76,6 +88,12 @@ export class AuthComponent implements OnInit {
         'Attention',
         'Merci de renseigner le mot de passe!'
       );
+    } else if (/\s/.test(this.password)) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        "Le mot de passe ne doit pas contenir d'espaces!"
+      );
     } else if (this.password.length < 8) {
       this.alertMessage(
         'error',
@@ -88,7 +106,20 @@ export class AuthComponent implements OnInit {
         'Attention',
         'Merci de renseigner votre numéro de téléphone!'
       );
+    } else if (/\s/.test(this.telephone)) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        "Le numéro de téléphone ne doit pas contenir d'espaces!"
+      );
+    } else if (!this.telephone.match(/^(\+221|221)?[76|77|78|70|33]\d{8}$/)) {
+      this.alertMessage(
+        'error',
+        'Attention',
+        'Le format du numéro de téléphone est invalide!'
+      );
     } else {
+      
       // let newUser: User = {
       //   nom: this.nom,
       //   prenom: this.prenom,
@@ -110,27 +141,62 @@ export class AuthComponent implements OnInit {
       formData.append('image', this.image);
       console.log(formData);
       // Appel du service pour ajouter le nouvel utilisateur
+      // this.userService.addUser(formData).subscribe(
+      //   (addedUser) => {
+      //     // L'utilisateur a été ajouté avec succès
+      //     this.alertMessage(
+      //       'success',
+      //       'Super',
+      //       'Inscription réussie avec succés!'
+      //     );
+      //     console.log('Utilisateur ajouté:', addedUser);
+      //     this.ShowForm();
+      //     // Rediriger vers la page de connexion
+      //     // this.router.navigate(['/login']);
+      //   },
+      //   (error) => {
+      //     // Gestion des erreurs lors de l'ajout de l'utilisateur
+      //     console.error("Erreur lors de l'ajout de l'utilisateur:", error);
+      //     this.alertMessage(
+      //       'error',
+      //       'Erreur',
+      //       "Erreur lors de l'inscription. Veuillez réessayer."
+      //     );
+      //   }
+      // );
+
       this.userService.addUser(formData).subscribe(
         (addedUser) => {
           // L'utilisateur a été ajouté avec succès
           this.alertMessage(
             'success',
             'Super',
-            'Inscription réussie avec succés!'
+            'Inscription réussie avec succès!'
           );
           console.log('Utilisateur ajouté:', addedUser);
           this.ShowForm();
-          // Rediriger vers la page de connexion
-          // this.router.navigate(['/login']);
         },
         (error) => {
           // Gestion des erreurs lors de l'ajout de l'utilisateur
           console.error("Erreur lors de l'ajout de l'utilisateur:", error);
-          this.alertMessage(
-            'error',
-            'Erreur',
-            "Erreur lors de l'inscription. Veuillez réessayer."
-          );
+
+          // Vérifiez si l'erreur est une erreur de validation retournée par le backend
+          if (error.status === 422 && error.error.errors) {
+            const errors = error.error.errors;
+            for (const key in errors) {
+              if (errors.hasOwnProperty(key)) {
+                const errorMsg = errors[key].join(', '); // Concaténer les messages d'erreur
+                this.alertMessage('error', 'Erreur de validation', errorMsg);
+              }
+            }
+          } else {
+            // Pour d'autres types d'erreurs, affichez simplement un message d'erreur générique
+            this.alertMessage(
+              'error',
+              'Erreur',
+              "Erreur lors de l'inscription. Veuillez réessayer."
+            );
+          }
         }
       );
     }
@@ -257,15 +323,45 @@ export class AuthComponent implements OnInit {
           // Appeler la méthode setUserId du service panier pour associer le panier à l'utilisateur
           this.panierService.setUserId(loggedInUser.id);
         },
+        // (error) => {
+        //   // Gérer l'échec de l'authentification
+        //   console.log("Erreur d'authentification:", error);
+        //   this.alertMessage(
+        //     'error',
+        //     'Erreur',
+        //     'Email ou mot de passe incorrect'
+        //   );
+        // }
         (error) => {
-          // Gérer l'échec de l'authentification
-          console.log("Erreur d'authentification:", error);
+        // Gérer l'échec de l'authentification
+        console.log("Erreur d'authentification:", error);
+        if (error.status === 401) {
+          // Gérer les erreurs spécifiques retournées par le backend
+          if (error.error && error.error.message) {
+            this.alertMessage('error', 'Erreur', error.error.message);
+          } else {
+            this.alertMessage(
+              'error',
+              'Erreur',
+              'Email ou mot de passe incorrect'
+            );
+          }
+        } else if (error.status === 403) {
+          // L'utilisateur est bloqué, afficher le message d'erreur approprié
           this.alertMessage(
             'error',
             'Erreur',
-            'Email ou mot de passe incorrect'
+            "Votre compte est bloqué. Veuillez contacter l'administrateur."
+          );
+        } else {
+          // Gérer les autres erreurs
+          this.alertMessage(
+            'error',
+            'Erreur',
+            "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
           );
         }
+      }
       );
     }
   }
@@ -278,6 +374,10 @@ export class AuthComponent implements OnInit {
   ShowForm() {
     this.email = '';
     this.password = '';
+    this.adresse = '';
+    this.telephone = '';
+    this.prenom = '';
+    this.nom = '';
     this.formChoice = !this.formChoice;
   }
 

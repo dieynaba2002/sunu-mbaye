@@ -68,13 +68,19 @@ export class ProduitAgriculteurComponent implements OnInit {
   }
 
   AjoutProduit() {
-    if (this.nom_produit == '' || this.quantite == '' || this.prix == '' || this.description == '' || this.images == '' ) {
+    if (
+      this.nom_produit == '' ||
+      this.quantite == '' ||
+      this.prix == '' ||
+      this.description == '' ||
+      this.images == ''
+    ) {
       this.produitService.alertMessage(
         'error',
         'Attention',
         'Veuillez remplir tous les champs'
       );
-    } else if (this.quantite < 0 ) {
+    } else if (this.quantite < 0) {
       this.produitService.alertMessage(
         'error',
         'Erreur',
@@ -137,24 +143,43 @@ export class ProduitAgriculteurComponent implements OnInit {
 
   // fonction pour modifier
   modifierProduit() {
-    const data = {
-      nom_produit: this.nom_produit,
-      description: this.description,
-      images: this.images,
-      prix: this.prix,
-      quantite: this.quantite,
-      categorie_id: this.categorie_id,
-    };
+    if (this.quantite < 0) {
+      this.produitService.alertMessage(
+        'error',
+        'Erreur',
+        'La quantité ne doit pas être négatif'
+      );
+    } else if (this.prix < 0) {
+      this.produitService.alertMessage(
+        'error',
+        'Erreur',
+        'Le prix ne doit pas être négatif'
+      );
+    } else {
+      const data = {
+        nom_produit: this.nom_produit,
+        description: this.description,
+        images: this.images,
+        prix: this.prix,
+        quantite: this.quantite,
+        categorie_id: this.categorie_id,
+      };
 
-    console.log('rtyu', this.seletedProduit);
-    // console.log(data)
-    this.produitService
-      .updateProduit(this.seletedProduit, data)
-      .subscribe((response) => {
-        console.log(response);
-      });
-    this.loadProduit();
-    console.warn(data);
+      console.log('rtyu', this.seletedProduit);
+      // console.log(data)
+      this.produitService
+        .updateProduit(this.seletedProduit, data)
+        .subscribe((response) => {
+          console.log(response);
+        });
+      this.produitService.alertMessage(
+        'success',
+        'Felicitation',
+        'Produit Modifier avec success'
+      );
+      this.loadProduit();
+      console.warn(data);
+    }
   }
 
   chargerInfosProduit(produit: any) {
@@ -194,7 +219,6 @@ export class ProduitAgriculteurComponent implements OnInit {
   }
 
   // pagination
-  // Méthode pour déterminer les articles à afficher sur la page actuelle
   getProduitPage(): any[] {
     if (!this.produits) {
       return [];
@@ -230,4 +254,5 @@ export class ProduitAgriculteurComponent implements OnInit {
     }
     return Math.ceil(this.produits.length / this.produitParPage);
   }
+  
 }

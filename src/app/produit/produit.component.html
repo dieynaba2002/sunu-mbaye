@@ -12,18 +12,12 @@
   <div class="test mt-5">
     <div class="menuFiltre mt-5 d-flex">
       <div class="filtreSection">
-        <button class="btn fw-bold px-3 active" (click)="filterByCategory(null)">
+        <button class="btn fw-bold px-3 active" (click)="filterByCategory(null)" [class.active]="selectedCategory === null">
           Tout
         </button>
-        <button class="btn fw-bold px-3" *ngFor="let categorie of categories"(click)="filterByCategory(categorie.id)">
+        <button class="btn fw-bold px-3" *ngFor="let categorie of categories"(click)="filterByCategory(categorie.id)" [class.active]="selectedCategory === categorie.id">
           {{ categorie.nom_categories }}
         </button>
-
-        <!-- <button class="btn fw-bold px-3" > Céréale </button>
-        <button class="btn fw-bold px-3">Fruit</button>
-        <button class="btn fw-bold px-3">Légume</button>
-        <button class="btn fw-bold px-3">Epice</button>
-        <button class="btn fw-bold px-3">Légume vert</button> -->
       </div>
     </div>
     <nav class="ms-5">

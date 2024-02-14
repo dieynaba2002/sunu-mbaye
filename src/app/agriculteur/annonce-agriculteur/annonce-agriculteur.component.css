@@ -26,6 +26,7 @@ nav{
 
 .image-annonce {
     border-radius: 15px !important;
+    height: 100%;
 }
 
 .btn-publier {
@@ -117,4 +118,13 @@ nav{
 .pagination-button:hover:not(.disabled) {
     background-color: #FF9C00;
     border-color: #FF9C00;
+}
+
+.limit-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
 }

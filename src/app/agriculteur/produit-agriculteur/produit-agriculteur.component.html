@@ -48,7 +48,7 @@
               <h5 class="card-title text-center mt-3 titre-couleur">
                 {{ produit.nom_produit }}
               </h5>
-              <p class="text-center mt-2">
+              <p class="text-center mt-2 limit-description">
                 {{ produit.description }}
               </p>
             </div>
@@ -162,7 +162,7 @@
             name="quantite"
             placeholder="Quantite"
             [(ngModel)]="quantite"
-            min="1"
+            
           />
         </div>
         <div class="mb-3 inputAjout">
@@ -173,7 +173,7 @@
             id="prix"
             name="prix"
             [(ngModel)]="prix"
-            min="1"
+            
           />
         </div>
         <div class="mb-3 inputAjout">

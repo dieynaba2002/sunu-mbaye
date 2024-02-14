@@ -76,7 +76,9 @@ export class PanierComponent {
       });
       return; // Arrêter l'exécution de la fonction
     }
-    if (this.authService.isAuthenticated) {
+    const accessToken = localStorage.getItem('access_token');
+    const userOnline = JSON.parse(localStorage.getItem('userOnline') || '{}');
+    if (accessToken && userOnline && userOnline.id && userOnline.role_id === 2) {
       let panier = this.panierService.getFromPanier();
       let panierProduit: any[] = [];
 
@@ -95,6 +97,8 @@ export class PanierComponent {
       this.panierService.addPayment(panierToSend).subscribe((reponse: any) => {
         console.warn(reponse);
         window.open(reponse.payment_url, '_self');
+        // Vider le panier une fois que le paiement a été effectué avec succès
+        localStorage.removeItem('cart');
       });
     } else {
       console.log(

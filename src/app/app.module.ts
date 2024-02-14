@@ -20,6 +20,7 @@ import { ModificationProfilComponent } from './modification-profil/modification-
 import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProduitCategPipe } from './produit-categ.pipe';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ProduitCategPipe } from './produit-categ.pipe';
     InformationProfilComponent,
     ModificationProfilComponent,
     HistoriqueTransactionComponent,
-    ProduitCategPipe
+    ProduitCategPipe,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,

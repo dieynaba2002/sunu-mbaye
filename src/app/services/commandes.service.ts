@@ -50,5 +50,39 @@ export class CommandesService {
       return of(null);
     }
   }
+
+  annulerCommande(commandeId: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${accessToken}`,
+      });
+      return this.http.put<any>(
+        `${url}/AnnulerLivraison/${commandeId}`,
+        {}, // Le corps de la requête est vide car aucune donnée supplémentaire n'est nécessaire
+        { headers }
+      );
+    } else {
+      // Gérer le cas où aucun jeton d'accès n'est disponible
+      return of(null);
+    }
+  }
+
+  terminerCommande(commandeId: number): Observable<any> {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${accessToken}`,
+      });
+      return this.http.put<any>(
+        `${url}/LivraisonTerminer/${commandeId}`,
+        {}, // Le corps de la requête est vide car aucune donnée supplémentaire n'est nécessaire
+        { headers }
+      );
+    } else {
+      // Gérer le cas où aucun jeton d'accès n'est disponible
+      return of(null);
+    }
+  }
 }
   

@@ -4,6 +4,7 @@ import { Annonce } from '../models/annonces.model';
 import { Produit } from '../models/produits.model';
 import { ProduitsService } from '../services/produits.service';
 import { PanierService } from '../services/panier.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-accueil',
@@ -16,6 +17,8 @@ export class AccueilComponent implements OnInit {
   categories: any[] = [];
   annoncesPubliees: any[] = [];
   produits: Produit[] = [];
+  seletedProduit: any = {};
+  seletedAnnonce: any = {};
 
   constructor(
     private annonceService: AnnoncesService,
@@ -30,11 +33,46 @@ export class AccueilComponent implements OnInit {
     // this.loadAnnoncesPubliees();
   }
 
+  // loadAnnoncePubliee() {
+  //   this.annonceService.getAllspublishAnnonceByAdmin().subscribe((data) => {
+  //     console.log('Données des annonces publish:', data);
+  //     this.annoncesPubliees = data.annoncesPubliees;
+  //     console.log('Données des annonces:', data);
+  //   });
+  //   this.annoncesPubliees.forEach((annonce) => {
+  //     this.produitService.getUserDetails(annonce.user_id).subscribe((userDetails) => {
+  //         annonce.user = userDetails;
+  //         // Ajoutez une propriété 'user_nom' au produit pour stocker le nom de l'utilisateur
+  //         annonce.user_nom = userDetails
+  //           ? `${userDetails.prenom} ${userDetails.nom}`
+  //           : 'N/A';
+  //           console.log('test',userDetails);
+  //     });
+  //   });
+  // }
+
   loadAnnoncePubliee() {
     this.annonceService.getAllspublishAnnonceByAdmin().subscribe((data) => {
       console.log('Données des annonces publish:', data);
       this.annoncesPubliees = data.annoncesPubliees;
       console.log('Données des annonces:', data);
+
+      // Créez un tableau d'observables pour récupérer les détails de tous les utilisateurs
+      const userObservables = this.annoncesPubliees.map((annonce) => {
+        return this.produitService.getUserDetails(annonce.user_id);
+      });
+
+      // Utilisez forkJoin pour attendre que toutes les requêtes soient terminées
+      forkJoin(userObservables).subscribe((userDetailsArray) => {
+        userDetailsArray.forEach((userDetails, index) => {
+          const annonce = this.annoncesPubliees[index];
+          annonce.user = userDetails;
+          // Ajoutez une propriété 'user_nom' à l'annonce pour stocker le nom de l'utilisateur
+          annonce.user_nom = userDetails ? `${userDetails.nom} ${userDetails.prenom}` : 'N/A';
+          annonce.user_telephone = userDetails ? userDetails.telephone : 'N/A';
+          console.log('test', userDetails);
+        });
+      });
     });
   }
 
@@ -72,5 +110,15 @@ export class AccueilComponent implements OnInit {
       this.produits.sort(() => Math.random() - 0.5);
       this.produits = this.getThreeProducts();
     });
+  }
+
+  getProduit(produit: any) {
+    this.seletedProduit = produit;
+    console.log('im sle', produit);
+  }
+
+  getAnnonce(annonce: any) {
+    this.seletedAnnonce = annonce;
+    console.log(annonce);
   }
 }

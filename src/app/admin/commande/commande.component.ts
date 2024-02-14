@@ -89,4 +89,16 @@ export class CommandeComponent implements OnInit {
     });
     return subtotal;
   }
+
+  annulerCommande(commandeId: number) {
+    this.commandeService.annulerCommande(commandeId).subscribe(() => {
+      this.loadCommande();
+    });
+  }
+
+  terminerCommande(commandeId: number) {
+    this.commandeService.terminerCommande(commandeId).subscribe(() => {
+      this.loadCommande();
+    });
+  }
 }

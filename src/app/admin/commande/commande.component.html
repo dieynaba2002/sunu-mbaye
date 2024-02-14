@@ -55,11 +55,11 @@
               {{ commande.prenom_utilisateur + " " + commande.nom_utilisateur }}
             </td>
             <td>
-              <span class="badge">{{ commande.etat_livraison }}</span>
+              <span class="badge" [ngClass]="{'badge-Annuler': commande.etat_livraison === 'annuler', 'badge-Termine': commande.etat_livraison === 'terminer', 'badge-info': commande.etat_livraison === 'En_court'}">{{ commande.etat_livraison }}</span>
             </td>
             <td>{{ commande.montant_total }}</td>
             <td>Orange Money</td>
-            <td>
+            <td class="action">
               <i
                 class="bi bi-eye-fill"
                 type="button"
@@ -67,6 +67,8 @@
                 data-bs-target="#commande"
                 (click)="loadDetailCommande(commande.id)"
               ></i>
+              <i class="bi bi-x-circle" type="button" (click)="annulerCommande(commande.id)" *ngIf="commande.etat_livraison === 'En_court'"></i>
+              <i class="bi bi-check2-square" type="button" (click)="terminerCommande(commande.id)" *ngIf="commande.etat_livraison === 'En_court'"></i>
             </td>
           </tr>
         </tbody>
@@ -106,7 +108,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let detail of detailCommandes">
-              <td><img src="http://127.0.0.1:8000/images/{{ detail.produit_photo }}" alt=""  style="width: 45px; height: 45px" class="rounded-circle "/></td>
+              <td>
+                <img
+                  src="http://127.0.0.1:8000/images/{{ detail.produit_photo }}"
+                  alt=""
+                  style="width: 45px; height: 45px"
+                  class="rounded-circle"
+                />
+              </td>
               <td>{{ detail.produit_nom }}</td>
               <td>{{ detail.prix_unitaire }}</td>
               <td>{{ detail.quantite }}</td>

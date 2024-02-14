@@ -10,7 +10,7 @@
         >
           Ajouter une annonce
         </button>
-        <button class="btn btn-annonce-pub">Annonce publié</button>
+        <!-- <button class="btn btn-annonce-pub">Annonce publié</button> -->
         <nav class="ms-5">
           <form action="#" class="recherche">
             <div class="form-input">
@@ -40,14 +40,14 @@
             <div class="col-md-4">
               <img
                 src="http://127.0.0.1:8000/images/{{ annonce.images }}"
-                class="img-fluid rounded h-100 image-annonce p-2"
+                class="img-fluid rounded image-annonce p-2"
                 alt="..."
               />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ annonce.titre }}</h5>
-                <p class="card-text">
+                <h6 class="card-title fw-bold">{{ annonce.titre }}</h6>
+                <p class="card-text limit-description">
                   {{ annonce.description }}
                 </p>
                 <div class="btngroup">
@@ -172,6 +172,7 @@
         <button
           type="button"
           class="btn btn-Ajout-modal"
+          data-bs-dismiss="modal"
           (click)="AjoutAnnonce()"
         >
           Ajouter

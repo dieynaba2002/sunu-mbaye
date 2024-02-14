@@ -14,6 +14,7 @@ import { ModificationProfilComponent } from './modification-profil/modification-
 import { HistoriqueTransactionComponent } from './historique-transaction/historique-transaction.component';
 import { authGuard } from './guard/auth.guard';
 import { agriculteurGuardGuard } from './guard/agriculteur-guard.guard';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'panier', component: PanierComponent },
+  // { path: '**', component: MaintenanceComponent },
   {
     path: 'politique-confidentialite',
     component: PolitiqueDeConfidentialiteComponent,
