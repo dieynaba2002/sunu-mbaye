@@ -605,6 +605,37 @@ html {
 /* CONTENT */
 
 
+@media screen and (max-width: 768px) {
+    #sidebar {
+        width: 100%;
+    }
+
+    #sidebar.hide {
+        width: 60px;
+    }
+
+    #content {
+        width: 100%;
+        left: 0;
+    }
+
+    #content.hide~#sidebar {
+        width: 60px;
+    }
+}
+
+/* Pour les tablettes */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Ajoutez des styles spécifiques pour les tablettes si nécessaire */
+}
+
+/* Pour les ordinateurs de bureau */
+@media screen and (min-width: 1024px) {
+    /* Ajoutez des styles spécifiques pour les ordinateurs de bureau si nécessaire */
+}
+
+
+
 
 
 

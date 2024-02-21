@@ -83,41 +83,94 @@ export class AnnoncesComponent implements OnInit {
   //   });
   // }
 
+  // publierAnnonce(id: number): void {
+  //   // Récupérer la liste des annonces publiées
+  //   this.annonceService.getAllspublishAnnonceByAdmin().subscribe((data) => {
+  //     if (data && data.annoncesPubliees) {
+  //       const annoncesPubliees: Annonce[] = data.annoncesPubliees;
+  //       // Vérifier si l'annonce à publier est déjà dans la liste des annonces publiées
+  //       const annonceExiste = annoncesPubliees.some(
+  //         (annonce) => annonce.id === id
+  //       );
+
+  //       if (annonceExiste) {
+  //         // Si l'annonce existe déjà dans la liste des annonces publiées, afficher un message indiquant qu'elle a déjà été publiée
+  //         this.annonceService.alertMessage(
+  //           'info',
+  //           'Information',
+  //           'Cette annonce a déjà été publiée'
+  //         );
+  //       } else {
+  //         // Sinon, procéder à la publication de l'annonce
+  //         this.annonceService
+  //           .publierAnnonceByAdmin(id)
+  //           .subscribe((response) => {
+  //             if (response && response.status) {
+  //               // Si la publication est réussie, afficher un message de succès
+  //               this.annonceService.alertMessage(
+  //                 'success',
+  //                 'Succès',
+  //                 'Annonce publiée avec succès'
+  //               );
+  //               console.log('Annonce publiée avec succès');
+  //             } else {
+  //               // Si la publication échoue pour une autre raison, afficher un message d'erreur
+  //               console.error("Erreur lors de la publication de l'annonce");
+  //             }
+  //           });
+  //       }
+  //     } else {
+  //       console.error('Erreur lors de la récupération des annonces publiées');
+  //     }
+  //   });
+  // }
+
   publierAnnonce(id: number): void {
     // Récupérer la liste des annonces publiées
     this.annonceService.getAllspublishAnnonceByAdmin().subscribe((data) => {
       if (data && data.annoncesPubliees) {
         const annoncesPubliees: Annonce[] = data.annoncesPubliees;
-        // Vérifier si l'annonce à publier est déjà dans la liste des annonces publiées
-        const annonceExiste = annoncesPubliees.some(
-          (annonce) => annonce.id === id
-        );
 
-        if (annonceExiste) {
-          // Si l'annonce existe déjà dans la liste des annonces publiées, afficher un message indiquant qu'elle a déjà été publiée
+        // Vérifier le nombre d'annonces déjà publiées par l'utilisateur
+        if (annoncesPubliees.length >= 3) {
+          // Si l'utilisateur a déjà publié 3 annonces, afficher un message d'erreur
           this.annonceService.alertMessage(
-            'info',
-            'Information',
-            'Cette annonce a déjà été publiée'
+            'error',
+            'Limite atteinte',
+            'Vous ne pouvez pas publier plus de 3 annonces. Veuillez retirer une annonce existante.'
           );
         } else {
-          // Sinon, procéder à la publication de l'annonce
-          this.annonceService
-            .publierAnnonceByAdmin(id)
-            .subscribe((response) => {
-              if (response && response.status) {
-                // Si la publication est réussie, afficher un message de succès
-                this.annonceService.alertMessage(
-                  'success',
-                  'Succès',
-                  'Annonce publiée avec succès'
-                );
-                console.log('Annonce publiée avec succès');
-              } else {
-                // Si la publication échoue pour une autre raison, afficher un message d'erreur
-                console.error("Erreur lors de la publication de l'annonce");
-              }
-            });
+          // Vérifier si l'annonce à publier est déjà dans la liste des annonces publiées
+          const annonceExiste = annoncesPubliees.some(
+            (annonce) => annonce.id === id
+          );
+
+          if (annonceExiste) {
+            // Si l'annonce existe déjà dans la liste des annonces publiées, afficher un message indiquant qu'elle a déjà été publiée
+            this.annonceService.alertMessage(
+              'info',
+              'Information',
+              'Cette annonce a déjà été publiée'
+            );
+          } else {
+            // Sinon, procéder à la publication de l'annonce
+            this.annonceService
+              .publierAnnonceByAdmin(id)
+              .subscribe((response) => {
+                if (response && response.status) {
+                  // Si la publication est réussie, afficher un message de succès
+                  this.annonceService.alertMessage(
+                    'success',
+                    'Succès',
+                    'Annonce publiée avec succès'
+                  );
+                  console.log('Annonce publiée avec succès');
+                } else {
+                  // Si la publication échoue pour une autre raison, afficher un message d'erreur
+                  console.error("Erreur lors de la publication de l'annonce");
+                }
+              });
+          }
         }
       } else {
         console.error('Erreur lors de la récupération des annonces publiées');

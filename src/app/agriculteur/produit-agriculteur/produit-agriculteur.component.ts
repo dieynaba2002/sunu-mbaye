@@ -41,6 +41,66 @@ export class ProduitAgriculteurComponent implements OnInit {
   pageActuelle: number = 1;
   produitParPage: number = 3;
 
+  // Variables pour faire la vérifications
+  verifNomProduit: String = '';
+  verifQuantite: String = '';
+  verifPrix: String = '';
+
+  // Variables si les champs sont exacts
+  exactNomProduit: boolean = false;
+  exactQuantite: boolean = false;
+  exactPrix: boolean = false;
+
+  // Verification du nom
+  verifNomProduitFonction() {
+    this.exactNomProduit = false;
+    const nomPattern = /^[a-zA-Z][a-zA-Z -]{1,100}$/;
+    if (this.nom_produit == '') {
+      this.verifNomProduit = 'Veuillez renseigner votre nom de produit';
+    } else if (this.nom_produit.length < 2) {
+      this.verifNomProduit = 'Le nom est trop court';
+    } else if (!this.nom_produit.match(nomPattern)) {
+      this.verifNomProduit =
+        'Le nom du produit ne dois pas avoir de caractere  speciaux';
+    } else {
+      this.verifNomProduit = '';
+      this.exactNomProduit = true;
+    }
+    if (this.nom_produit == '') {
+      this.verifNomProduit = '';
+    }
+  }
+
+  // Verification de la quantité
+  verifQuantiteFonction() {
+    this.exactQuantite = false;
+    if (this.quantite === '') {
+      this.verifQuantite = 'Veuillez renseigner la quantité';
+    } else if (isNaN(this.quantite)) {
+      this.verifQuantite = 'La quantité doit être un nombre';
+    } else if (parseInt(this.quantite) <= 0) {
+      this.verifQuantite = 'La quantité doit être supérieure à zéro';
+    } else {
+      this.verifQuantite = '';
+      this.exactQuantite = true;
+    }
+  }
+
+  // Verification du prix
+  verifPrixFonction() {
+    this.exactPrix = false;
+    if (this.prix === '') {
+      this.verifPrix = 'Veuillez renseigner le prix';
+    } else if (isNaN(this.prix)) {
+      this.verifPrix = 'Le prix doit être un nombre';
+    } else if (parseFloat(this.prix) <= 0) {
+      this.verifPrix = 'Le prix doit être supérieur à zéro';
+    } else {
+      this.verifPrix = '';
+      this.exactPrix = true;
+    }
+  }
+
   onSearch() {
     // Recherche se fait selon le nom ou le prenom
     this.filterValue = this.filterValue.toLowerCase();
@@ -254,5 +314,4 @@ export class ProduitAgriculteurComponent implements OnInit {
     }
     return Math.ceil(this.produits.length / this.produitParPage);
   }
-  
 }

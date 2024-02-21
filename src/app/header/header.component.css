@@ -160,6 +160,9 @@
     order: 1;
 }
 
+.login-link {
+    display: none;
+}
 @media screen and (max-width: 1023px) {
     .navbar .logo a {
         font-size: 1.5rem;
@@ -176,6 +179,7 @@
         flex-direction: column;
         transition: 0.3s ease;
     }
+        
     .links li a{
         font-size: 2em;
         color: white !important;

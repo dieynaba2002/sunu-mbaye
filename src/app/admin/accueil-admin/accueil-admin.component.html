@@ -5,21 +5,21 @@
       <i class="bx bxs-group"></i>
       <span class="text" *ngIf="users">
         <h3>{{ users.length }}</h3>
-        <p class="fw-bold ">Utilisateurs</p>
+        <p class="fw-bold">Utilisateurs</p>
       </span>
     </li>
     <li>
       <i class="bx bi-megaphone-fill"></i>
       <span class="text" *ngIf="annonces">
         <h3>{{ annonces.length }}</h3>
-        <p class="fw-bold ">Annonces</p>
+        <p class="fw-bold">Annonces</p>
       </span>
     </li>
     <li>
       <i class="bx bi bi-ui-checks-grid"></i>
       <span class="text" *ngIf="categories">
         <h3>{{ categories.length }}</h3>
-        <p class="fw-bold ">Categorie</p>
+        <p class="fw-bold">Categorie</p>
       </span>
     </li>
   </ul>
@@ -45,14 +45,38 @@
         <tbody>
           <tr *ngFor="let user of users">
             <td>
-              <img *ngIf="user.image" src="http://127.0.0.1:8000/images/{{ user.image }}" alt=""/> 
-              <!-- <img *ngIf="!user.image || user.image === '1'" src="../../../assets/img/pub.png" alt="" /> -->
+              <ng-container *ngIf="user.image == 1; else defaultImage">
+                <img src="../../../assets/img/pub.png" />
+              </ng-container>
+              <ng-template #defaultImage>
+                <img src="http://127.0.0.1:8000/images/{{ user.image }}" />
+              </ng-template>
             </td>
             <td>{{ user.prenom }}</td>
             <td>{{ user.nom }}</td>
             <td>{{ user.email }}</td>
             <td>{{ getRoleName(user.role_id) }}</td>
-            <td><i  class="bi ms-4" [ngClass]="{ 'bi-ban': !user.est_bloquer, 'bi bi-unlock': user.est_bloquer }"type="button" (click)="user.est_bloquer ? debloquerUtilisateur(user.id) : bloquerUtilisateur(user.id)" style="color: #017D03;font-size: 24px; font-weight: bold;"></i></td>
+            <td>
+              <i
+                class="bi ms-4"
+                [ngClass]="{
+                  'bi bi-unlock': !user.est_bloquer,
+                  'bi-lock': user.est_bloquer
+                }"
+                type="button"
+                (click)="
+                  user.est_bloquer
+                    ? debloquerUtilisateur(user.id)
+                    : bloquerUtilisateur(user.id)
+                "
+                style="color: #017d03; font-size: 24px; font-weight: bold"
+                [title]="
+                  user.est_bloquer
+                    ? 'Cliquez pour débloquer l\'utilisateur'
+                    : 'Cliquez pour bloquer l\'utilisateur'
+                "
+              ></i>
+            </td>
           </tr>
         </tbody>
       </table>

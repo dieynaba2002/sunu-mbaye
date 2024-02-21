@@ -25,6 +25,22 @@ export class AuthComponent implements OnInit {
   adresse: string = '';
   sexe: string = '';
 
+  // Variables pour faire la vérifications
+  verifNom: String = '';
+  verifPrenom: String = '';
+  verifEmail: String = '';
+  verifPassword: String = '';
+  verifTelephone: String = '';
+  verifAdresse: String = '';
+
+  // Variables si les champs sont exacts
+  exactNom: boolean = false;
+  exactPrenom: boolean = false;
+  exactEmail: boolean = false;
+  exactPassword: boolean = false;
+  exactTelephone: boolean = false;
+  exactAdresse: boolean = false;
+
   formChoice = true;
 
   emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
@@ -45,6 +61,113 @@ export class AuthComponent implements OnInit {
     // Vérifier si les champs email et password ne sont pas vides avant d'appeler login()
     if (this.email !== '' && this.password !== '') {
       this.login();
+    }
+  }
+
+  // Verification du nom
+  verifNomFonction() {
+    this.exactNom = false;
+    const nomPattern = /^[a-zA-Z][a-zA-Z -]{1,100}$/;
+    if (this.nom == '') {
+      this.verifNom = 'Veuillez renseigner votre nom';
+    } else if (this.nom.length < 2) {
+      this.verifNom = 'Le nom est trop court';
+    } else if (!this.nom.match(nomPattern)) {
+      this.verifNom = 'Le nom ne dois pas avoir de caractere  speciaux';
+    } else {
+      this.verifNom = '';
+      this.exactNom = true;
+    }
+     if (this.nom == '') {
+       this.verifNom = '';
+     }
+  }
+
+  // Verification du prenom
+  verifPrenomFonction() {
+    this.exactPrenom = false;
+    if (this.prenom == '') {
+      this.verifPrenom = 'Veuillez renseigner votre prenom';
+    } else if (this.prenom.length < 3) {
+      this.verifPrenom = 'Le prenom est trop court';
+    } else {
+      this.verifPrenom = '';
+      this.exactPrenom = true;
+    }
+    if (this.prenom == '') {
+      this.verifPrenom = '';
+    }
+  }
+
+  // Verification de  l'email
+  verifEmailFonction() {
+    const emailPattern =
+      /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    this.exactEmail = false;
+
+    if (this.email == '') {
+      this.verifEmail = 'Veuillez renseigner votre email';
+    } else if (!this.email.match(emailPattern)) {
+      this.verifEmail = 'Veuillez donner un email valide';
+    } else {
+      this.verifEmail = '';
+      this.exactEmail = true;
+    }
+    if (this.email == '') {
+      this.verifEmail = '';
+    }
+  }
+
+  // Verification du mot de passe
+  verifPasswordFonction() {
+    this.exactPassword = false;
+    if (this.password == '') {
+      this.verifPassword = 'Veuillez renseigner votre mot de passe';
+    } else if (this.password.length < 8) {
+      this.verifPassword = 'Mot de passe doit être supérieur ou égal à 8';
+    } else if (this.password.includes(' ')) {
+      this.verifPassword = "Le mot de passe ne peut pas contenir d'espace";
+    } else {
+      this.verifPassword = '';
+      this.exactPassword = true;
+    }
+    if (this.password == '') {
+      this.verifPassword = '';
+    }
+  }
+
+  verifTelephoneFonction() {
+    this.exactTelephone = false;
+    const telephonePattern = /^\+221(76|77|78|70|33)\d{7}$/;
+
+    if (this.telephone === '') {
+      this.verifTelephone = 'Veuillez renseigner votre numéro de téléphone';
+    } else if (/\s/.test(this.telephone)) {
+      this.verifTelephone =
+        "Le numéro de téléphone ne doit pas contenir d'espaces";
+    } else if (!telephonePattern.test(this.telephone)) {
+      this.verifTelephone = 'Le format du numéro de téléphone est invalide';
+    } else {
+      this.verifTelephone = '';
+      this.exactTelephone = true;
+    }
+    if (this.telephone == '') {
+      this.verifTelephone = '';
+    }
+  }
+
+  verifAdresseFonction() {
+    this.exactAdresse = false;
+    if (this.adresse == '') {
+      this.verifAdresse = 'Veuillez renseigner votre adresse';
+    } else if (this.adresse.length < 3) {
+      this.verifAdresse = 'L\'adresse est trop court';
+    } else {
+      this.verifAdresse = '';
+      this.exactAdresse = true;
+    }
+    if (this.adresse == '') {
+      this.verifAdresse = '';
     }
   }
 
@@ -112,14 +235,13 @@ export class AuthComponent implements OnInit {
         'Attention',
         "Le numéro de téléphone ne doit pas contenir d'espaces!"
       );
-    } else if (!this.telephone.match(/^(\+221|221)?[76|77|78|70|33]\d{8}$/)) {
+    } else if (!this.telephone.match(/^\+221(76|77|78|70|33)\d{7}$/)) {
       this.alertMessage(
         'error',
         'Attention',
         'Le format du numéro de téléphone est invalide!'
       );
     } else {
-      
       // let newUser: User = {
       //   nom: this.nom,
       //   prenom: this.prenom,
@@ -333,35 +455,35 @@ export class AuthComponent implements OnInit {
         //   );
         // }
         (error) => {
-        // Gérer l'échec de l'authentification
-        console.log("Erreur d'authentification:", error);
-        if (error.status === 401) {
-          // Gérer les erreurs spécifiques retournées par le backend
-          if (error.error && error.error.message) {
-            this.alertMessage('error', 'Erreur', error.error.message);
-          } else {
+          // Gérer l'échec de l'authentification
+          console.log("Erreur d'authentification:", error);
+          if (error.status === 401) {
+            // Gérer les erreurs spécifiques retournées par le backend
+            if (error.error && error.error.message) {
+              this.alertMessage('error', 'Erreur', error.error.message);
+            } else {
+              this.alertMessage(
+                'error',
+                'Erreur',
+                'Email ou mot de passe incorrect'
+              );
+            }
+          } else if (error.status === 403) {
+            // L'utilisateur est bloqué, afficher le message d'erreur approprié
             this.alertMessage(
               'error',
               'Erreur',
-              'Email ou mot de passe incorrect'
+              "Votre compte est bloqué. Veuillez contacter l'administrateur."
+            );
+          } else {
+            // Gérer les autres erreurs
+            this.alertMessage(
+              'error',
+              'Erreur',
+              "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
             );
           }
-        } else if (error.status === 403) {
-          // L'utilisateur est bloqué, afficher le message d'erreur approprié
-          this.alertMessage(
-            'error',
-            'Erreur',
-            "Votre compte est bloqué. Veuillez contacter l'administrateur."
-          );
-        } else {
-          // Gérer les autres erreurs
-          this.alertMessage(
-            'error',
-            'Erreur',
-            "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
-          );
         }
-      }
       );
     }
   }
@@ -387,6 +509,8 @@ export class AuthComponent implements OnInit {
       icon: icon,
       title: title,
       text: text,
+      showConfirmButton: false,
+      timer: 900,
     });
   }
 }

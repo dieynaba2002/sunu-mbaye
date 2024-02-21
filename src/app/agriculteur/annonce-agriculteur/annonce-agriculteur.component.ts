@@ -29,6 +29,36 @@ export class AnnonceAgriculteurComponent {
   tabNewsFilter: any[] = [];
   filterValue: string = '';
 
+  // Variables pour faire la vérifications
+  verifNomProduit: String = '';
+  verifQuantite: String = '';
+  verifPrix: String = '';
+
+  // Variables si les champs sont exacts
+  exactNomProduit: boolean = false;
+  exactQuantite: boolean = false;
+  exactPrix: boolean = false;
+
+  // Verification du nom
+  verifNomProduitFonction() {
+    this.exactNomProduit = false;
+    const nomPattern = /^[a-zA-Z][a-zA-Z -]{1,100}$/;
+    if (this.titre == '') {
+      this.verifNomProduit = 'Veuillez renseigner votre titre';
+    } else if (this.titre.length < 2) {
+      this.verifNomProduit = 'Le titre est trop court';
+    } else if (!this.titre.match(nomPattern)) {
+      this.verifNomProduit =
+        'Le titre ne dois pas avoir de caractere  speciaux';
+    } else {
+      this.verifNomProduit = '';
+      this.exactNomProduit = true;
+    }
+    if (this.titre == '') {
+      this.verifNomProduit = '';
+    }
+  }
+
   // Récupération des categories
   loadAnnonce() {
     this.annonceService.getAllsAnnonces().subscribe((data) => {
@@ -39,7 +69,7 @@ export class AnnonceAgriculteurComponent {
   }
 
   // detail annonce
-  
+
   AjoutAnnonce() {
     if (this.titre == '') {
       this.annonceService.alertMessage(
@@ -116,6 +146,11 @@ export class AnnonceAgriculteurComponent {
       .updateAnnonce(this.seletedAnnonce, data)
       .subscribe((response) => {
         console.log(response);
+        this.annonceService.alertMessage(
+          'success',
+          'Succès',
+          'Annonce modifiée avec succès'
+        );
       });
 
     this.loadAnnonce();

@@ -16,6 +16,73 @@ export class ContactComponent implements OnInit {
   telephone: string = '';
   message: string = '';
 
+  // Variables pour faire la vérifications
+  verifNom: String = '';
+  verifEmail: String = '';
+  verifTelephone: String = '';
+
+  // Variables si les champs sont exacts
+  exactNom: boolean = false;
+  exactEmail: boolean = false;
+  exactTelephone: boolean = false;
+
+  // Verification du nom
+  verifNomFonction() {
+    this.exactNom = false;
+    const nomPattern = /^[a-zA-Z][a-zA-Z -]{1,100}$/;
+    if (this.nom == '') {
+      this.verifNom = 'Veuillez renseigner votre nom';
+    } else if (this.nom.length < 2) {
+      this.verifNom = 'Le nom est trop court';
+    } else if (!this.nom.match(nomPattern)) {
+      this.verifNom = 'Le nom ne dois pas avoir de caractere  speciaux';
+    } else {
+      this.verifNom = '';
+      this.exactNom = true;
+    }
+    if (this.nom == '') {
+      this.verifNom = '';
+    }
+  }
+
+  // Verification de  l'email
+  verifEmailFonction() {
+    const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    this.exactEmail = false;
+
+    if (this.email == '') {
+      this.verifEmail = 'Veuillez renseigner votre email';
+    } else if (!this.email.match(emailPattern)) {
+      this.verifEmail = 'Veuillez donner un email valide';
+    } else {
+      this.verifEmail = '';
+      this.exactEmail = true;
+    }
+    if (this.email == '') {
+      this.verifEmail = '';
+    }
+  }
+
+  verifTelephoneFonction() {
+    this.exactTelephone = false;
+    const telephonePattern = /^\+221(76|77|78|70|33)\d{7}$/;
+
+    if (this.telephone === '') {
+      this.verifTelephone = 'Veuillez renseigner votre numéro de téléphone';
+    } else if (/\s/.test(this.telephone)) {
+      this.verifTelephone =
+        "Le numéro de téléphone ne doit pas contenir d'espaces";
+    } else if (!telephonePattern.test(this.telephone)) {
+      this.verifTelephone = 'Le format du numéro de téléphone est invalide';
+    } else {
+      this.verifTelephone = '';
+      this.exactTelephone = true;
+    }
+    if (this.telephone == '') {
+      this.verifTelephone = '';
+    }
+  }
+
   AjoutMessage() {
     const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (

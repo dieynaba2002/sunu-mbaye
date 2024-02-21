@@ -23,19 +23,31 @@
         <div class="form_conaitner">
             <form action="" id="contact-form">
                 <div class="mb-3">
-                    <label for="">Prénom Nom</label>
-                    <input type="text" name="nom" placeholder="Nom Complet" required [(ngModel)]="nom">
+                    <label for="">Prénom Nom <span class="required text-danger">*</span></label>
+                    <input type="text" name="nom" placeholder="Nom Complet" required [(ngModel)]="nom" (input)="verifNomFonction()">
+                    <p class="text-danger" *ngIf="!exactNom">{{ verifNom }}</p>
+                    <p class="text-success" *ngIf="exactNom">
+                        <i class="bi bi-check2-all"></i> Correct !
+                    </p>
                 </div>
                 <div class="mb-3">
-                    <label for="">Email</label>
-                    <input type="email" name="email" placeholder="email@gmail.com" [(ngModel)]="email" required>
+                    <label for="">Email <span class="required text-danger">*</span></label>
+                    <input type="email" name="email" placeholder="email@gmail.com" [(ngModel)]="email" required (input)="verifEmailFonction()">
+                    <p class="text-danger" *ngIf="!exactEmail">{{ verifEmail }}</p>
+                    <p class="text-success" *ngIf="exactEmail">
+                        <i class="bi bi-check2-all"></i> Correct !
+                    </p>
                 </div>
                 <div class="mb-3">
-                    <label for="">Téléphone</label>
-                    <input type="text" name="telephone" placeholder="+221 77 777 77 77 " required [(ngModel)]="telephone">
+                    <label for="">Téléphone <span class="required text-danger">*</span></label>
+                    <input type="text" name="telephone" placeholder="+221 77 777 77 77 " required [(ngModel)]="telephone" (input)="verifTelephoneFonction()">
+                    <p class="text-danger" *ngIf="!exactTelephone">{{ verifTelephone }}</p>
+                    <p class="text-success" *ngIf="exactTelephone">
+                        <i class="bi bi-check2-all"></i> Correct !
+                    </p>
                 </div>
                 <div class="mb-3">
-                    <label for="">Message</label>
+                    <label for="">Message <span class="required text-danger">*</span></label>
                     <textarea id="message" name="message" placeholder="Votre message"
                         required [(ngModel)]="message"> </textarea>
                 </div>

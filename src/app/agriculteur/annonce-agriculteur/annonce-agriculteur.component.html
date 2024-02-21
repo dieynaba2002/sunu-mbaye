@@ -137,7 +137,12 @@
             name="titre"
             placeholder="Titre annonce"
             [(ngModel)]="titre"
+            (input)="verifNomProduitFonction()"
           />
+          <p class="text-danger" *ngIf="!exactNomProduit">
+            {{ verifNomProduit }}
+          </p>
+          <p class="text-success" *ngIf="exactNomProduit">Correct !</p>
         </div>
         <div class="mb-3 inputAjout">
           <label for="formFile" class="form-label">Image</label>

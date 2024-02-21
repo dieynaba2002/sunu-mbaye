@@ -64,7 +64,6 @@ export class PanierComponent {
     console.log('Somme des articles :', this.sommeArticles);
   }
 
-  
   payer() {
     let panier = this.panierService.getFromPanier();
     // Vérifier si le panier est vide
@@ -73,12 +72,34 @@ export class PanierComponent {
         icon: 'error',
         title: 'Panier vide',
         text: 'Votre panier est vide. Veuillez le remplir avant de passer une commande.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return; // Arrêter l'exécution de la fonction
+    }
+    // Vérifier si la quantité de chaque produit est positive
+    const quantiteNegative = panier.some((element: any) => {
+      return element.quantity < 0;
+    });
+
+    if (quantiteNegative) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Quantité invalide',
+        text: 'La quantité de chaque produit doit être positive.',
+        showConfirmButton: false,
+        timer: 1500,
       });
       return; // Arrêter l'exécution de la fonction
     }
     const accessToken = localStorage.getItem('access_token');
     const userOnline = JSON.parse(localStorage.getItem('userOnline') || '{}');
-    if (accessToken && userOnline && userOnline.id && userOnline.role_id === 2) {
+    if (
+      accessToken &&
+      userOnline &&
+      userOnline.id &&
+      userOnline.role_id === 2
+    ) {
       let panier = this.panierService.getFromPanier();
       let panierProduit: any[] = [];
 

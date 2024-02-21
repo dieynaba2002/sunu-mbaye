@@ -38,7 +38,7 @@ export class PanierService {
     this.alertMessage(
       'success',
       'Produit ajouté',
-      'Le produit a été ajouté au panier avec succès.'
+      'Le produit a été ajouté au panier avec succès.',
     );
   }
 
@@ -111,6 +111,8 @@ export class PanierService {
       icon: icon,
       title: title,
       text: text,
+      showConfirmButton: false,
+      timer: 1500,
     });
   }
 

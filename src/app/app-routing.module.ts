@@ -25,7 +25,6 @@ const routes: Routes = [
   { path: 'login', component: AuthComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'panier', component: PanierComponent },
-  // { path: '**', component: MaintenanceComponent },
   {
     path: 'politique-confidentialite',
     component: PolitiqueDeConfidentialiteComponent,
@@ -48,7 +47,9 @@ const routes: Routes = [
       ),
     canActivate: [agriculteurGuardGuard],
   },
+  { path: '**', component: MaintenanceComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

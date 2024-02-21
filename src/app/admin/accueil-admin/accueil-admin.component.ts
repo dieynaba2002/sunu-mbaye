@@ -79,7 +79,6 @@ export class AccueilAdminComponent implements OnInit {
     return role ? role.nom_role : 'N/A';
   }
 
-
   bloquerUtilisateur(id: number): void {
     // Affichez une fenêtre de confirmation avant de bloquer l'utilisateur
     Swal.fire({
@@ -139,5 +138,11 @@ export class AccueilAdminComponent implements OnInit {
     this.userService.bloquerUtilisateur(user.id, newState).subscribe(() => {
       user.bloque = newState;
     });
+  }
+
+  getActionTitle(user: any): string {
+    return user.est_bloquer
+      ? "Cliquez pour débloquer l'utilisateur"
+      : "Cliquez pour bloquer l'utilisateur";
   }
 }

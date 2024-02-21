@@ -103,6 +103,8 @@ export class UserServicesService {
       icon: icon,
       title: title,
       text: text,
+      showConfirmButton: false,
+      timer: 900,
     });
   }
 }
