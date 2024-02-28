@@ -34,7 +34,7 @@ export class UserServicesService {
     const accessToken = localStorage.getItem('access_token');
     console.log(accessToken);
     return accessToken
-      ? this.http.put<any>(`${url}/updateUser/${id}`, user, {
+      ? this.http.post<any>(`${url}/updateUser/${id}`, user, {
           headers: new HttpHeaders({
             Authorization: `Bearer ${accessToken}`,
           }),

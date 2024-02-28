@@ -48,7 +48,6 @@ export class CategorieService {
     return this.http.delete<{ message: string }>(`${url}/supCategorie/` + id);
   }
 
-
   // Fonction pour afficher un sweetalert
   alertMessage(icon: any, title: any, text: any) {
     Swal.fire({

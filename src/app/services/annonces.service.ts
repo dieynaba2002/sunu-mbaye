@@ -76,7 +76,7 @@ export class AnnoncesService {
     const accessToken = localStorage.getItem('access_token');
 
     return accessToken
-      ? this.http.put<any>(`${url}/modifierAnnonce/${id}`, annonce, {
+      ? this.http.post<any>(`${url}/modifierAnnonce/${id}`, annonce, {
           headers: new HttpHeaders({ Authorization: `Bearer ${accessToken}` }),
         })
       : of(null);

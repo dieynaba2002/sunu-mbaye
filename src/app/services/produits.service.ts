@@ -101,7 +101,7 @@ export class ProduitsService {
     const accessToken = localStorage.getItem('access_token');
 
     return accessToken
-      ? this.http.put<any>(`${url}/updateproduit/${id}`, produit, {
+      ? this.http.post<any>(`${url}/updateproduit/${id}`, produit, {
           headers: new HttpHeaders({ Authorization: `Bearer ${accessToken}` }),
         })
       : of(null);
